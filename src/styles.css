@@ -1,4 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #272727;
+  color: white;
+}
+
+.icon-color{
+  color: white;
+}
+
+.card-color{
+  background: #4C5454;
+  color: white;
+  width: 18rem;
+}
+
+.no-margin {
+  margin-top: 0 !important;
+}

@@ -4,20 +4,18 @@ import {
   LucideAngularModule,
   Home,
   Menu,
-  UsersRound,
   Bell,
   CircleUserRound,
-  UserRoundPlus
+  UserRoundPlus, UserRound
 } from 'lucide-angular';
 
 
 const icons = {
   Home,
   Menu,
-  UsersRound,
+  UserRound,
   Bell,
   CircleUserRound,
-  UserRoundPlus
 };
 
 @NgModule({
