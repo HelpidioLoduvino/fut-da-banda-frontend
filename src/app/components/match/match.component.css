@@ -1,0 +1,12 @@
+.custom-tab-group .mat-tab-label {
+  color: #ffffff; /* Cor da label */
+}
+
+.custom-tab-group .mat-tab-label-active {
+  color: #ff4081; /* Cor da label ativa */
+}
+
+/* Opcional: Estilize a borda da aba ativa */
+.custom-tab-group .mat-ink-bar {
+  background-color: #ff4081; /* Cor da borda ativa */
+}

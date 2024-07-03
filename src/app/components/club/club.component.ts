@@ -1,20 +1,19 @@
 import { Component } from '@angular/core';
 import {NavbarComponent} from "../navbar/navbar.component";
 import {FooterComponent} from "../footer/footer.component";
-import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
-  selector: 'app-match',
+  selector: 'app-club',
   standalone: true,
   imports: [
     NavbarComponent,
     FooterComponent,
-    MatTabGroup,
-    MatTab
+    NgOptimizedImage
   ],
-  templateUrl: './match.component.html',
-  styleUrl: './match.component.css'
+  templateUrl: './club.component.html',
+  styleUrl: './club.component.css'
 })
-export class MatchComponent {
+export class ClubComponent {
 
 }
