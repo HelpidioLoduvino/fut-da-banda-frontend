@@ -2,61 +2,16 @@
 
 <div class="container mt-3">
   <div class="row g-3">
-    <div class="col-md-3 mb-3">
+    <div class="col-md-3 mb-3" *ngFor="let club of clubs">
       <div class="d-flex justify-content-center">
         <div class="card-color card" style="cursor: pointer;" (click)="clubDetails()">
           <div class="card-header bg-light">
             <div class="d-flex justify-content-center">
-              <img class="card-img" ngSrc="/img/img06.png" alt="emblema do time" height="200" width="500">
+              <img class="card-img" [ngSrc]="imageUrls[club.id]" alt="Logo do Clube" height="200" width="500">
             </div>
           </div>
           <div class="card-body d-flex justify-content-center">
-            <h6>FC BARCELONA</h6>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3 mb-3">
-      <div class="d-flex justify-content-center">
-        <div class="card-color card" style="cursor: pointer;">
-          <div class="card-header bg-light">
-            <div class="d-flex justify-content-center">
-              <img class="card-img" ngSrc="/img/img06.png" alt="emblema do time" height="200" width="500">
-            </div>
-          </div>
-          <div class="card-body d-flex justify-content-center">
-            <h6>FC BARCELONA</h6>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3 mb-3">
-      <div class="d-flex justify-content-center">
-        <div class="card-color card" style="cursor: pointer;">
-          <div class="card-header bg-light">
-            <div class="d-flex justify-content-center">
-              <img class="card-img" ngSrc="/img/img06.png" alt="emblema do time" height="200" width="500">
-            </div>
-          </div>
-          <div class="card-body d-flex justify-content-center">
-            <h6>FC BARCELONA</h6>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3 mb-3">
-      <div class="d-flex justify-content-center">
-        <div class="card-color card" style="cursor: pointer;">
-          <div class="card-header bg-light">
-            <div class="d-flex justify-content-center">
-              <img class="card-img" ngSrc="/img/img06.png" alt="emblema do time" height="200" width="500">
-            </div>
-          </div>
-          <div class="card-body d-flex justify-content-center">
-            <h6>FC BARCELONA</h6>
+            <h6>{{club.name}} ({{club.abv}})</h6>
           </div>
         </div>
       </div>

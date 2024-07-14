@@ -8,6 +8,7 @@ import {TransferMarketComponent} from "./components/transfer-market/transfer-mar
 import {LoginComponent} from "./components/login/login.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {ClubComponent} from "./components/club/club.component";
+import {CreateClubComponent} from "./components/create-club/create-club.component";
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -19,4 +20,5 @@ export const routes: Routes = [
   {path: 'mercado-transferência', component: TransferMarketComponent},
   {path: 'entrar', component: LoginComponent},
   {path: 'registar', component: RegisterComponent},
+  {path: 'registar-clube', component: CreateClubComponent}
 ];

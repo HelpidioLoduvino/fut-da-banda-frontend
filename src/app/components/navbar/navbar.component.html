@@ -14,28 +14,42 @@
           </a>
           <img src="/img/ball.png" width="50" height="50" alt="logo" style="position: relative; right: 14px; top: 1px; cursor: pointer">
         </div>
-        <div style="border: 2px solid gold; position: relative; top: -5px; width: 160px;"></div>
+        <div class="title-underline" style="position: relative; top: -5px; width: 160px;"></div>
       </li>
     </u>
     <div class="collapse navbar-collapse" id="navbarNav" style="position:relative; right: 20px; top: 3px;">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link icon-color" routerLinkActive="active" routerLink="/partidas">Partidas</a>
+          <a class="nav-link icon-color" routerLinkActive="active" routerLink="/partidas">Campeonatos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link icon-color" routerLinkActive="active" routerLink="/clubes">Clubes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link icon-color" routerLinkActive="active" routerLink="/tabela-classificação">Classificação</a>
+          <a class="nav-link icon-color" routerLinkActive="active" routerLink="/tabela-classificação">Campos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link icon-color" routerLinkActive="active" routerLink="/mercado-transferência">Mercado</a>
+          <a class="nav-link icon-color" routerLinkActive="active" routerLink="/mercado-transferência">Notícias</a>
         </li>
       </ul>
     </div>
     <ul class="navbar-nav d-flex flex-row flex-nowrap">
-      <li class="nav-item">
-        <a routerLink="/entrar" class="btn btn-light" style="background: gold;">Login</a>
+      <li class="nav-item" *ngIf="!isLogged()">
+        <a routerLink="/entrar" class="btn btn-light border-0" style="background: #80FF72;">Entrar</a>
+      </li>
+      <li class="nav-item" *ngIf="isLogged()">
+        <button class="icon-color btn bg-transparent border-0" [matMenuTriggerFor]="userMenu">
+          <lucide-icon name="circle-user-round"></lucide-icon>
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <a routerLink="#" mat-menu-item>Perfil</a>
+          <a routerLink="/registar-clube" mat-menu-item>Clube</a>
+        </mat-menu>
+      </li>
+      <li class="nav-item" *ngIf="isLogged()">
+        <button class="icon-color btn bg-transparent border-0" (click)="logout()">
+          <lucide-icon name="log-out" size="24"></lucide-icon>
+        </button>
       </li>
     </ul>
   </div>

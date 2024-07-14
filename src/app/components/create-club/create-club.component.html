@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-3">
+  <h6 class="d-flex justify-content-center">Registar o meu Clube</h6>
+  <div class="d-flex justify-content-center">
+    <form [formGroup]="clubForm" (ngSubmit)="registerClub()">
+      <input type="hidden" value="Amador" formControlName="state">
+      <div class="form-group">
+        <label class="name">Nome</label>
+        <input type="text" class="form-control" formControlName="name">
+      </div>
+      <div class="form-group mt-3">
+        <label class="name">Abreviação</label>
+        <input type="text" class="form-control" formControlName="abv">
+      </div>
+      <div class="form-group mt-3">
+        <label class="name">Província</label>
+        <select class="form-control" formControlName="province">
+          <option value="Bengo">Bengo</option>
+          <option value="Benguela">Benguela</option>
+          <option value="Bié">Bié</option>
+          <option value="Cabinda">Cabinda</option>
+          <option value="Cuando-cubango">Cuando-Cubango</option>
+          <option value="Cuanza-norte">Cuanza Norte</option>
+          <option value="Cuanza-sul">Cuanza Sul</option>
+          <option value="Cunene">Cunene</option>
+          <option value="Huambo">Huambo</option>
+          <option value="Huíla">Huíla</option>
+          <option value="Luanda">Luanda</option>
+          <option value="Luanda-norte">Lunda Norte</option>
+          <option value="Luanda-sul">Lunda Sul</option>
+          <option value="Malanje">Malanje</option>
+          <option value="Moxico">Moxico</option>
+          <option value="Namibe">Namibe</option>
+          <option value="Uíge">Uíge</option>
+          <option value="Zaire">Zaire</option>
+        </select>
+      </div>
+      <div class="form-group mt-3">
+        <label class="name">Logotipo</label>
+        <input type="file" accept="image/*" (change)="onImageFileChange($event)" class="form-control">
+      </div>
+
+      <span class="d-flex justify-content-center">
+        <input type="submit" class="btn btn-success mt-3" value="Registar">
+      </span>
+
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>

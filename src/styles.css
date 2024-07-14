@@ -12,10 +12,19 @@ body {
   color: white;
 }
 
+.icon-color:hover{
+  color: black;
+}
+
 .card-color{
   background: #4C5454;
   color: white;
   width: 18rem;
+}
+
+.main-card{
+  background: #4C5454;
+  color: white;
 }
 
 .no-margin {
@@ -24,4 +33,8 @@ body {
 
 .white-line{
   border: 1px solid white;
+}
+
+.title-underline{
+  border: 1px solid #80FF72;
 }

@@ -3,8 +3,9 @@ import {FooterComponent} from "../footer/footer.component";
 import {LucideAngularModule} from "lucide-angular";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
-import {NgClass} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 import { IconsModule } from "../../icons/icons.module";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-navbar',
@@ -18,13 +19,27 @@ import { IconsModule } from "../../icons/icons.module";
     MatMenuItem,
     NgClass,
     IconsModule,
-    RouterLinkActive
+    RouterLinkActive,
+    NgIf
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+
   isSidebarOpened: boolean = false;
+
+  constructor(private userService: UserService) {
+  }
+
+  isLogged(): boolean {
+    return this.userService.isLoggedIn();
+  }
+
+  logout(): void {
+    this.userService.logout();
+  }
+
 
   toggleSidebar() {
     this.isSidebarOpened = !this.isSidebarOpened;
