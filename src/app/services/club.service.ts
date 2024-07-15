@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
 export class ClubService {
 
   private backendUrl = environment.backendUrl;
-  token = localStorage.getItem('token');
+
   constructor(private http: HttpClient) { }
 
   register(club: any, logo: File){

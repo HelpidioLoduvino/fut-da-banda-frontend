@@ -35,6 +35,10 @@ body {
   border: 1px solid white;
 }
 
+.navbar-light{
+  background-color: #F4F2F3;
+}
+
 .title-underline{
   border: 1px solid #80FF72;
 }
