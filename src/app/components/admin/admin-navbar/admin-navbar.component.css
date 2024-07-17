@@ -1,7 +1,11 @@
 a:hover{
-  color: #4C5454;
+  color: #d1cfe2;
 }
 
 li.active{
   color: #d1cfe2;
+}
+
+.sidebar{
+  color: white;
 }

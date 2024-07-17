@@ -6,7 +6,7 @@ import {
   Menu,
   Bell,
   CircleUserRound,
-  UserRoundPlus, UserRound, ShoppingCart, DollarSign, Info, LogOut, Users
+  UserRoundPlus, UserRound, ShoppingCart, DollarSign, Info, LogOut, Users, LineChart
 } from 'lucide-angular';
 
 
@@ -20,7 +20,8 @@ const icons = {
   DollarSign,
   Info,
   LogOut,
-  Users
+  Users,
+  LineChart
 }
 
 @NgModule({
