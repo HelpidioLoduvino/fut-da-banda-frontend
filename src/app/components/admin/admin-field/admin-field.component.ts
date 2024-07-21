@@ -7,19 +7,23 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {FieldService} from "../../../services/field.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {NgForOf} from "@angular/common";
+import {AdminNotificationComponent} from "../admin-notification/admin-notification.component";
+import {AdminSidebarComponent} from "../admin-sidebar/admin-sidebar.component";
 
 @Component({
   selector: 'app-admin-field',
   standalone: true,
-  imports: [
-    AdminNavbarComponent,
-    LucideAngularModule,
-    IconsModule,
-    MatTabGroup,
-    MatTab,
-    ReactiveFormsModule,
-    NgForOf
-  ],
+    imports: [
+        AdminNavbarComponent,
+        LucideAngularModule,
+        IconsModule,
+        MatTabGroup,
+        MatTab,
+        ReactiveFormsModule,
+        NgForOf,
+        AdminNotificationComponent,
+        AdminSidebarComponent
+    ],
   templateUrl: './admin-field.component.html',
   styleUrl: './admin-field.component.css'
 })

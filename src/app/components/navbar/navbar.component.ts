@@ -40,7 +40,6 @@ export class NavbarComponent {
     this.userService.logout();
   }
 
-
   toggleSidebar() {
     this.isSidebarOpened = !this.isSidebarOpened;
   }

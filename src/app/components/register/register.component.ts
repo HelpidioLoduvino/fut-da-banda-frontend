@@ -3,13 +3,19 @@ import {Router, RouterLink} from "@angular/router";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatStep, MatStepLabel, MatStepper} from "@angular/material/stepper";
+import {MatLabel} from "@angular/material/form-field";
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatStepper,
+    MatStep,
+    MatStepLabel,
+    MatLabel
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -17,6 +23,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class RegisterComponent implements OnInit{
 
   registerForm!: FormGroup
+  photo!: File;
 
   constructor(
     private userService: UserService,
@@ -28,19 +35,27 @@ export class RegisterComponent implements OnInit{
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
+      fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(5)]],
       userRole: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      position: ['', Validators.required],
+      gender: ['', Validators.required],
+      biography: ['', Validators.required],
     });
+  }
+
+  onImageFileChange(event: any) {
+    if(event.target.files.length > 0){
+      this.photo = event.target.files[0];
+    }
   }
 
   register() {
     if(this.registerForm.valid){
-      const user = this.registerForm.value;
-      this.userService.register(user).subscribe(response=>{
+      const player = this.registerForm.value;
+      this.userService.registerPlayer(player, this.photo).subscribe(response=>{
         if(response.ok){
           this.snackBar.open('Registo Feito Com Sucesso', 'Fechar', {
             duration: 3000, panelClass: ['snackbar-success']

@@ -15,12 +15,23 @@ export class UserService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  register(user: any) {
-    return this.http.post<any>(`${this.backendUrl}/api/user/register`, user, {observe: "response"});
+  registerPlayer(player: any, photo: File) {
+    const formData: FormData = new FormData();
+    formData.append('player', new Blob([JSON.stringify(player)], { type: 'application/json' }));
+    formData.append('photo', photo);
+    return this.http.post<any>(`${this.backendUrl}/api/user/register-player`, formData, {observe: "response"});
   }
 
   login(credentials: any) {
     return this.http.post<any>(`${this.backendUrl}/api/user/login`, credentials);
+  }
+
+  showPhoto(id: number): Observable<Blob> {
+    return this.http.get(`${this.backendUrl}/api/user/display/${id}`, { responseType: 'blob' });
+  }
+
+  getAllPlayers(){
+    return this.http.get<any>(`${this.backendUrl}/api/user/all-players`);
   }
 
   refreshTokenRequest(): Observable<any> {

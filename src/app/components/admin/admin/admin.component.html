@@ -1,31 +1,19 @@
-<div class="d-none d-md-block">
-  <div class="row g-0" style="background-color: #F4F2F3; height: 100vh">
-    <div class="col-md-2" style="background: #355070">
-      <app-admin-navbar></app-admin-navbar>
-    </div>
-    <div class="col">
-      <div class="container mt-3">
-        <nav class="navbar navbar-light">
-          <div class="container-fluid">
-            <button class="btn bg-transparent border-0 d-md-none">
-              <lucide-icon name="menu"></lucide-icon>
-            </button>
-            <a class="navbar-brand d-md-block d-none">Dashboard</a>
-            <a class="navbar-brand d-md-none d-block" style="position: relative; right: 45px;">FUTDABANDA</a>
-            <div class="d-flex align-items-end">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a href="#" class="nav-link position-relative me-2">
-                    <lucide-icon name="bell"></lucide-icon>
-                    <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
-                    1<span class="visually-hidden"></span>
-                  </span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+<div class="row g-0" style="background-color: #F4F2F3;">
+  <div class="col-md-2 d-md-block d-none" style="background: #355070">
+    <app-admin-navbar></app-admin-navbar>
+  </div>
+  <div class="col d-flex flex-column justify-content-between" style="min-height: 100vh;">
+    <div class="container mt-3 flex-grow-1">
+      <app-admin-sidebar class="d-md-none"></app-admin-sidebar>
+      <nav class="navbar navbar-light d-none d-md-block">
+        <div class="container-fluid">
+          <a class="navbar-brand d-md-block d-none position-relative" style="top: 15px;">Dashboard</a>
+        </div>
+        <div class="d-flex justify-content-end">
+          <app-admin-notification></app-admin-notification>
+        </div>
+      </nav>
+      <section>
         <div class="row mt-3">
           <div class="col-md-6 mb-3 mb-md-0">
             <div class="card mb-3" style="color: black; background-color: #F4F2F3; border-radius: 0;">
@@ -49,64 +37,11 @@
             </div>
           </div>
         </div>
-        <div class="card card-body mt-3" style="border-radius: 0; background-color: #F4F2F3; color: black;">
-          <p class="d-flex justify-content-center" style="position: relative; top: 6px;">futdabanda.com</p>
-        </div>
-      </div>
+      </section>
+      <section style="position: fixed; bottom: 12px; width: 72rem;">
+        <p class="d-flex justify-content-center" style="position: relative; top: 6px; color: black;">futdabanda.com</p>
+      </section>
     </div>
   </div>
 </div>
 
-
-<div class="d-md-none" style="">
-  <div class="container mt-3">
-    <nav class="navbar navbar-light">
-      <div class="container-fluid">
-        <button class="btn bg-transparent border-0 d-md-none">
-          <lucide-icon name="menu"></lucide-icon>
-        </button>
-        <a class="navbar-brand d-md-block d-none">Dashboard</a>
-        <a class="navbar-brand d-md-none d-block" style="position: relative; right: 45px;">FUTDABANDA</a>
-        <div class="d-flex align-items-end">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a href="#" class="nav-link position-relative me-2">
-                <lucide-icon name="bell"></lucide-icon>
-                <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
-                    1<span class="visually-hidden"></span>
-                  </span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="row mt-3">
-      <div class="col-md-6 mb-3 mb-md-0">
-        <div class="card mb-3" style="color: black; background-color: #F4F2F3; border-radius: 0;">
-          <div class="card-body">
-            <lucide-icon name="circle-user-round"></lucide-icon>
-            <h6 class="d-flex justify-content-center"><strong>Meu Perfil</strong></h6>
-            <p>Nome: </p>
-            <p>Email: </p>
-          </div>
-        </div>
-        <div class="card card-body" style="color: black; background-color: #F4F2F3; border-radius: 0;">
-          <lucide-icon name="line-chart"></lucide-icon>
-          <h6 class="d-flex justify-content-center"><strong>Estatística Geral</strong></h6>
-          <p>Jogadores: </p>
-          <p>Treinadores: </p>
-        </div>
-      </div>
-      <div class="col">
-        <div>
-          <app-bar-chart></app-bar-chart>
-        </div>
-      </div>
-    </div>
-    <div class="card card-body mt-3" style="border-radius: 0; background-color: #F4F2F3; color: black;">
-      <p class="d-flex justify-content-center" style="position: relative; top: 6px;">futdabanda.com</p>
-    </div>
-  </div>
-  <br>
-</div>

@@ -37,7 +37,10 @@ export class CreateClubComponent implements OnInit{
       name: ['', Validators.required],
       abv: ['', Validators.required],
       province: ['', Validators.required],
-      state: ['Amador', Validators.required]
+      state: ['Amador', Validators.required],
+      description: ['', Validators.required],
+      category: ['', Validators.required],
+      cGroup: ['', Validators.required],
     })
   }
 

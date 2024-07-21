@@ -7,6 +7,9 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {ClubService} from "../../../services/club.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {NgForOf} from "@angular/common";
+import {BarChartComponent} from "../bar-chart/bar-chart.component";
+import {AdminNotificationComponent} from "../admin-notification/admin-notification.component";
+import {AdminSidebarComponent} from "../admin-sidebar/admin-sidebar.component";
 
 @Component({
   selector: 'app-admin-club',
@@ -18,7 +21,10 @@ import {NgForOf} from "@angular/common";
     MatTab,
     MatTabGroup,
     ReactiveFormsModule,
-    NgForOf
+    NgForOf,
+    BarChartComponent,
+    AdminNotificationComponent,
+    AdminSidebarComponent
   ],
   templateUrl: './admin-club.component.html',
   styleUrl: './admin-club.component.css'
@@ -41,7 +47,10 @@ export class AdminClubComponent implements OnInit{
       name: ['', Validators.required],
       abv: ['', Validators.required],
       province: ['', Validators.required],
-      state: ['Profissional', Validators.required]
+      state: ['Profissional', Validators.required],
+      description: ['', Validators.required],
+      category: ['', Validators.required],
+      cGroup: ['', Validators.required],
     })
 
     this.clubService.getAll().subscribe(response=>{

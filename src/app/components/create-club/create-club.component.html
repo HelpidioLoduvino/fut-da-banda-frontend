@@ -41,6 +41,38 @@
         <input type="file" accept="image/*" (change)="onImageFileChange($event)" class="form-control">
       </div>
 
+      <div class="form-group mt-3">
+        <label class="name">Sobre o Clube</label>
+        <textarea class="form-control" formControlName="description"></textarea>
+      </div>
+
+      <div class="form-group mt-3">
+        <label class="name">Grupo</label>
+        <select class="form-control" formControlName="cGroup">
+          <option selected disabled>-- Selecionar --</option>
+          <option value="A">Grupo A</option>
+          <option value="B">Grupo B</option>
+          <option value="C">Grupo C</option>
+          <option value="D">Grupo D</option>
+        </select>
+      </div>
+
+      <div class="form-group mt-3">
+        <label class="name">Categoria</label>
+        <select class="form-control" formControlName="category">
+          <option selected disabled>-- Selecionar --</option>
+          <option value="Sub-7">Sub-7 (6-8 anos)</option>
+          <option value="Sub-9">Sub-9 (9-10 anos)</option>
+          <option value="Sub-11">Sub-11 (11-12 anos)</option>
+          <option value="Sub-13">Sub-13 (13-14 anos)</option>
+          <option value="Sub-15">Sub-15 (15-16 anos)</option>
+          <option value="Sub-17">Sub-17 (17-19 anos)</option>
+          <option value="Sub-20">Sub-20 (18-20 anos)</option>
+          <option value="Adulto">Adulto</option>
+          <option value="Veterano">Veterano</option>
+        </select>
+      </div>
+
       <span class="d-flex justify-content-center">
         <input type="submit" class="btn btn-success mt-3" value="Registar">
       </span>
