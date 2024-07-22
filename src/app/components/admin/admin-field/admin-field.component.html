@@ -23,7 +23,7 @@
                   <tr>
                     <th>Nome</th>
                     <th>Localização</th>
-                    <th>Estado</th>
+                    <th>Ocupado</th>
                   </tr>
                   </thead>
                   <tbody class="table-active">
@@ -37,7 +37,7 @@
               </div>
             </mat-tab>
             <mat-tab label="Novo">
-              <div class="navbar-light card card-body">
+              <div class="navbar-light card card-body" style="border-radius: 0;">
                 <form [formGroup]="fieldForm" (ngSubmit)="register()" style="color: black;">
                   <input type="hidden" formControlName="occupied">
                   <div class="d-flex justify-content-center mt-3">

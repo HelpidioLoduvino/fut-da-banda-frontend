@@ -50,7 +50,7 @@ export class AdminClubComponent implements OnInit{
       state: ['Profissional', Validators.required],
       description: ['', Validators.required],
       category: ['', Validators.required],
-      cGroup: ['', Validators.required],
+      groupType: ['', Validators.required],
     })
 
     this.clubService.getAll().subscribe(response=>{

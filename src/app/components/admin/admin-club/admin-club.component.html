@@ -25,16 +25,16 @@
                       <thead class="table-dark">
                       <tr>
                         <th>Nome</th>
-                        <th>Abreviação</th>
-                        <th>Provincia</th>
+                        <th>Categoria</th>
+                        <th>Grupo</th>
                         <th>Estado</th>
                       </tr>
                       </thead>
                       <tbody class="table-active">
                       <tr *ngFor="let club of clubs" style="cursor:pointer;">
                         <td>{{ club.name }}</td>
-                        <td>{{ club.abv }}</td>
-                        <td>{{ club.province }}</td>
+                        <td>{{ club.category }}</td>
+                        <td>{{ club.groupType }}</td>
                         <td>{{ club.state }}</td>
                       </tr>
                       </tbody>
@@ -42,7 +42,7 @@
                   </div>
                 </mat-tab>
                 <mat-tab label="Novo">
-                  <div class="card card-body navbar-light" style="position: relative; max-height: 380px;">
+                  <div class="card card-body navbar-light" style="position: relative; max-height: 380px; border-radius: 0;">
                     <div class="d-flex justify-content-center">
                       <form [formGroup]="clubForm" (ngSubmit)="registerClub()">
                         <input type="hidden" formControlName="state">
@@ -86,7 +86,7 @@
                           <div class="col">
                             <div class="form-group mt-3">
                               <label class="name">Grupo</label>
-                              <select class="form-control" formControlName="cGroup">
+                              <select class="form-control" formControlName="groupType">
                                 <option selected disabled>-- Selecionar --</option>
                                 <option value="A">Grupo A</option>
                                 <option value="B">Grupo B</option>

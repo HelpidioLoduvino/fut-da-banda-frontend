@@ -23,7 +23,56 @@
 
             </mat-tab>
             <mat-tab label="Nova">
-
+              <div class="card card-body navbar-light" style="border-radius: 0; color: black">
+                <form>
+                  <div class="d-flex justify-content-center">
+                    <div>
+                      <div class="row mb-3">
+                        <div class="col">
+                          <label>Campeonato</label>
+                          <select class="form-control">
+                            <option selected disabled>-- Selecionar --</option>
+                          </select>
+                        </div>
+                        <div class="col">
+                          <label>Campo</label>
+                          <select class="form-control">
+                            <option selected disabled>-- Selecionar --</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col">
+                          <label>Time A</label>
+                          <select class="form-control">
+                            <option selected disabled>-- Selecionar --</option>
+                          </select>
+                        </div>
+                        <div class="col">
+                          <span style="position: relative; right: 18px; top: 30px;">X</span>
+                          <label style="position: relative; right: 10px;">Time B</label>
+                          <select class="form-control">
+                            <option selected disabled>-- Selecionar --</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col">
+                          <label>Data e Hora</label>
+                          <input type="datetime-local" class="form-control">
+                        </div>
+                        <div class="col">
+                          <label>Jornada</label>
+                          <input type="number" class="form-control">
+                        </div>
+                      </div>
+                      <span class="d-flex justify-content-center">
+                        <input type="submit" class="btn btn-success" value="Marcar">
+                      </span>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </mat-tab>
           </mat-tab-group>
         </div>
