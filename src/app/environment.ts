@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  backendUrl: 'https://localhost:8443'
+  backendUrl: 'https://fut-da-banda-api.onrender.com'
 };
