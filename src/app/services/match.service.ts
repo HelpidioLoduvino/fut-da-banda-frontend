@@ -12,16 +12,16 @@ export class MatchService {
   constructor(private http: HttpClient) { }
 
   create(game: any){
-    return this.http.post(`${this.backendUrl}/api/game/add`, game, {observe: "response"})
+    return this.http.post(`${this.backendUrl}/api/games`, game, {observe: "response"})
   }
 
   update(game: any, id: number){
     const params = new HttpParams().set('id', id.toString())
-    return this.http.post(`${this.backendUrl}/api/game/update`, game, {params, observe: "response"})
+    return this.http.put(`${this.backendUrl}/api/games`, game, {params, observe: "response"})
   }
 
   getAll(){
-    return this.http.get<any>(`${this.backendUrl}/api/game/all`);
+    return this.http.get<any>(`${this.backendUrl}/api/games`);
   }
 
 }

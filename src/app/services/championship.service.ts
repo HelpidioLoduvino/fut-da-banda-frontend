@@ -12,11 +12,11 @@ export class ChampionshipService {
   constructor(private http: HttpClient) { }
 
   create(championship: any){
-    return this.http.post(`${this.backendUrl}/api/championship/create`, championship, {observe: "response"})
+    return this.http.post(`${this.backendUrl}/api/championships`, championship, {observe: "response"})
   }
 
   getAll(){
-    return this.http.get<any>(`${this.backendUrl}/api/championship/all`);
+    return this.http.get<any>(`${this.backendUrl}/api/championships`);
   }
 
 }

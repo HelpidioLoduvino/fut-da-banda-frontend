@@ -12,11 +12,11 @@ export class FieldService {
   constructor(private http: HttpClient) { }
 
   register(field: any){
-    return this.http.post(`${this.backendUrl}/api/field/register`, field, {observe: "response"})
+    return this.http.post(`${this.backendUrl}/api/fields`, field, {observe: "response"})
   }
 
   all(){
-    return this.http.get<any>(`${this.backendUrl}/api/field/all`)
+    return this.http.get<any>(`${this.backendUrl}/api/fields`)
   }
 
 }

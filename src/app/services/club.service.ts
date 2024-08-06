@@ -16,15 +16,15 @@ export class ClubService {
     const formData: FormData = new FormData();
     formData.append('club', new Blob([JSON.stringify(club)], { type: 'application/json' }));
     formData.append('logo', logo);
-    return this.http.post(`${this.backendUrl}/api/club/register`, formData, {observe: "response"});
+    return this.http.post(`${this.backendUrl}/api/clubs`, formData, {observe: "response"});
   }
 
   getAll(){
-    return this.http.get<any>(`${this.backendUrl}/api/club/all`);
+    return this.http.get<any>(`${this.backendUrl}/api/clubs`);
   }
 
   displayCover(id: number): Observable<Blob> {
-    return this.http.get(`${this.backendUrl}/api/club/display/${id}`, { responseType: 'blob' });
+    return this.http.get(`${this.backendUrl}/api/clubs/display/${id}`, { responseType: 'blob' });
   }
 
 }

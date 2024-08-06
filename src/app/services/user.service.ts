@@ -19,23 +19,23 @@ export class UserService {
     const formData: FormData = new FormData();
     formData.append('player', new Blob([JSON.stringify(player)], { type: 'application/json' }));
     formData.append('photo', photo);
-    return this.http.post<any>(`${this.backendUrl}/api/user/register-player`, formData, {observe: "response"});
+    return this.http.post<any>(`${this.backendUrl}/api/users`, formData, {observe: "response"});
   }
 
   login(credentials: any) {
-    return this.http.post<any>(`${this.backendUrl}/api/user/login`, credentials);
+    return this.http.post<any>(`${this.backendUrl}/api/users/login`, credentials);
   }
 
   showPhoto(id: number): Observable<Blob> {
-    return this.http.get(`${this.backendUrl}/api/user/display/${id}`, { responseType: 'blob' });
+    return this.http.get(`${this.backendUrl}/api/users/display/${id}`, { responseType: 'blob' });
   }
 
   getAllPlayers(){
-    return this.http.get<any>(`${this.backendUrl}/api/user/all-players`);
+    return this.http.get<any>(`${this.backendUrl}/api/users/players`);
   }
 
   refreshTokenRequest(): Observable<any> {
-    return this.http.post<any>(`${this.backendUrl}/api/user/refreshToken`, { refreshToken: this.refreshToken }).pipe(
+    return this.http.post<any>(`${this.backendUrl}/api/users/token`, { refreshToken: this.refreshToken }).pipe(
       tap(tokens => {
         this.token = tokens.token;
         this.refreshToken = tokens.refreshToken;
