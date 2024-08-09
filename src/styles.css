@@ -1,4 +1,6 @@
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html, body { height: 100%; }
 
@@ -48,4 +50,9 @@ body {
 
 .title-underline{
   border: 1px solid #80FF72;
+}
+
+.error {
+  color: red;
+  display: block;
 }

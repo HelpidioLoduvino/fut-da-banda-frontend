@@ -1,36 +1,29 @@
 import { Routes } from '@angular/router';
-import {HomeComponent} from "./components/home/home.component";
-import {MatchComponent} from "./components/match/match.component";
-import {PlayersComponent} from "./components/players/players.component";
-import {ClubsComponent} from "./components/clubs/clubs.component";
-import {ClassificationComponent} from "./components/classification/classification.component";
-import {TransferMarketComponent} from "./components/transfer-market/transfer-market.component";
-import {LoginComponent} from "./components/login/login.component";
-import {RegisterComponent} from "./components/register/register.component";
-import {ClubComponent} from "./components/club/club.component";
-import {CreateClubComponent} from "./components/create-club/create-club.component";
-import {AdminComponent} from "./components/admin/admin/admin.component";
-import {AdminClubComponent} from "./components/admin/admin-club/admin-club.component";
-import {AdminChampionshipComponent} from "./components/admin/admin-championship/admin-championship.component";
-import {AdminPlayerComponent} from "./components/admin/admin-player/admin-player.component";
-import {AdminMatchComponent} from "./components/admin/admin-match/admin-match.component";
-import {AdminFieldComponent} from "./components/admin/admin-field/admin-field.component";
+import {HomeComponent} from "./features/user/home/components/home.component";
+import {ClubsComponent} from "./features/user/clubs/components/list/clubs.component";
+import {LoginComponent} from "./core/auth/login/login.component";
+import {RegisterComponent} from "./core/auth/register/register.component";
+import {CreateClubComponent} from "./features/user/clubs/components/create/create-club.component";
+import {DashboardComponent} from "./features/admin/dashboard/components/dashboard.component";
+import {ClubComponent} from "./features/admin/clubs/components/club.component";
+import {ChampionshipComponent} from "./features/admin/championships/components/championship.component";
+import {PlayerComponent} from "./features/admin/players/components/player.component";
+import {MatchComponent} from "./features/admin/matches/components/match.component";
+import {FieldComponent} from "./features/admin/fields/components/field.component";
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'partidas', component: MatchComponent},
-  {path: 'jogadores', component: PlayersComponent},
+  {path: 'jogadores', component: PlayerComponent},
   {path: 'clubes', component: ClubsComponent},
   {path: 'clube', component: ClubComponent},
-  {path: 'tabela-classificação', component: ClassificationComponent},
-  {path: 'mercado-transferência', component: TransferMarketComponent},
   {path: 'entrar', component: LoginComponent},
   {path: 'registar', component: RegisterComponent},
   {path: 'registar-clube', component: CreateClubComponent},
-  {path: 'admin', component: AdminComponent},
-  {path: 'admin-clubes', component: AdminClubComponent},
-  {path: 'admin-campeonatos', component: AdminChampionshipComponent},
-  {path: 'admin-jogadores', component: AdminPlayerComponent},
-  {path: 'admin-partidas', component: AdminMatchComponent},
-  {path: 'admin-campos', component: AdminFieldComponent}
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'admin-clubes', component: ClubComponent},
+  {path: 'admin-campeonatos', component: ChampionshipComponent},
+  {path: 'admin-jogadores', component: PlayerComponent},
+  {path: 'admin-partidas', component: MatchComponent},
+  {path: 'admin-campos', component: FieldComponent}
 ];
