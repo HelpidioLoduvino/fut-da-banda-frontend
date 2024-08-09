@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from "@angular/common/http";
 import {environment} from "../../../environment/environment";
 import {Observable} from "rxjs";
 import {Club} from "../models/Club";
@@ -27,6 +27,22 @@ export class ClubService {
       .set('size', size.toString());
 
     return this.http.get<Page<Club>>(`${this.backendUrl}/api/clubs`, { params });
+  }
+
+  findById(id: number): Observable<HttpResponse<Club>>{
+    return this.http.get<Club>(`${this.backendUrl}/api/clubs/${id}`, {observe: "response"})
+  }
+
+  update(club: any, id: number){
+    const params = new HttpParams().set('id', id.toString())
+    return this.http.put(`${this.backendUrl}/api/clubs`, club, {observe: "response", params});
+  }
+
+  updateEmblem(emblem: File, id: number){
+    const formData: FormData = new FormData();
+    formData.append('emblem', emblem);
+    const params = new HttpParams().set('id', id.toString())
+    return this.http.put(`${this.backendUrl}/api/clubs/emblem`, formData, {observe: "response", params});
   }
 
   displayCover(id: number): Observable<Blob> {

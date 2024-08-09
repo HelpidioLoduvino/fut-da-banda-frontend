@@ -8,10 +8,12 @@ import {NotificationComponent} from "../../../../core/components/notifications/n
 import {SharedModule} from "../../../../shared/shared.module";
 import {NgOptimizedImage} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
-import {DeleteComponent} from "../../../../shared/components/modal/delete/delete.component";
+import {DeleteComponent} from "./delete/delete.component";
 import {ModalComponent} from "../../../../shared/components/modal/modal.component";
 import {Club} from "../../../../core/models/Club";
 import {Page} from "../../../../core/models/Page";
+import {Router} from "@angular/router";
+import {EditComponent} from "./edit/edit.component";
 
 
 @Component({
@@ -43,7 +45,8 @@ export class ClubComponent implements OnInit{
   constructor(private clubService: ClubService,
               private snackBar: MatSnackBar,
               private formBuilder: FormBuilder,
-              private modal: MatDialog
+              private modal: MatDialog,
+              private router: Router
               ) {
   }
 
@@ -97,11 +100,11 @@ export class ClubComponent implements OnInit{
       this.clubService.register(club, this.logo).subscribe(response=>{
         if(response.ok){
           this.snackBar.open("Clube criado com Sucesso", 'Fechar', {
-            duration: 3000
+            duration: 2000
           })
           setTimeout(() => {
             window.location.reload();
-          }, 3000);
+          }, 2000);
         } else {
           this.snackBar.open("Erro ao criar CLube", 'Fechar', {
             duration: 3000
@@ -127,6 +130,24 @@ export class ClubComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  edit(id: number): void {
+    const dialogRef = this.modal.open(ModalComponent, {
+      width: '500px',
+      height: '500px',
+      data: {
+        component: EditComponent,
+        componentData: { id: id}
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  detail(id: number){
+    this.router.navigate(['admin-clube' , id]).then()
   }
 
 }

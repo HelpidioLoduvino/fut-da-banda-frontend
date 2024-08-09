@@ -10,8 +10,11 @@ import {ChampionshipComponent} from "./features/admin/championships/components/c
 import {PlayerComponent} from "./features/admin/players/components/player.component";
 import {MatchComponent} from "./features/admin/matches/components/match.component";
 import {FieldComponent} from "./features/admin/fields/components/field.component";
+import {DetailComponent} from "./features/admin/clubs/components/detail/detail.component";
 
 export const routes: Routes = [
+
+  // User routes
   {path: '', component: HomeComponent},
   {path: 'partidas', component: MatchComponent},
   {path: 'jogadores', component: PlayerComponent},
@@ -20,8 +23,11 @@ export const routes: Routes = [
   {path: 'entrar', component: LoginComponent},
   {path: 'registar', component: RegisterComponent},
   {path: 'registar-clube', component: CreateClubComponent},
+
+  //Admin routes
   {path: 'dashboard', component: DashboardComponent},
   {path: 'admin-clubes', component: ClubComponent},
+  {path: 'admin-clube/:id', component: DetailComponent},
   {path: 'admin-campeonatos', component: ChampionshipComponent},
   {path: 'admin-jogadores', component: PlayerComponent},
   {path: 'admin-partidas', component: MatchComponent},

@@ -1,0 +1,13 @@
+<div class="container">
+  <label>Novo Emblema:</label>
+  <input type="file" accept="image/*" (change)="onImageFileChange($event)" class="form-control">
+
+  <span class="flex justify-center mt-3">
+    <button class="btn btn-success" (click)="update()">Carregar</button>
+  </span>
+
+  <div class="card card-body mt-3 h-25">
+    <img *ngIf="selectedImageUrl" [src]="selectedImageUrl" alt="Imagem Selecionada" class="img-fluid"/>
+  </div>
+
+</div>

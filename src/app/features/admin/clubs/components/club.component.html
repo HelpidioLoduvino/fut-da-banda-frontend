@@ -33,13 +33,13 @@
                       </thead>
                       <tbody class="table-active">
                       <tr *ngFor="let club of clubs" style="cursor:pointer;">
-                        <td>{{ club.name }}</td>
-                        <td>{{ club.category }}</td>
-                        <td>{{ club.groupType }}</td>
-                        <td>{{ club.state }}</td>
+                        <td (click)="detail(club.id)">{{ club.name }}</td>
+                        <td (click)="detail(club.id)">{{ club.category }}</td>
+                        <td (click)="detail(club.id)">{{ club.groupType }}</td>
+                        <td (click)="detail(club.id)">{{ club.state }}</td>
                         <td>
                           <div class="d-flex">
-                            <button class="btn btn-primary me-2">
+                            <button class="btn btn-primary me-2" (click)="edit(club.id)">
                               <lucide-icon name="pencil"></lucide-icon>
                             </button>
                             <button type="submit" class="btn btn-danger" (click)="delete(club.id)">
@@ -51,12 +51,12 @@
                       </tbody>
                     </table>
                     <div>
-                      <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">
+                      <button class="btn btn-dark me-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">
                         Anterior
                       </button>
                       <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
-                      <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= totalPages - 1">
-                        Próximo
+                      <button class="btn btn-dark ms-2" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= totalPages - 1">
+                        Próxima
                       </button>
                     </div>
                   </div>
@@ -87,15 +87,15 @@
                                     <option value="Benguela">Benguela</option>
                                     <option value="Bié">Bié</option>
                                     <option value="Cabinda">Cabinda</option>
-                                    <option value="Cuando-cubango">Cuando-Cubango</option>
-                                    <option value="Cuanza-norte">Cuanza Norte</option>
-                                    <option value="Cuanza-sul">Cuanza Sul</option>
+                                    <option value="Cuando Cubango">Cuando Cubango</option>
+                                    <option value="Cuanza Norte">Cuanza Norte</option>
+                                    <option value="Cuanza Sul">Cuanza Sul</option>
                                     <option value="Cunene">Cunene</option>
                                     <option value="Huambo">Huambo</option>
                                     <option value="Huíla">Huíla</option>
                                     <option value="Luanda">Luanda</option>
-                                    <option value="Luanda-norte">Lunda Norte</option>
-                                    <option value="Luanda-sul">Lunda Sul</option>
+                                    <option value="Lunda Norte">Lunda Norte</option>
+                                    <option value="Lunda Sul">Lunda Sul</option>
                                     <option value="Malanje">Malanje</option>
                                     <option value="Moxico">Moxico</option>
                                     <option value="Namibe">Namibe</option>
@@ -140,8 +140,8 @@
                                   <label class="name">Tipo</label>
                                   <select class="form-control" formControlName="state">
                                     <option value="" disabled>-- Selecionar --</option>
-                                    <option value="PROFISSIONAL">Profissional</option>
-                                    <option value="AMADOR">Amador</option>
+                                    <option value="Profissional">Profissional</option>
+                                    <option value="Amador">Amador</option>
                                   </select>
                                 </div>
                               </div>
@@ -165,7 +165,7 @@
                       </div>
                     </div>
                     <div class="col">
-                      <div class="card card-body mt-4 me-4">
+                      <div class="card card-body mt-4 me-4 h-100">
                         <img *ngIf="selectedImageUrl" [src]="selectedImageUrl" alt="Imagem Selecionada" class="img-fluid"/>
                       </div>
                     </div>
