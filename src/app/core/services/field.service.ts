@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../../environment/environment";
+import {Field} from "../models/Field";
+import {Page} from "../models/Page";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +17,11 @@ export class FieldService {
     return this.http.post(`${this.backendUrl}/api/fields`, field, {observe: "response"})
   }
 
-  all(){
-    return this.http.get<any>(`${this.backendUrl}/api/fields`)
+  all(page: number, size: number){
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+    return this.http.get<Page<Field>>(`${this.backendUrl}/api/fields`, {params})
   }
 
 }

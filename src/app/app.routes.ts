@@ -7,17 +7,17 @@ import {CreateClubComponent} from "./features/user/clubs/components/create/creat
 import {DashboardComponent} from "./features/admin/dashboard/components/dashboard.component";
 import {ClubComponent} from "./features/admin/clubs/components/club.component";
 import {ChampionshipComponent} from "./features/admin/championships/components/championship.component";
-import {PlayerComponent} from "./features/admin/players/components/player.component";
 import {MatchComponent} from "./features/admin/matches/components/match.component";
 import {FieldComponent} from "./features/admin/fields/components/field.component";
 import {DetailComponent} from "./features/admin/clubs/components/detail/detail.component";
+import {UserComponent} from "./features/admin/users/components/user.component";
 
 export const routes: Routes = [
 
   // User routes
   {path: '', component: HomeComponent},
   {path: 'partidas', component: MatchComponent},
-  {path: 'jogadores', component: PlayerComponent},
+  //{path: 'jogadores', component: },
   {path: 'clubes', component: ClubsComponent},
   {path: 'clube', component: ClubComponent},
   {path: 'entrar', component: LoginComponent},
@@ -29,7 +29,7 @@ export const routes: Routes = [
   {path: 'admin-clubes', component: ClubComponent},
   {path: 'admin-clube/:id', component: DetailComponent},
   {path: 'admin-campeonatos', component: ChampionshipComponent},
-  {path: 'admin-jogadores', component: PlayerComponent},
+  {path: 'admin-usuarios', component: UserComponent},
   {path: 'admin-partidas', component: MatchComponent},
   {path: 'admin-campos', component: FieldComponent}
 ];

@@ -5,6 +5,9 @@ import {FieldService} from "../../../../core/services/field.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {NotificationComponent} from "../../../../core/components/notifications/notification.component";
 import {SharedModule} from "../../../../shared/shared.module";
+import {Page} from "../../../../core/models/Page";
+import {Club} from "../../../../core/models/Club";
+import {Field} from "../../../../core/models/Field";
 
 @Component({
   selector: 'app-admin-field',
@@ -22,6 +25,10 @@ export class FieldComponent implements OnInit{
 
   fieldForm!: FormGroup
   fields: any[] = [];
+  totalElements: number = 0;
+  totalPages: number = 0;
+  currentPage: number = 0;
+  pageSize: number = 4;
 
   constructor(private fieldService: FieldService,
               private formBuilder: FormBuilder,
@@ -33,12 +40,27 @@ export class FieldComponent implements OnInit{
     this.fieldForm = this.formBuilder.group({
       name: ['', Validators.required],
       location: ['', Validators.required],
-      occupied: [false, Validators.required]
+      state: ['', Validators.required]
     })
+    this.loadFields()
+  }
 
-    this.fieldService.all().subscribe(response=>{
-      this.fields = response;
-    })
+  loadFields(){
+    this.fieldService.all(this.currentPage, this.pageSize).subscribe({
+      next: (page: Page<Field>) => {
+        this.fields = page.content;
+        this.totalElements = page.totalElements;
+        this.totalPages = page.totalPages;
+      },
+      error: (err) => console.error('Erro ao buscar clubes:', err)
+    });
+  }
+
+  onPageChange(page: number): void {
+    if (page >= 0 && page < this.totalPages) {
+      this.currentPage = page;
+      this.loadFields();
+    }
   }
 
   register(){
@@ -47,16 +69,16 @@ export class FieldComponent implements OnInit{
       this.fieldService.register(field).subscribe(response=>{
         if(response.ok){
           this.snackBar.open("Campo Adicionado Com Sucesso", 'Fechar', {
-            duration: 3000
+            duration: 1000
           })
           setTimeout(() => {
             window.location.reload();
-          }, 3000);
+          }, 1000);
         }
       })
     } else {
       this.snackBar.open("Erro de Formulário", 'Fechar', {
-        duration: 3000
+        duration: 1000
       })
     }
   }
