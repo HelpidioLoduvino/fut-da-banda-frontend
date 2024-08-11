@@ -36,7 +36,7 @@ export class EditComponent implements OnInit{
       name: [''],
       abv: [''],
       province: [''],
-      state: [''],
+      status: [''],
       description: [''],
       category: [''],
       groupType: [''],
@@ -52,7 +52,7 @@ export class EditComponent implements OnInit{
           name: this.club.name,
           abv: this.club.abv,
           province: this.club.province,
-          state: this.club.state,
+          status: this.club.status,
           description: this.club.description,
           category: this.club.category,
           groupType: this.club.groupType,
@@ -72,6 +72,10 @@ export class EditComponent implements OnInit{
           setTimeout(() => {
             window.location.reload();
           }, 1000);
+        } else {
+          this.snackBar.open("Erro ao atualizar clube", 'Fechar', {
+            duration: 1000
+          })
         }
       })
     }

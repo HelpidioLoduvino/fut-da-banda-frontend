@@ -9,7 +9,19 @@ import {
   Menu,
   Bell,
   CircleUserRound,
-  UserRound, ShoppingCart, DollarSign, Info, LogOut, Users, LineChart, LoaderCircle, Trash, Pencil
+  UserRound,
+  ShoppingCart,
+  DollarSign,
+  Info,
+  LogOut,
+  Users,
+  LineChart,
+  LoaderCircle,
+  Trash,
+  Pencil,
+  Ban,
+  RefreshCwOff,
+  Search, Plus
 } from 'lucide-angular';
 import {AdminSidebarComponent} from "./components/admin-sidebar/admin-sidebar.component";
 import {AdminNavbarComponent} from "./components/admin-navbar/admin-navbar.component";
@@ -29,7 +41,11 @@ const icons = {
   LineChart,
   LoaderCircle,
   Trash,
-  Pencil
+  Pencil,
+  Ban,
+  RefreshCwOff,
+  Search,
+  Plus
 }
 
 

@@ -1,83 +1,8 @@
 <app-navbar></app-navbar>
-
 <div class="container mt-3">
   <h6 class="d-flex justify-content-center">Registar o meu Clube</h6>
   <div class="d-flex justify-content-center">
-    <form [formGroup]="clubForm" (ngSubmit)="registerClub()">
-      <input type="hidden" value="Amador" formControlName="state">
-      <div class="form-group">
-        <label class="name">Nome</label>
-        <input type="text" class="form-control" formControlName="name">
-      </div>
-      <div class="form-group mt-3">
-        <label class="name">Abreviação</label>
-        <input type="text" class="form-control" formControlName="abv">
-      </div>
-      <div class="form-group mt-3">
-        <label class="name">Província</label>
-        <select class="form-control" formControlName="province">
-          <option selected disabled>-- Selecionar --</option>
-          <option value="Bengo">Bengo</option>
-          <option value="Benguela">Benguela</option>
-          <option value="Bié">Bié</option>
-          <option value="Cabinda">Cabinda</option>
-          <option value="Cuando-cubango">Cuando-Cubango</option>
-          <option value="Cuanza-norte">Cuanza Norte</option>
-          <option value="Cuanza-sul">Cuanza Sul</option>
-          <option value="Cunene">Cunene</option>
-          <option value="Huambo">Huambo</option>
-          <option value="Huíla">Huíla</option>
-          <option value="Luanda">Luanda</option>
-          <option value="Luanda-norte">Lunda Norte</option>
-          <option value="Luanda-sul">Lunda Sul</option>
-          <option value="Malanje">Malanje</option>
-          <option value="Moxico">Moxico</option>
-          <option value="Namibe">Namibe</option>
-          <option value="Uíge">Uíge</option>
-          <option value="Zaire">Zaire</option>
-        </select>
-      </div>
-      <div class="form-group mt-3">
-        <label class="name">Logotipo</label>
-        <input type="file" accept="image/*" (change)="onImageFileChange($event)" class="form-control">
-      </div>
-
-      <div class="form-group mt-3">
-        <label class="name">Sobre o Clube</label>
-        <textarea class="form-control" formControlName="description"></textarea>
-      </div>
-
-      <div class="form-group mt-3">
-        <label class="name">Grupo</label>
-        <select class="form-control" formControlName="groupType">
-          <option selected disabled>-- Selecionar --</option>
-          <option value="A">Grupo A</option>
-          <option value="B">Grupo B</option>
-          <option value="C">Grupo C</option>
-          <option value="D">Grupo D</option>
-        </select>
-      </div>
-
-      <div class="form-group mt-3">
-        <label class="name">Categoria</label>
-        <select class="form-control" formControlName="category">
-          <option selected disabled>-- Selecionar --</option>
-          <option value="Sub-7">Sub-7 (6-8 anos)</option>
-          <option value="Sub-9">Sub-9 (9-10 anos)</option>
-          <option value="Sub-11">Sub-11 (11-12 anos)</option>
-          <option value="Sub-13">Sub-13 (13-14 anos)</option>
-          <option value="Sub-15">Sub-15 (15-16 anos)</option>
-          <option value="Sub-17">Sub-17 (17-19 anos)</option>
-          <option value="Sub-20">Sub-20 (18-20 anos)</option>
-          <option value="Adulto">Adulto</option>
-          <option value="Veterano">Veterano</option>
-        </select>
-      </div>
-
-      <span class="d-flex justify-content-center">
-        <input type="submit" class="btn btn-success mt-3" value="Registar">
-      </span>
-    </form>
+    <app-club-form></app-club-form>
   </div>
 </div>
 

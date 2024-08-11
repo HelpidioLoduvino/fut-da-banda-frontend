@@ -1,0 +1,25 @@
+<div>
+  <form [formGroup]="fieldForm" (ngSubmit)="update()" class="p-5 space-y-5">
+    <div class="form-group">
+      <label>Nome</label>
+      <input type="text" class="form-control" formControlName="name">
+    </div>
+    <div class="form-group">
+      <label>Loalização</label>
+      <input type="text" class="form-control" formControlName="location">
+    </div>
+    <div class="form-group">
+      <label>Disponibilidade</label>
+      <select class="form-control" formControlName="status">
+        <option value="" disabled></option>
+        <option value="Disponível">Disponível</option>
+        <option value="Indisponível">Indisponível</option>
+      </select>
+    </div>
+
+    <div class="flex justify-center">
+      <input type="submit" class="btn btn-primary" value="Editar">
+    </div>
+
+  </form>
+</div>

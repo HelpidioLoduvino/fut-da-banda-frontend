@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environment/environment";
 import {Observable, tap} from "rxjs";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpParams, HttpResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {User} from "../models/User";
 import {Player} from "../models/Player";
 import {Page} from "../models/Page";
+
 
 @Injectable({
   providedIn: 'root'
@@ -44,13 +45,34 @@ export class UserService {
     return this.http.get<Page<User>>(`${this.backendUrl}/api/users`, {params});
   }
 
-  getAllPlayers(){
-    return this.http.get<Player>(`${this.backendUrl}/api/users/players`, {observe: "response"});
+  getAllPlayers(page: number, size: number){
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+    return this.http.get<Page<Player>>(`${this.backendUrl}/api/users/players`, {params});
+  }
+
+  findById(id: number): Observable<HttpResponse<User>>{
+    return this.http.get<User>(`${this.backendUrl}/api/users/${id}`, {observe: "response"})
+  }
+
+  findRole(): Observable<HttpResponse<string>>{
+    return this.http.get(`${this.backendUrl}/api/users/role`, { observe: "response", responseType: 'text' });
+  }
+
+  findUserByRole(role: string){
+    const params = new HttpParams().set('role', role)
+    return this.http.get<User>(`${this.backendUrl}/api/users/user`, {observe: "response", params})
   }
 
   update(user: any, id: number){
     const params = new HttpParams().set('id', id.toString())
-    return this.http.put(`${this.backendUrl}/api/clubs`, user, {observe: "response", params});
+    return this.http.put(`${this.backendUrl}/api/users`, user, {observe: "response", params});
+  }
+
+  updatePlayer(player: any, id: number){
+    const params = new HttpParams().set('id', id.toString())
+    return this.http.put(`${this.backendUrl}/api/users/player`, player, {observe: "response", params});
   }
 
   updatePhoto(photo: File, id: number){
@@ -60,9 +82,14 @@ export class UserService {
     return this.http.put(`${this.backendUrl}/api/users/photo`, formData, {observe: "response", params});
   }
 
-  delete(id: number){
+  ban(id: number){
     const params = new HttpParams().set('id', id.toString())
-    return this.http.delete(`${this.backendUrl}/api/users`, {params, observe: "response"})
+    return this.http.put(`${this.backendUrl}/api/users/ban`, null,{params, observe: "response"})
+  }
+
+  unban(id: number){
+    const params = new HttpParams().set('id', id.toString())
+    return this.http.put(`${this.backendUrl}/api/users/unban`, null,{params, observe: "response"})
   }
 
   refreshTokenRequest(): Observable<any> {
@@ -84,9 +111,6 @@ export class UserService {
   logout (): void {
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
-    localStorage.removeItem('email');
-    localStorage.removeItem('id');
-    localStorage.removeItem('userRole');
     this.router.navigate(['']).then();
   }
 }

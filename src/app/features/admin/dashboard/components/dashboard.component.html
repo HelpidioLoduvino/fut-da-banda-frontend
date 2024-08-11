@@ -17,18 +17,17 @@
         <div class="row mt-3">
           <div class="col-md-6 mb-3 mb-md-0">
             <div class="card mb-3" style="color: black; background-color: #F4F2F3; border-radius: 0;">
-              <div class="card-body">
+              <div class="card-body" *ngIf="user">
                 <lucide-icon name="circle-user-round"></lucide-icon>
                 <h6 class="d-flex justify-content-center"><strong>Meu Perfil</strong></h6>
-                <p>Nome: </p>
-                <p>Email: </p>
+                <p>Nome: {{user.fullName}}</p>
+                <p>Email: {{user.email}}</p>
               </div>
             </div>
             <div class="card card-body" style="color: black; background-color: #F4F2F3; border-radius: 0;">
               <lucide-icon name="line-chart"></lucide-icon>
               <h6 class="d-flex justify-content-center"><strong>Estatística Geral</strong></h6>
-              <p>Jogadores: </p>
-              <p>Treinadores: </p>
+              <p>Jogadores: <span *ngIf="players"></span>{{players}}</p>
             </div>
           </div>
           <div class="col">

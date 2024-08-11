@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {ClubService} from "../../../../../core/services/club.service";
 import {Club} from "../../../../../core/models/Club";
 import {AdminNavbarComponent} from "../../../../../shared/components/admin-navbar/admin-navbar.component";
@@ -10,25 +10,25 @@ import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {NotificationComponent} from "../../../../../core/components/notifications/notification.component";
 import {ModalComponent} from "../../../../../shared/components/modal/modal.component";
-import {EditComponent} from "../edit/edit.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ChangeEmblemComponent} from "../change-emblem/change-emblem.component";
+import {SharedModule} from "../../../../../shared/shared.module";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 
 @Component({
   selector: 'app-detail',
   standalone: true,
   imports: [
-    AdminNavbarComponent,
-    AdminSidebarComponent,
     FormsModule,
-    LucideAngularModule,
     MatTab,
     MatTabGroup,
-    NgForOf,
-    NgIf,
+    NgOptimizedImage,
+    SharedModule,
     NotificationComponent,
-    ReactiveFormsModule,
-    NgOptimizedImage
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
+    RouterLink
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css'

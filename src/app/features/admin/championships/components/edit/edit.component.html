@@ -1,0 +1,83 @@
+<div>
+  <form [formGroup]="championshipForm" (ngSubmit)="edit()">
+    <div class="d-flex justify-content-center">
+      <div>
+        <div class="row mb-3">
+          <div class="col">
+            <label>Nome</label>
+            <input type="text" class="form-control" formControlName="name">
+          </div>
+          <div class="col">
+            <label>Categoria</label>
+            <select class="form-control" formControlName="category">
+              <option value="" disabled>-- Selecionar --</option>
+              <option value="Sub-7">Sub-7 (6-8 anos)</option>
+              <option value="Sub-9">Sub-9 (9-10 anos)</option>
+              <option value="Sub-11">Sub-11 (11-12 anos)</option>
+              <option value="Sub-13">Sub-13 (13-14 anos)</option>
+              <option value="Sub-15">Sub-15 (15-16 anos)</option>
+              <option value="Sub-17">Sub-17 (17-19 anos)</option>
+              <option value="Sub-20">Sub-20 (18-20 anos)</option>
+              <option value="Adulto">Adulto</option>
+              <option value="Veterano">Veterano</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <label>Provincia</label>
+            <select class="form-control" formControlName="province">
+              <option value="" disabled>-- Selecionar --</option>
+              <option value="Nacional">Nacional</option>
+              <option value="Bengo">Bengo</option>
+              <option value="Benguela">Benguela</option>
+              <option value="Bié">Bié</option>
+              <option value="Cabinda">Cabinda</option>
+              <option value="Cuando-cubango">Cuando-Cubango</option>
+              <option value="Cuanza-norte">Cuanza Norte</option>
+              <option value="Cuanza-sul">Cuanza Sul</option>
+              <option value="Cunene">Cunene</option>
+              <option value="Huambo">Huambo</option>
+              <option value="Huíla">Huíla</option>
+              <option value="Luanda">Luanda</option>
+              <option value="Luanda-norte">Lunda Norte</option>
+              <option value="Luanda-sul">Lunda Sul</option>
+              <option value="Malanje">Malanje</option>
+              <option value="Moxico">Moxico</option>
+              <option value="Namibe">Namibe</option>
+              <option value="Uíge">Uíge</option>
+              <option value="Zaire">Zaire</option>
+            </select>
+          </div>
+          <div class="col">
+            <label>Grupo</label>
+            <select class="form-control" formControlName="groupType">
+              <option value="" disabled>-- Selecionar --</option>
+              <option value="A">Grupo A</option>
+              <option value="B">Grupo B</option>
+              <option value="C">Grupo C</option>
+              <option value="D">Grupo D</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <label>Preço de Inscrição:</label>
+            <input type="number" class="form-control" formControlName="price">
+          </div>
+          <div class="col">
+            <label>Jornadas:</label>
+            <input type="number" class="form-control" formControlName="matchDay">
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label>Descrição do campeonato:</label>
+          <textarea class="form-control" formControlName="description"></textarea>
+        </div>
+        <span class="d-flex justify-content-center">
+          <input type="submit" class="btn btn-success" value="Editar">
+        </span>
+      </div>
+    </div>
+  </form>
+</div>

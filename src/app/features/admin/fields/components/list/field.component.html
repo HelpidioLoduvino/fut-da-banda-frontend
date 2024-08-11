@@ -1,0 +1,84 @@
+<script src="field.component.ts"></script>
+<div class="row g-0" style="background-color: #F4F2F3;">
+  <div class="col-md-2 d-md-block d-none" style="background: #355070">
+    <app-admin-navbar></app-admin-navbar>
+  </div>
+  <div class="col d-flex flex-column justify-content-between" style="min-height: 100vh;">
+    <div class="container mt-3 flex-grow-1">
+      <app-admin-sidebar class="d-md-none"></app-admin-sidebar>
+      <nav class="navbar navbar-light d-none d-md-block">
+        <div class="container-fluid">
+          <a class="navbar-brand d-md-block d-none position-relative" style="top: 15px;">Campos</a>
+        </div>
+        <div class="d-flex justify-content-end">
+          <app-admin-notification></app-admin-notification>
+        </div>
+      </nav>
+
+      <section class="w-full mt-3">
+        <div class="flex justify-between items-center">
+          <div>
+            <div>
+              <button class="btn btn-primary" (click)="save()">
+                <lucide-icon name="plus"></lucide-icon>
+              </button>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <div>
+              <form class="d-flex">
+                <input class="form-control flex-grow-1" type="search" placeholder="Procurar Campo" aria-label="Search">
+                <button class="btn btn-outline-primary ml-2" type="submit">
+                  <lucide-icon name="search"></lucide-icon>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="w-full mt-3" style="color: black;">
+        <div class="table-responsive" style="position:relative; max-height: 400px;">
+          <table class="table table-hover">
+            <thead class="table-dark">
+            <tr>
+              <th>Nome</th>
+              <th>Localização</th>
+              <th>Disponibilidade</th>
+              <th>Ação</th>
+            </tr>
+            </thead>
+            <tbody class="table-active">
+            <tr *ngFor="let field of fields">
+              <td>{{field.name}}</td>
+              <td>{{field.location}}</td>
+              <td>{{field.status}}</td>
+              <td>
+                <div class="d-flex">
+                  <button class="btn btn-primary me-2" (click)="edit(field.id)">
+                    <lucide-icon name="pencil"></lucide-icon>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="w-full" style="position: fixed; bottom: 12px; color: black">
+        <div class="">
+          <button class="btn btn-outline-dark me-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">
+            <
+          </button>
+          <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+          <button class="btn btn-outline-dark ms-2" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= totalPages - 1">
+            >
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+
+

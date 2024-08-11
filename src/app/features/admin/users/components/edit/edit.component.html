@@ -1,1 +1,15 @@
-<p>edit works!</p>
+<div>
+  <form class="p-5 space-y-5" [formGroup]="userForm" (ngSubmit)="update()">
+    <div>
+      <label>Nome Completo</label>
+      <input type="text" formControlName="fullName" class="form-control">
+    </div>
+    <div>
+      <label>Email</label>
+      <input type="email" formControlName="email" class="form-control">
+    </div>
+    <div class="flex justify-center">
+      <input type="submit" value="Editar" class="btn btn-primary">
+    </div>
+  </form>
+</div>

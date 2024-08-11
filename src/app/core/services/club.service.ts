@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpParams, HttpResponse} from "@angular/common/http";
 import {environment} from "../../../environment/environment";
 import {Observable} from "rxjs";
 import {Club} from "../models/Club";
@@ -49,9 +49,14 @@ export class ClubService {
     return this.http.get(`${this.backendUrl}/api/clubs/display/${id}`, { responseType: 'blob' });
   }
 
-  delete(id: number){
+  ban(id: number){
     const params = new HttpParams().set('id', id.toString())
-    return this.http.delete(`${this.backendUrl}/api/clubs`, {params, observe: "response"})
+    return this.http.put(`${this.backendUrl}/api/clubs/ban`, null,{params, observe: "response"})
+  }
+
+  unban(id: number){
+    const params = new HttpParams().set('id', id.toString())
+    return this.http.put(`${this.backendUrl}/api/clubs/unban`, null,{params, observe: "response"})
   }
 
 }

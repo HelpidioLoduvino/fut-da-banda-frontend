@@ -31,7 +31,7 @@
                       <h5 class="card-title mt-4">{{club.name}}</h5>
                       <p class="mb-0"> <span class="text-muted">Abreviação: </span> <strong>{{ club.abv }}</strong></p>
                       <p class="mb-0"> <span class="text-muted">Província: </span><strong>{{ club.province }}</strong></p>
-                      <p class="mb-0"> <span class="text-muted">Tipo de Equipa: </span><strong>{{ club.state }}</strong></p>
+                      <p class="mb-0"> <span class="text-muted">Tipo de Equipa: </span><strong>{{ club.status }}</strong></p>
                       <p class="mb-0"> <span class="text-muted">Grupo: </span><strong>{{ club.groupType }}</strong></p>
                       <p class="mb-0"> <span class="text-muted">Categoria: </span><strong>{{ club.category }}</strong></p>
                       <p class="mb-0" *ngIf="!club.isReadyToPlay"> <span class="text-muted">Disponibilidade: </span><strong>Falta de jogadores para competição</strong></p>
@@ -47,7 +47,14 @@
             </div>
             <div class="col">
               <div class="card card-body" style="color: black">
-                  <h6 class="flex justify-center">Jogadores</h6>
+                <div class="flex">
+                  <h6 class="">Jogadores</h6>
+                  <div>
+                    <a routerLink="/admin-jogadores" class="btn btn-primary ms-3">
+                      +
+                    </a>
+                  </div>
+                </div>
                   <ul>
                     <li *ngFor="let player of club.players let i = index">
                       {{ i + 1 }}.

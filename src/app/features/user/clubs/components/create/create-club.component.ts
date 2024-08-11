@@ -5,6 +5,7 @@ import {MatStep, MatStepLabel, MatStepper} from "@angular/material/stepper";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ClubService} from "../../../../../core/services/club.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ClubFormComponent} from "../../../../../shared/components/club-form/club-form.component";
 
 @Component({
   selector: 'app-create-club',
@@ -15,7 +16,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     MatStepper,
     MatStep,
     MatStepLabel,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClubFormComponent
   ],
   templateUrl: './create-club.component.html',
   styleUrl: './create-club.component.css'

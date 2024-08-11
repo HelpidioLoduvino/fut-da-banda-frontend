@@ -27,7 +27,7 @@ export class RegisterFormComponent implements OnInit{
   photo!: File;
   @ViewChild(MatStepper) stepper!: MatStepper;
   errorMessage: string = '';
-  admin: string | null = localStorage.getItem('userRole');
+  role!: string | null
 
   constructor(
     private userService: UserService,
@@ -52,6 +52,7 @@ export class RegisterFormComponent implements OnInit{
         gender: [''],
         position: [''],
         biography: [''],
+        available: ['']
       })
     });
 
@@ -63,6 +64,8 @@ export class RegisterFormComponent implements OnInit{
         this.registerForm.get('player.gender')?.setValidators(Validators.required);
         this.registerForm.get('player.position')?.setValidators(Validators.required);
         this.registerForm.get('player.biography')?.setValidators(Validators.required);
+        this.registerForm.get('player.available');
+
       }
     });
 
@@ -110,6 +113,7 @@ export class RegisterFormComponent implements OnInit{
           gender: playerForm.gender,
           position: playerForm.position,
           biography: playerForm.biography,
+          available: playerForm.available
         }
 
         this.userService.registerPlayer(player, this.photo).subscribe(response=>{
@@ -143,12 +147,18 @@ export class RegisterFormComponent implements OnInit{
   }
 
   isAdmin(){
-    if(this.admin === "ADMIN"){
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    } else {
-      this.router.navigate(['/entrar']).then(r => {})
-    }
+    this.userService.findRole().subscribe(response=>{
+      if(response.ok){
+        this.role = response.body
+        if(this.role && this.role === "ADMIN"){
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else{
+          this.router.navigate(['/entrar']).then(r => {})
+        }
+      }
+    })
   }
+
 }

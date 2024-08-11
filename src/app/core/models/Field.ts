@@ -1,6 +1,6 @@
 export interface Field{
-  id?: number
+  id: number
   name: string;
   location: string;
-  state: string;
+  status: string;
 }

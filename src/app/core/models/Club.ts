@@ -4,10 +4,11 @@ export interface Club {
   abv: string;
   province: string;
   emblem: string;
-  state: string;
+  status: string;
   description: string;
   groupType: string;
   category: string;
   isReadyToPlay: boolean;
   players: any[];
+
 }

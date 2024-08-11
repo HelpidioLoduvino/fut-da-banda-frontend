@@ -38,29 +38,30 @@ export class LoginComponent implements OnInit{
   onSubmit() {
     if (this.loginForm.valid) {
       this.isLoading = true;
-
       const credentials = this.loginForm.value;
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
-
       this.userService.login(credentials).subscribe({
         next: (response) => {
           localStorage.setItem('token', response.token);
           localStorage.setItem('refreshToken', response.refreshToken);
-          localStorage.setItem('email', response.email);
-          localStorage.setItem('id', response.id);
-          localStorage.setItem('userRole', response.userRole);
-
-          if (response.userRole === "ADMIN") {
-            this.router.navigate(['/dashboard']).then();
-          } else if (response.userRole === "CAPTAIN" || response.userRole === "PLAYER" || response.userRole === "COACH") {
-            this.router.navigate(['']).then();
+          if(response.status !== "Bloqueado"){
+            if (response.userRole === "ADMIN") {
+              this.router.navigate(['/dashboard']).then();
+            } else if (response.userRole === "CAPTAIN" || response.userRole === "PLAYER" || response.userRole === "COACH" || response.userRole === "USER") {
+              this.router.navigate(['']).then();
+            }
+          } else {
+            this.snackBar.open('Conta bloqueada pelo Administrador', 'Fechar', {
+              duration: 1000, panelClass: ['snackbar-error']
+            });
           }
         },
         error: (error) => {
           this.snackBar.open('Erro ao Iniciar Sessão!', 'Fechar', {
-            duration: 3000, panelClass: ['snackbar-error']
+            duration: 1000, panelClass: ['snackbar-error']
           });
+          console.log(error)
         },
         complete: () => {
           this.isLoading = false;
