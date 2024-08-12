@@ -1,8 +1,8 @@
 import {Component, Inject} from '@angular/core';
-import {ClubService} from "../../../../../core/services/club.service";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {NgIf} from "@angular/common";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ClubService} from "../../../core/services/club.service";
 
 @Component({
   selector: 'app-change-emblem',

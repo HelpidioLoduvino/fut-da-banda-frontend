@@ -10,7 +10,6 @@ import {ModalComponent} from "../../../../../shared/components/modal/modal.compo
 import {Club} from "../../../../../core/models/Club";
 import {Page} from "../../../../../core/models/Page";
 import {Router} from "@angular/router";
-import {EditComponent} from "../edit/edit.component";
 import {ClubFormComponent} from "../../../../../shared/components/club-form/club-form.component";
 import {SaveComponent} from "../save/save.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -55,6 +54,7 @@ export class ClubComponent implements OnInit{
     this.clubService.getAll(this.currentPage, this.pageSize).subscribe({
       next: (page: Page<Club>) => {
         this.clubs = page.content;
+        console.log(this.clubs)
         this.totalElements = page.totalElements;
         this.totalPages = page.totalPages;
       },
@@ -95,19 +95,6 @@ export class ClubComponent implements OnInit{
     })
   }
 
-  edit(id: number): void {
-    const dialogRef = this.modal.open(ModalComponent, {
-      width: '500px',
-      height: '500px',
-      data: {
-        component: EditComponent,
-        componentData: { id: id}
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
 
   detail(id: number){
     this.router.navigate(['admin-clube' , id]).then()

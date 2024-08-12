@@ -54,9 +54,6 @@
               <td (click)="detail(club.id)">{{ club.status }}</td>
               <td>
                 <div class="d-flex">
-                  <button class="btn btn-primary me-2" (click)="edit(club.id)">
-                    <lucide-icon name="pencil"></lucide-icon>
-                  </button>
                   <button *ngIf="club.ban === 'Ativo'" class="btn btn-danger" (click)="ban(club.id)">
                     <lucide-icon name="ban"></lucide-icon>
                   </button>

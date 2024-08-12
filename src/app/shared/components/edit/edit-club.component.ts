@@ -1,10 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ClubService} from "../../../../../core/services/club.service";
-import {Club} from "../../../../../core/models/Club";
+
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {SharedModule} from "../../../../../shared/shared.module";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {SharedModule} from "../../shared.module";
+import {Club} from "../../../core/models/Club";
+import {ClubService} from "../../../core/services/club.service";
 
 
 @Component({
@@ -14,10 +15,10 @@ import {MatSnackBar} from "@angular/material/snack-bar";
         FormsModule,
         SharedModule
     ],
-  templateUrl: './edit.component.html',
-  styleUrl: './edit.component.css'
+  templateUrl: './edit-club.component.html',
+  styleUrl: './edit-club.component.css'
 })
-export class EditComponent implements OnInit{
+export class EditClubComponent implements OnInit{
 
   clubForm!: FormGroup
   public club!: Club

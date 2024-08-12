@@ -39,8 +39,10 @@ export class ClubsComponent implements OnInit{
     this.clubService.getAll(this.currentPage, this.pageSize).subscribe({
       next: (page: Page<Club>) => {
         this.clubs = page.content;
+        console.log(this.clubs)
         this.totalElements = page.totalElements;
         this.totalPages = page.totalPages;
+        this.loadImages()
       },
       error: (err) => console.error('Erro ao buscar clubes:', err)
     });
@@ -62,8 +64,8 @@ export class ClubsComponent implements OnInit{
     })
   }
 
-  clubDetails(){
-    this.router.navigate(['/clube']).then();
+  clubDetails(id: number){
+    this.router.navigate(['/clube', id]).then();
   }
 
   displayCover(id: number): void {

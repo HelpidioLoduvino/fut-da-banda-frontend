@@ -34,7 +34,7 @@ export class UserComponent implements OnInit{
   totalElements: number = 0;
   totalPages: number = 0;
   currentPage: number = 0;
-  pageSize: number = 4;
+  pageSize: number = 6;
 
   constructor(private userService: UserService,
               private modal: MatDialog,

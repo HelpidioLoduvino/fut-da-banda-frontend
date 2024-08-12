@@ -5,6 +5,7 @@ import {ClubService} from "../../../core/services/club.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
+import {UserService} from "../../../core/services/user.service";
 
 @Component({
   selector: 'app-club-form',
@@ -19,9 +20,11 @@ export class ClubFormComponent implements OnInit{
   clubForm!: FormGroup
   logo!: File;
   selectedImageUrl: string | ArrayBuffer | null = null;
+  role!: string | null
 
   constructor(private clubService: ClubService,
               private snackBar: MatSnackBar,
+              private userService: UserService,
               private formBuilder: FormBuilder,
   ) {
   }
@@ -36,6 +39,16 @@ export class ClubFormComponent implements OnInit{
       category: ['', Validators.required],
       groupType: ['', Validators.required],
     });
+    this.findRole()
+  }
+
+  findRole(){
+    this.userService.findRole().subscribe(response=>{
+      this.role = response.body
+      if (this.role === 'CAPTAIN') {
+        this.clubForm.patchValue({ status: 'Amador' });
+      }
+    })
   }
 
   onImageFileChange(event: any) {
@@ -51,6 +64,7 @@ export class ClubFormComponent implements OnInit{
   }
 
   submit(){
+    console.log('Form Value:', this.clubForm.value);
     if(this.clubForm.valid && this.logo){
       const club = this.clubForm.value
       this.clubService.register(club, this.logo).subscribe(response=>{
@@ -68,7 +82,7 @@ export class ClubFormComponent implements OnInit{
         }
       })
     } else {
-      this.snackBar.open("Erro no Formulário!", 'Fechar', {
+      this.snackBar.open("Erro no Formulário! Todos os campos devem ser preenchidos.", 'Fechar', {
         duration: 1000
       })
     }

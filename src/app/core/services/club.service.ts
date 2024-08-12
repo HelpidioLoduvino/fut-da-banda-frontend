@@ -33,6 +33,10 @@ export class ClubService {
     return this.http.get<Club>(`${this.backendUrl}/api/clubs/${id}`, {observe: "response"})
   }
 
+  findIfExists(): Observable<HttpResponse<Club>>{
+    return this.http.get<Club>(`${this.backendUrl}/api/clubs/exists`, {observe: "response"})
+  }
+
   update(club: any, id: number){
     const params = new HttpParams().set('id', id.toString())
     return this.http.put(`${this.backendUrl}/api/clubs`, club, {observe: "response", params});

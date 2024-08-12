@@ -12,18 +12,24 @@ import {FieldComponent} from "./features/admin/fields/components/list/field.comp
 import {DetailComponent} from "./features/admin/clubs/components/detail/detail.component";
 import {UserComponent} from "./features/admin/users/components/list/user.component";
 import {PlayersComponent} from "./features/admin/users/components/players/players.component";
+import {
+  ListChampionshipComponent
+} from "./features/user/championships/components/list/championship/list-championship.component";
+import {ListPlayersComponent} from "./features/user/players/components/list/list-players/list-players.component";
+import {UserClubDetailComponent} from "./features/user/clubs/components/detail/user-club-detail.component";
 
 export const routes: Routes = [
 
   // User routes
   {path: '', component: HomeComponent},
   {path: 'partidas', component: GameComponent},
-  //{path: 'jogadores', component: },
+  {path: 'jogadores', component: ListPlayersComponent},
   {path: 'clubes', component: ClubsComponent},
-  {path: 'clube', component: ClubComponent},
+  {path: 'clube/:id', component: UserClubDetailComponent},
   {path: 'entrar', component: LoginComponent},
   {path: 'registar', component: RegisterComponent},
   {path: 'registar-clube', component: CreateClubComponent},
+  {path: 'campeonatos', component: ListChampionshipComponent},
 
   //Admin routes
   {path: 'dashboard', component: DashboardComponent},

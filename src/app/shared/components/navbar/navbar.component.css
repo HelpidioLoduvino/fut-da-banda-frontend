@@ -1,8 +1,6 @@
 .navbar{
   background-color: #4C5454;
   color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  flex-wrap: nowrap !important;
 }
 
 .custom-nav-items{

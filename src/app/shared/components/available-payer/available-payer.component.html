@@ -1,0 +1,41 @@
+<section class="w-100">
+  <div class="row g-2">
+    <div class="col-md-3" *ngFor="let player of players">
+      <div class="d-flex justify-content-center">
+        <div class="card mb-2 flex flex-col h-full w-100 rounded-lg overflow-hidden">
+          <div class="w-full h-40">
+            <img [src]="imageUrls[player.id]" class="w-full h-full object-cover" alt="Foto do jogador">
+            <button [matMenuTriggerFor]="playerInfo" class="absolute top-2 right-2 bg-white rounded-full p-1">
+              <lucide-icon name="info" class="text-gray-800"></lucide-icon>
+            </button>
+            <mat-menu #playerInfo="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
+              <p class="p-2" style="color: black;">{{player.biography}}</p>
+            </mat-menu>
+          </div>
+          <div class="p-3 bg-white">
+            <h5 class="card-title text-lg font-semibold truncate">{{player.fullName}}</h5>
+            <p class="text-sm text-gray-600"><strong>Posição:</strong> {{player.position}}</p>
+            <p class="text-sm text-gray-600"><strong>Género:</strong> {{player.gender}}</p>
+            <div class="mt-2">
+              <button class="w-full bg-blue-500 text-white py-1 rounded-md hover:bg-blue-600 transition duration-300">
+                Solicitar
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section class="w-full mt-3 mb-3 flex justify-center" style="color: black">
+  <div class="">
+    <button class="btn btn-outline-dark me-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">
+      <
+    </button>
+    <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+    <button class="btn btn-outline-dark ms-2" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= totalPages - 1">
+      >
+    </button>
+  </div>
+</section>

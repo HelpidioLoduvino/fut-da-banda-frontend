@@ -13,64 +13,7 @@
           <app-admin-notification></app-admin-notification>
         </div>
       </nav>
-      <section>
-        <div class="mt-3">
-          <div class="row g-2" *ngIf="club">
-            <div class="col-md-6">
-              <div class="card mb-3" style="max-width: 100%;">
-                <div class="row g-0">
-                  <div class="col-md-4">
-                    <div class="image-container">
-                      <img [src]="imageUrl[club.id]" class="img-fluid rounded-start mt-[50px]" alt="..." height="500" width="500">
-                      <div class="overlay"></div>
-                      <button class="edit-button btn btn-primary" style="position: relative; left: 60px; top: -100px;" (click)="changeEmblem(club.id)">Editar</button>
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title mt-4">{{club.name}}</h5>
-                      <p class="mb-0"> <span class="text-muted">Abreviação: </span> <strong>{{ club.abv }}</strong></p>
-                      <p class="mb-0"> <span class="text-muted">Província: </span><strong>{{ club.province }}</strong></p>
-                      <p class="mb-0"> <span class="text-muted">Tipo de Equipa: </span><strong>{{ club.status }}</strong></p>
-                      <p class="mb-0"> <span class="text-muted">Grupo: </span><strong>{{ club.groupType }}</strong></p>
-                      <p class="mb-0"> <span class="text-muted">Categoria: </span><strong>{{ club.category }}</strong></p>
-                      <p class="mb-0" *ngIf="!club.isReadyToPlay"> <span class="text-muted">Disponibilidade: </span><strong>Falta de jogadores para competição</strong></p>
-                      <p class="mb-0" *ngIf="club.isReadyToPlay"> <span class="text-muted">Disponibilidade: </span><strong>Disponível para jogos</strong></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <section style="color: black">
-                <h6>Sobre</h6>
-                <p>{{club.description}}</p>
-              </section>
-            </div>
-            <div class="col">
-              <div class="card card-body" style="color: black">
-                <div class="flex">
-                  <h6 class="">Jogadores</h6>
-                  <div>
-                    <a routerLink="/admin-jogadores" class="btn btn-primary ms-3">
-                      +
-                    </a>
-                  </div>
-                </div>
-                  <ul>
-                    <li *ngFor="let player of club.players let i = index">
-                      {{ i + 1 }}.
-                      <span *ngIf="player.userRole !== 'ADMIN'">{{ player.fullName }}</span>
-                      <span *ngIf="player.userRole === 'CAPTAIN'"> (Capitão)</span>
-                      <span *ngIf="player.userRole === 'SUB-CAPTAIN'"> (Sub-Capitão)</span>
-                    </li>
-                  </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section style="position: fixed; bottom: 12px; width: 72rem;">
-        <p class="d-flex justify-content-center" style="position: relative; top: 6px; color: black;">futdabanda.com</p>
-      </section>
+      <app-club-detail></app-club-detail>
     </div>
   </div>
 </div>
