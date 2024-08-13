@@ -7,6 +7,7 @@ import {ModalComponent} from "../modal/modal.component";
 import {SharedModule} from "../../shared.module";
 import {EditClubComponent} from "../edit/edit-club.component";
 import {ChangeEmblemComponent} from "../change-emblem/change-emblem.component";
+import {UserService} from "../../../core/services/user.service";
 
 
 @Component({
@@ -23,11 +24,14 @@ export class ClubDetailComponent implements OnInit{
 
   private id!: number
   public club!: Club;
+  role!: string | null
+  isCaptain: boolean = false
   imageUrl: { [key: number]: string } = {};
 
   constructor(
     private route: ActivatedRoute,
     private clubService: ClubService,
+    private userService: UserService,
     private modal: MatDialog
   ) {
   }
@@ -38,6 +42,24 @@ export class ClubDetailComponent implements OnInit{
       if(this.id){
         this.detail(this.id)
         this.displayCover(this.id)
+        this.isPlayerCaptain(this.id)
+      }
+    })
+    this.findRole()
+  }
+
+  findRole(){
+    this.userService.findRole().subscribe(response=>{
+      if(response.ok){
+        this.role = response.body
+      }
+    })
+  }
+
+  isPlayerCaptain(id: number){
+    this.clubService.isPlayerCaptain(id).subscribe(response=>{
+      if(response.ok){
+        this.isCaptain = response.body
       }
     })
   }
@@ -46,6 +68,7 @@ export class ClubDetailComponent implements OnInit{
     this.clubService.findById(id).subscribe(response=>{
       if(response.ok){
         this.club = response.body as Club
+        console.log(this.club)
       }
     })
   }

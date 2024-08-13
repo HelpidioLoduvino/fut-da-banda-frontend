@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit{
 
   isSidebarOpened: boolean = false;
   public club!: Club
-  clubExists: boolean = false
+  role!: string | null
 
   constructor(private userService: UserService,
               private clubService: ClubService,
@@ -38,10 +38,23 @@ export class NavbarComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.findRole()
+    this.findClubIfExists()
+  }
+
+
+  findRole(){
+    this.userService.findRole().subscribe(response=>{
+      if(response.ok){
+        this.role = response.body
+      }
+    })
+  }
+
+  findClubIfExists(){
     this.clubService.findIfExists().subscribe(response=>{
       if(response.ok){
         this.club = response.body as Club
-        this.clubExists = true;
       }
     })
   }
@@ -49,6 +62,7 @@ export class NavbarComponent implements OnInit{
   clubDetail(id: number){
     this.router.navigate(['/clube', id]);
   }
+
 
   isLogged(): boolean {
     return this.userService.isLoggedIn();

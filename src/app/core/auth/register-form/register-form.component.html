@@ -19,19 +19,19 @@
           <small class="error" *ngIf="registerForm.get('user.email')?.errors?.['email']">Email inválido.</small>
         </div>
 
-        <label>Palavra-Passe:</label>
+        <label>Senha:</label>
         <input type="password" class="form-control border-black" formControlName="password">
         <div *ngIf="registerForm.get('user.password')?.touched && registerForm.get('user.password')?.invalid">
           <small class="error" *ngIf="registerForm.get('user.password')?.errors?.['required']">Senha é obrigatória.</small>
           <small class="error" *ngIf="registerForm.get('user.password')?.errors?.['minlength']">Senha deve ter pelo menos 6 caracteres.</small>
         </div>
 
-        <label>Confirmar Palavra-Passe:</label>
+        <label>Confirmar Senha:</label>
         <input type="password" class="form-control border-black" formControlName="confirmPassword">
         <div *ngIf="registerForm.get('user.confirmPassword')?.touched && registerForm.get('user.confirmPassword')?.invalid">
           <small class="error" *ngIf="registerForm.get('user.confirmPassword')?.errors?.['required']">Confirmação de senha é obrigatória.</small>
         </div>
-        <div *ngIf="registerForm.errors?.['passwordMismatch']">
+        <div *ngIf="registerForm.get('user')?.errors?.['passwordMismatch']">
           <small class="error">As senhas não coincidem.</small>
         </div>
 
@@ -39,7 +39,6 @@
         <select class="form-control border-black" formControlName="userRole">
           <option value="" disabled>-- Selecionar --</option>
           <option value="CAPTAIN">Jogador (Capitão)</option>
-          <option value="SUB-CAPTAIN">Jogador (Sub-Capitão)</option>
           <option value="PLAYER">Jogador</option>
           <option value="USER">Usuário</option>
         </select>

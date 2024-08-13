@@ -20,6 +20,7 @@ export class AvailablePayerComponent implements OnInit{
 
   players: any[] = []
   imageUrls: { [key: number]: string } = {};
+  role!: string | null
   totalElements: number = 0;
   totalPages: number = 0;
   currentPage: number = 0;
@@ -30,6 +31,15 @@ export class AvailablePayerComponent implements OnInit{
 
   ngOnInit(): void {
     this.findPlayers()
+    this.findRole()
+  }
+
+  findRole(){
+    this.userService.findRole().subscribe(response=>{
+      if(response.ok){
+        this.role = response.body
+      }
+    })
   }
 
   findPlayers(){

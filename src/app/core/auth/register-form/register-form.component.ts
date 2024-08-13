@@ -46,7 +46,7 @@ export class RegisterFormComponent implements OnInit{
         userRole: ['', Validators.required],
         confirmPassword: ['', Validators.required]
       }, {
-        validator: passwordMatchValidator()
+        validators: passwordMatchValidator()
       }),
       player: this.formBuilder.group({
         gender: [''],
@@ -97,9 +97,6 @@ export class RegisterFormComponent implements OnInit{
       if(userRole === 'USER'){
         this.userService.registerUser(user).subscribe(response=>{
           if(response.ok){
-            this.snackBar.open('Registo Feito Com Sucesso', 'Fechar', {
-              duration: 1000, panelClass: ['snackbar-success']
-            });
             this.isAdmin()
           } else {
             this.snackBar.open('Erro ao Fazer Registo!', 'Fechar', {
@@ -118,9 +115,6 @@ export class RegisterFormComponent implements OnInit{
 
         this.userService.registerPlayer(player, this.photo).subscribe(response=>{
           if(response.ok){
-            this.snackBar.open('Registo Feito Com Sucesso', 'Fechar', {
-              duration: 1000, panelClass: ['snackbar-success']
-            });
             this.isAdmin()
           } else {
             this.snackBar.open('Erro ao Fazer Registo!', 'Fechar', {
@@ -150,13 +144,25 @@ export class RegisterFormComponent implements OnInit{
     this.userService.findRole().subscribe(response=>{
       if(response.ok){
         this.role = response.body
-        if(this.role && this.role === "ADMIN"){
+        if(this.role === "ADMIN"){
+          this.snackBar.open('Registo Feito Com Sucesso', 'Fechar', {
+            duration: 1000, panelClass: ['snackbar-success']
+          });
           setTimeout(() => {
             window.location.reload();
           }, 1000);
-        } else{
-          this.router.navigate(['/entrar']).then(r => {})
+        } else {
+          this.router.navigate(['/entrar']).then(r => {
+            this.snackBar.open('Registo Feito Com Sucesso', 'Fechar', {
+              duration: 1000, panelClass: ['snackbar-success']
+            });
+          })
         }
+      } else {
+        console.log("Erro na requisição:", Error);
+        this.snackBar.open('Erro ao comunicar com o servidor.', 'Fechar', {
+          duration: 1000, panelClass: ['snackbar-error']
+        });
       }
     })
   }

@@ -21,7 +21,7 @@
           <a class="nav-link icon-color" routerLinkActive="active" routerLink="/clubes">Clubes</a>
         </li>
         <li class="nav-item">
-          <a *ngIf="clubExists && club" class="nav-link icon-color" routerLinkActive="active" routerLink="/jogadores">Jogadores</a>
+          <a *ngIf="club" class="nav-link icon-color" routerLinkActive="active" routerLink="/jogadores">Jogadores</a>
         </li>
       </ul>
     </div>
@@ -35,8 +35,8 @@
         </button>
         <mat-menu #userMenu="matMenu">
           <a routerLink="#" mat-menu-item>Perfil</a>
-          <a *ngIf="!clubExists" routerLink="/registar-clube" mat-menu-item>Clube</a>
-          <a *ngIf="clubExists && club" (click)="clubDetail(club.id)" mat-menu-item>Clube</a>
+          <a *ngIf="club" (click)="clubDetail(club.id)" mat-menu-item>Clube</a>
+          <a *ngIf="role === 'CAPTAIN' && !club" routerLink="/registar-clube" mat-menu-item>Clube</a>
           <a mat-menu-item (click)="logout()">Sair</a>
         </mat-menu>
       </li>
@@ -75,7 +75,7 @@
     </li>
     <hr>
     <li class="sidebar-item">
-      <a routerLink="/jogadores" routerLinkActive="active" *ngIf="clubExists && club">
+      <a routerLink="/jogadores" routerLinkActive="active" *ngIf="club">
         Jogadores
       </a>
     </li>

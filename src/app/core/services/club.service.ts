@@ -37,6 +37,11 @@ export class ClubService {
     return this.http.get<Club>(`${this.backendUrl}/api/clubs/exists`, {observe: "response"})
   }
 
+  isPlayerCaptain(id: number){
+    const params = new HttpParams().set('id', id.toString())
+    return this.http.get<any>(`${this.backendUrl}/api/clubs/captain`, {observe: "response", params})
+  }
+
   update(club: any, id: number){
     const params = new HttpParams().set('id', id.toString())
     return this.http.put(`${this.backendUrl}/api/clubs`, club, {observe: "response", params});

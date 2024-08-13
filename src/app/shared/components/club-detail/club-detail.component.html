@@ -6,15 +6,15 @@
           <div class="col-md-4">
             <div class="image-container">
               <img [src]="imageUrl[club.id]" class="img-fluid rounded-start mt-[50px]" alt="..." height="500" width="500">
-              <div class="overlay"></div>
-              <button class="edit-button btn btn-primary" style="position: relative; left: 60px; top: -100px;" (click)="changeEmblem(club.id)">Editar</button>
+              <div *ngIf="isCaptain || role === 'ADMIN'" class="overlay"></div>
+              <button *ngIf="isCaptain || role === 'ADMIN'" class="edit-button btn btn-primary" style="position: relative; left: 60px; top: -100px;" (click)="changeEmblem(club.id)">Editar</button>
             </div>
           </div>
           <div class="col-md-8">
             <div class="card-body">
               <div class="d-flex">
                 <h5 class="card-title mt-4 me-3">{{club.name}}</h5>
-                <button class="mt-2" (click)="edit(club.id)">
+                <button class="mt-2" (click)="edit(club.id)" *ngIf="isCaptain || role === 'ADMIN'">
                   <lucide-icon name="pencil" class="text-gray-500 hover:text-black transition duration-300"></lucide-icon>
                 </button>
               </div>
@@ -40,18 +40,18 @@
       <div class="card card-body" style="color: black">
         <div class="flex">
           <h6 class="">Jogadores</h6>
-          <div>
-            <a routerLink="/admin-jogadores" class="btn btn-primary ms-3">
-              +
-            </a>
+          <div *ngIf="role === 'ADMIN'">
+            <a routerLink="/admin-jogadores" class="btn btn-primary ms-3">+</a>
+          </div>
+          <div *ngIf="isCaptain">
+            <a routerLink="/jogadores" class="btn btn-primary ms-3">+</a>
           </div>
         </div>
         <ul>
           <li *ngFor="let player of club.players let i = index">
             {{ i + 1 }}.
-            <span *ngIf="player.userRole !== 'ADMIN'">{{ player.fullName }}</span>
-            <span *ngIf="player.userRole === 'CAPTAIN'"> (Capitão)</span>
-            <span *ngIf="player.userRole === 'SUB-CAPTAIN'"> (Sub-Capitão)</span>
+            <span *ngIf="player.userRole === 'CAPTAIN'"> {{player.fullName}} (C)</span>
+            <span *ngIf="player.userRole === 'SUB-CAPTAIN'"> {{player.fullName}}  (SC)</span>
           </li>
         </ul>
       </div>
