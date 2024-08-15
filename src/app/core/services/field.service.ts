@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams, HttpResponse} from "@angular/common/http";
-import {environment} from "../../../environment/environment";
+import {environment} from "../../../environments/environment";
 import {Field} from "../models/Field";
 import {Page} from "../models/Page";
 import {Observable} from "rxjs";

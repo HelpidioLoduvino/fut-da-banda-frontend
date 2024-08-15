@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../../environment/environment";
+import {environment} from "../../../environments/environment";
 import {Observable, tap} from "rxjs";
 import {HttpClient, HttpParams, HttpResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
@@ -113,5 +113,5 @@ export class UserService {
     localStorage.removeItem('refreshToken');
     this.router.navigate(['']).then();
   }
-  
+
 }
