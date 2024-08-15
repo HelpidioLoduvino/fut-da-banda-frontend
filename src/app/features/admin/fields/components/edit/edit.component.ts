@@ -20,6 +20,7 @@ export class EditComponent implements OnInit{
   fieldForm!: FormGroup
   public field!: Field
   private id!: number
+  isLoading = false
 
   constructor(private fieldService: FieldService,
               private formBuilder: FormBuilder,
@@ -53,9 +54,11 @@ export class EditComponent implements OnInit{
 
   update(){
     if(this.fieldForm.valid){
+      this.isLoading = true
       const field = this.fieldForm.value
       this.fieldService.update(field, this.id).subscribe(response=>{
         if(response.ok){
+          this.isLoading = false
           this.snackBar.open("Campo atualizado com Sucesso", 'Fechar', {
             duration: 1000
           })
@@ -63,6 +66,7 @@ export class EditComponent implements OnInit{
             window.location.reload();
           }, 1000);
         } else{
+          this.isLoading = false
           this.snackBar.open("Erro ao atualizar campo", 'Fechar', {
             duration: 1000
           })

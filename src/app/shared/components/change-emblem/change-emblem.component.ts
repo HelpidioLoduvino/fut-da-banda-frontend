@@ -18,6 +18,7 @@ export class ChangeEmblemComponent {
   logo!: File;
   selectedImageUrl: string | ArrayBuffer | null = null;
   id!: number
+  isLoading = false
 
   constructor(private clubService: ClubService,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -39,8 +40,10 @@ export class ChangeEmblemComponent {
   }
 
   update(){
+    this.isLoading = true
     this.clubService.updateEmblem(this.logo, this.id).subscribe(response=>{
       if(response.ok){
+        this.isLoading = false
         this.toast.open("Emblema atualizado com sucesso!", 'Fechar', {
           duration: 1000
         })

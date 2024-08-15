@@ -3,8 +3,6 @@ import {SharedModule} from "../../shared.module";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ClubService} from "../../../core/services/club.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MatDialog} from "@angular/material/dialog";
-import {Router} from "@angular/router";
 import {UserService} from "../../../core/services/user.service";
 
 @Component({
@@ -21,6 +19,7 @@ export class ClubFormComponent implements OnInit{
   logo!: File;
   selectedImageUrl: string | ArrayBuffer | null = null;
   role!: string | null
+  isLoading = false;
 
   constructor(private clubService: ClubService,
               private snackBar: MatSnackBar,
@@ -64,11 +63,12 @@ export class ClubFormComponent implements OnInit{
   }
 
   submit(){
-    console.log('Form Value:', this.clubForm.value);
     if(this.clubForm.valid && this.logo){
+      this.isLoading = true;
       const club = this.clubForm.value
       this.clubService.register(club, this.logo).subscribe(response=>{
         if(response.ok){
+          this.isLoading = false;
           this.snackBar.open("Clube criado com Sucesso", 'Fechar', {
             duration: 1000
           })
@@ -76,12 +76,14 @@ export class ClubFormComponent implements OnInit{
             window.location.reload();
           }, 1000);
         } else {
+          this.isLoading = false;
           this.snackBar.open("Erro ao criar CLube", 'Fechar', {
             duration: 1000
           })
         }
       })
     } else {
+      this.isLoading = false;
       this.snackBar.open("Erro no Formulário! Todos os campos devem ser preenchidos.", 'Fechar', {
         duration: 1000
       })

@@ -17,6 +17,7 @@ import {SharedModule} from "../../../../../shared/shared.module";
 export class SaveComponent implements OnInit{
 
   fieldForm!: FormGroup
+  isLoading = false
 
   constructor(private fieldService: FieldService,
               private formBuilder: FormBuilder,
@@ -34,9 +35,11 @@ export class SaveComponent implements OnInit{
 
   submit(){
     if(this.fieldForm.valid){
+      this.isLoading = true;
       const field = this.fieldForm.value;
       this.fieldService.register(field).subscribe(response=>{
         if(response.ok){
+          this.isLoading = false
           this.snackBar.open("Campo Adicionado Com Sucesso", 'Fechar', {
             duration: 1000
           })
@@ -46,6 +49,7 @@ export class SaveComponent implements OnInit{
         }
       })
     } else {
+      this.isLoading = false
       this.snackBar.open("Erro de Formulário", 'Fechar', {
         duration: 1000
       })

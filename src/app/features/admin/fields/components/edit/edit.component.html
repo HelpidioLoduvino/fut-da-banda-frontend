@@ -17,6 +17,12 @@
       </select>
     </div>
 
+    <div class="text-center" style="color: black">
+      <div class="spinner-border" role="status" *ngIf="isLoading">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
     <div class="flex justify-center">
       <input type="submit" class="btn btn-primary" value="Editar">
     </div>

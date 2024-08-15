@@ -18,6 +18,7 @@ import {SharedModule} from "../../../../../shared/shared.module";
 export class SaveComponent implements OnInit{
 
   championshipForm!: FormGroup
+  isLoading = false
 
   constructor(private championshipService: ChampionshipService,
               private formBuilder: FormBuilder,
@@ -39,9 +40,11 @@ export class SaveComponent implements OnInit{
 
   submit(){
     if(this.championshipForm.valid){
+      this.isLoading = true
       const championship = this.championshipForm.value
       this.championshipService.create(championship).subscribe(response=>{
         if(response.ok){
+          this.isLoading = false
           this.snackbar.open("Campeonato criado com sucesso!", 'Fechar', {
             duration: 1000
           })
@@ -49,12 +52,14 @@ export class SaveComponent implements OnInit{
             window.location.reload();
           }, 1000);
         } else {
+          this.isLoading = false
           this.snackbar.open("Erro ao criar campeonato!", 'Fechar', {
             duration: 1000
           })
         }
       })
     } else {
+      this.isLoading = false
       this.snackbar.open("Formulário Inválido", 'Fechar', {
         duration: 3000
       })

@@ -40,7 +40,7 @@
           <option value="" disabled>-- Selecionar --</option>
           <option value="CAPTAIN">Jogador (Capitão)</option>
           <option value="PLAYER">Jogador</option>
-          <option value="ADMIN">Usuário</option>
+          <option value="USER">Usuário</option>
         </select>
         <div *ngIf="registerForm.get('user.userRole')?.touched && registerForm.get('user.userRole')?.invalid">
           <small class="error" *ngIf="registerForm.get('user.userRole')?.errors?.['required']">Tipo de Conta é obrigatório.</small>

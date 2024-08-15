@@ -23,6 +23,7 @@ export class EditClubComponent implements OnInit{
   clubForm!: FormGroup
   public club!: Club
   private id!: number
+  isLoading = false
 
   constructor(private clubService: ClubService,
               private formBuilder: FormBuilder,
@@ -64,9 +65,11 @@ export class EditClubComponent implements OnInit{
 
   edit(){
     if(this.clubForm.valid){
+      this.isLoading = true
       const club = this.clubForm.value
       this.clubService.update(club, this.id).subscribe(response=>{
         if(response.ok){
+          this.isLoading = false
           this.snackBar.open("Clube atualizado com Sucesso", 'Fechar', {
             duration: 1000
           })
@@ -74,6 +77,7 @@ export class EditClubComponent implements OnInit{
             window.location.reload();
           }, 1000);
         } else {
+          this.isLoading = false
           this.snackBar.open("Erro ao atualizar clube", 'Fechar', {
             duration: 1000
           })

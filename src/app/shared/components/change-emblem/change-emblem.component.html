@@ -2,6 +2,12 @@
   <label>Novo Emblema:</label>
   <input type="file" accept="image/*" (change)="onImageFileChange($event)" class="form-control">
 
+  <div class="text-center" style="color: black">
+    <div class="spinner-border" role="status" *ngIf="isLoading">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
   <span class="flex justify-center mt-3">
     <button class="btn btn-success" (click)="update()">Carregar</button>
   </span>

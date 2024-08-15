@@ -86,6 +86,12 @@
       </textarea>
     </div>
 
+    <div class="text-center" style="color: black">
+      <div class="spinner-border" role="status" *ngIf="isLoading">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
     <span class="d-flex justify-content-center">
       <input type="submit" class="btn btn-primary mt-3" value="Editar">
     </span>

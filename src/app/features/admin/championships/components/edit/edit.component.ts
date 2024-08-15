@@ -20,6 +20,7 @@ export class EditComponent implements OnInit{
   championshipForm!: FormGroup
   public championship!: Championship
   private id!: number
+  isLoading = false
 
   constructor(private championshipService: ChampionshipService,
               private formBuilder: FormBuilder,
@@ -61,9 +62,11 @@ export class EditComponent implements OnInit{
 
   edit(){
     if(this.championshipForm.valid){
+      this.isLoading = true
       const championship = this.championshipForm.value
       this.championshipService.update(championship, this.id).subscribe(response=>{
         if(response.ok){
+          this.isLoading = false
           this.snackBar.open("Campeonato atualizado com Sucesso", 'Fechar', {
             duration: 1000
           })
@@ -71,6 +74,7 @@ export class EditComponent implements OnInit{
             window.location.reload();
           }, 1000);
         } else {
+          this.isLoading = false
           this.snackBar.open("Erro ao atualizar campeonato", 'Fechar', {
             duration: 1000
           })
