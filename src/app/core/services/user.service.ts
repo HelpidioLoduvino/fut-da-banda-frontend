@@ -113,4 +113,5 @@ export class UserService {
     localStorage.removeItem('refreshToken');
     this.router.navigate(['']).then();
   }
+  
 }
