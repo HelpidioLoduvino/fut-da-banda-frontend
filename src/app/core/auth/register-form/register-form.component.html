@@ -40,10 +40,16 @@
           <option value="" disabled>-- Selecionar --</option>
           <option value="CAPTAIN">Jogador (Capitão)</option>
           <option value="PLAYER">Jogador</option>
-          <option value="USER">Usuário</option>
+          <option value="ADMIN">Usuário</option>
         </select>
         <div *ngIf="registerForm.get('user.userRole')?.touched && registerForm.get('user.userRole')?.invalid">
           <small class="error" *ngIf="registerForm.get('user.userRole')?.errors?.['required']">Tipo de Conta é obrigatório.</small>
+        </div>
+
+        <div class="text-center" style="color: black">
+          <div class="spinner-border" role="status" *ngIf="isLoading">
+            <span class="visually-hidden">Loading...</span>
+          </div>
         </div>
 
         <div class="mt-3" *ngIf="registerForm.get('user.userRole')?.value === 'USER'">
@@ -89,6 +95,12 @@
         <textarea class="form-control border-black mb-3" formControlName="biography"></textarea>
 
         <input type="radio" value="Disponível" class="me-1 mb-3" formControlName="available"> <span>Aceito receber solicitações de clubes.</span>
+
+        <div class="text-center" style="color: black">
+          <div class="spinner-border" role="status" *ngIf="isLoading">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
 
         <span class="d-flex justify-content-center">
           <input type="submit" class="login-btn btn btn-success" value="Criar Conta"

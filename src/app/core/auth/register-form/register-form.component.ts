@@ -28,6 +28,7 @@ export class RegisterFormComponent implements OnInit{
   @ViewChild(MatStepper) stepper!: MatStepper;
   errorMessage: string = '';
   role!: string | null
+  isLoading = false;
 
   constructor(
     private userService: UserService,
@@ -81,8 +82,8 @@ export class RegisterFormComponent implements OnInit{
 
   register() {
     if(this.registerForm.valid){
+      this.isLoading = true;
       this.errorMessage = '';
-
       const userForm = this.registerForm.get('user')?.value;
       const playerForm = this.registerForm.get('player')?.value;
       const userRole = userForm.userRole;
@@ -97,8 +98,10 @@ export class RegisterFormComponent implements OnInit{
       if(userRole === 'USER'){
         this.userService.registerUser(user).subscribe(response=>{
           if(response.ok){
+            this.isLoading = false;
             this.isAdmin()
           } else {
+            this.isLoading = false;
             this.snackBar.open('Erro ao Fazer Registo!', 'Fechar', {
               duration: 1000, panelClass: ['snackbar-error']
             });
@@ -115,8 +118,10 @@ export class RegisterFormComponent implements OnInit{
 
         this.userService.registerPlayer(player, this.photo).subscribe(response=>{
           if(response.ok){
+            this.isLoading = false;
             this.isAdmin()
           } else {
+            this.isLoading = false;
             this.snackBar.open('Erro ao Fazer Registo!', 'Fechar', {
               duration: 1000, panelClass: ['snackbar-error']
             });
@@ -124,6 +129,7 @@ export class RegisterFormComponent implements OnInit{
         })
       }
     }else{
+      this.isLoading = false;
       this.errorMessage = 'Por favor, preencha todos os campos obrigatórios corretamente.';
       return;
     }
