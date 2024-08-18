@@ -4,6 +4,10 @@ import {UserService} from "../../../core/services/user.service";
 import {Page} from "../../../core/models/Page";
 import {Player} from "../../../core/models/Player";
 import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
+import {InvitationService} from "../../../core/services/invitation.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Club} from "../../../core/models/Club";
+import {ClubService} from "../../../core/services/club.service";
 
 @Component({
   selector: 'app-available-payer',
@@ -25,13 +29,22 @@ export class AvailablePayerComponent implements OnInit{
   totalPages: number = 0;
   currentPage: number = 0;
   pageSize: number = 4;
+  isLoading = false
+  clubInvitations: any[] = []
+  public club!: Club
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private invitationService: InvitationService,
+              private toast: MatSnackBar,
+              private clubService: ClubService
+              ) {
   }
 
   ngOnInit(): void {
     this.findPlayers()
     this.findRole()
+    this.listClubInvitation()
+    this.findClubIfExists()
   }
 
   findRole(){
@@ -46,6 +59,7 @@ export class AvailablePayerComponent implements OnInit{
     this.userService.getAllPlayers(this.currentPage, this.pageSize).subscribe({
       next: (page: Page<Player>) => {
         this.players = page.content;
+        console.log(this.players)
         this.totalElements = page.totalElements;
         this.totalPages = page.totalPages;
         this.loadImages()
@@ -53,6 +67,43 @@ export class AvailablePayerComponent implements OnInit{
       error: (err) => console.error('Error finding players:', err)
     });
   }
+
+  listClubInvitation(){
+    this.invitationService.clubAlreadyInvitedPlayer().subscribe(response=>{
+      if(response.ok){
+        this.clubInvitations = response.body
+        console.log(this.clubInvitations)
+      }
+    })
+  }
+
+  findClubIfExists(){
+    this.clubService.findIfExists().subscribe(response=>{
+      if(response.ok){
+        this.club = response.body as Club
+      }
+    })
+  }
+
+  playerCanBeInvited(playerId: number): boolean {
+    const hasAcceptedInvitation = this.clubInvitations.some(
+      invitation => invitation.recipient.id === playerId && invitation.status === "Aceite"
+    );
+
+    if (hasAcceptedInvitation) {
+      return false;
+    }
+    const hasPendingOrAcceptedInvitationFromSameClub = this.clubInvitations.some(
+      invitation =>
+        invitation.recipient.id === playerId &&
+        invitation.club.id === this.club.id &&
+        invitation.status !== "Rejeitado"
+    );
+
+    return !hasPendingOrAcceptedInvitationFromSameClub;
+  }
+
+
 
   onPageChange(page: number): void {
     if (page >= 0 && page < this.totalPages) {
@@ -76,6 +127,26 @@ export class AvailablePayerComponent implements OnInit{
       },
       error: (error) => {
         console.error('Error loading image', error);
+      }
+    })
+  }
+
+  invitePlayer(id: number){
+    this.isLoading = true;
+    this.invitationService.invitePlayer(id).subscribe(response=>{
+      if(response.ok){
+        this.isLoading = false
+        this.toast.open("Convite Enviado", 'Fechar', {
+          duration: 1000
+        })
+        setTimeout(() =>{
+          window.location.reload()
+        }, 1000)
+      } else {
+        this.isLoading = false
+        this.toast.open("Erro ao enviar convite", 'Fechar', {
+          duration: 1000
+        })
       }
     })
   }

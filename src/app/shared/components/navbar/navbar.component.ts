@@ -7,6 +7,7 @@ import {NgClass, NgIf} from "@angular/common";
 import {UserService} from "../../../core/services/user.service";
 import {ClubService} from "../../../core/services/club.service";
 import {Club} from "../../../core/models/Club";
+import {InvitationService} from "../../../core/services/invitation.service";
 
 @Component({
   selector: 'app-navbar',
@@ -30,9 +31,11 @@ export class NavbarComponent implements OnInit{
   isSidebarOpened: boolean = false;
   public club!: Club
   role!: string | null
+  unseenInvitations!: number
 
   constructor(private userService: UserService,
               private clubService: ClubService,
+              private invitationService: InvitationService,
               private router: Router
   ) {
   }
@@ -40,6 +43,7 @@ export class NavbarComponent implements OnInit{
   ngOnInit(): void {
     this.findRole()
     this.findClubIfExists()
+    this.countUnseenInvitation()
   }
 
 
@@ -55,6 +59,14 @@ export class NavbarComponent implements OnInit{
     this.clubService.findIfExists().subscribe(response=>{
       if(response.ok){
         this.club = response.body as Club
+      }
+    })
+  }
+
+  countUnseenInvitation(){
+    this.invitationService.countUnseen().subscribe(response=>{
+      if(response.ok){
+        this.unseenInvitations = response.body
       }
     })
   }

@@ -20,6 +20,9 @@ import {UserClubDetailComponent} from "./features/user/clubs/components/detail/u
 import {
   UserChampionshipDetailComponent
 } from "./features/user/championships/components/detail/detail/user-championship-detail.component";
+import {
+  ListNotificationComponent
+} from "./features/user/notifications/components/list-notification/list-notification.component";
 
 export const routes: Routes = [
 
@@ -34,6 +37,7 @@ export const routes: Routes = [
   {path: 'registar-clube', component: CreateClubComponent},
   {path: 'campeonatos', component: ListChampionshipComponent},
   {path: 'campeonato/:id', component: UserChampionshipDetailComponent},
+  {path: 'notificações', component: ListNotificationComponent},
 
   //Admin routes
   {path: 'dashboard', component: DashboardComponent},

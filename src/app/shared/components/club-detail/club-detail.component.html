@@ -52,6 +52,7 @@
             {{ i + 1 }}.
             <span *ngIf="player.userRole === 'CAPTAIN'"> {{player.fullName}} (C)</span>
             <span *ngIf="player.userRole === 'SUB-CAPTAIN'"> {{player.fullName}}  (SC)</span>
+            <span *ngIf="player.userRole === 'PLAYER'"> {{player.fullName}}</span>
           </li>
         </ul>
       </div>

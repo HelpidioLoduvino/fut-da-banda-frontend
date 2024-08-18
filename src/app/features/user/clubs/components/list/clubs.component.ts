@@ -5,6 +5,8 @@ import {ClubService} from "../../../../../core/services/club.service";
 import {SharedModule} from "../../../../../shared/shared.module";
 import {Page} from "../../../../../core/models/Page";
 import {Club} from "../../../../../core/models/Club";
+import {InvitationService} from "../../../../../core/services/invitation.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-clubs',
@@ -25,27 +27,78 @@ export class ClubsComponent implements OnInit{
   totalPages: number = 0;
   currentPage: number = 0;
   pageSize: number = 10;
+  isLoading = false
+  playerHasClub = false
+  playerPermissions: any[] = []
+
 
   constructor(private router: Router,
               private clubService: ClubService,
+              private invitationService: InvitationService,
+              private toast: MatSnackBar
               ) {
   }
 
   ngOnInit(): void {
     this.loadClubs()
+    this.hasClub()
+    this.getPlayerPermissions()
   }
 
   loadClubs(): void {
     this.clubService.getAll(this.currentPage, this.pageSize).subscribe({
       next: (page: Page<Club>) => {
         this.clubs = page.content;
-        console.log(this.clubs)
         this.totalElements = page.totalElements;
         this.totalPages = page.totalPages;
         this.loadImages()
       },
       error: (err) => console.error('Erro ao buscar clubes:', err)
     });
+  }
+
+  hasClub(){
+    this.clubService.playerHasClub().subscribe(response=>{
+      if(response.ok){
+        this.playerHasClub = response.body
+      }
+    })
+  }
+
+  getPlayerPermissions(){
+    this.invitationService.listPlayerPermission().subscribe(response=>{
+      if(response.ok){
+        this.playerPermissions = response.body
+      }
+    })
+  }
+
+  playerAlreadyAskedForPermission(clubId: number): boolean{
+    return this.playerPermissions.some(permission => permission.club.id === clubId);
+  }
+
+  askToJoin(id: number){
+    this.isLoading = true;
+    this.invitationService.joinClub(id).subscribe(response=>{
+      if(response.ok){
+        this.isLoading = false
+        this.toast.open("Pedido enviado", 'Fechar', {
+          duration: 1000
+        })
+        setTimeout(() =>{
+          window.location.reload()
+        }, 1000)
+      } else {
+        this.isLoading = false
+        this.toast.open("Erro ao fazer pedido", 'Fechar', {
+          duration: 1000
+        })
+        setTimeout(() =>{
+          window.location.reload()
+        }, 1000)
+      }
+    })
+
   }
 
   onPageChange(page: number): void {

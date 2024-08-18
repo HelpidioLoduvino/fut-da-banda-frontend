@@ -29,6 +29,22 @@
       <li class="nav-item" *ngIf="!isLogged()">
         <a routerLink="/entrar" class="btn btn-light border-0" style="background: #80FF72;">Entrar</a>
       </li>
+      <li class="nav-item mt-2 me-2" *ngIf="isLogged()">
+        <a routerLink="/notificações" class="position-relative icon-color" *ngIf="unseenInvitations">
+          <lucide-icon name="bell"></lucide-icon>
+          <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
+            {{unseenInvitations}}<span class="visually-hidden"></span>
+          </span>
+        </a>
+
+        <a routerLink="/notificações" class="position-relative icon-color" *ngIf="!unseenInvitations">
+          <lucide-icon name="bell"></lucide-icon>
+          <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
+            0<span class="visually-hidden"></span>
+          </span>
+        </a>
+
+      </li>
       <li class="nav-item" *ngIf="isLogged()">
         <button class="icon-color btn bg-transparent border-0" [matMenuTriggerFor]="userMenu">
           <lucide-icon name="circle-user-round"></lucide-icon>

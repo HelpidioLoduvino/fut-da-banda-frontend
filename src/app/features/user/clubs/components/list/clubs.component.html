@@ -6,17 +6,31 @@
         <div class="row g-3">
           <div class="col-md-3 mb-3" *ngFor="let club of clubs">
             <div class="d-flex justify-content-center">
-              <div class="card-color card" style="cursor: pointer;" (click)="clubDetails(club.id)">
-                <div class="card-header bg-light">
+              <div class="card-color card" style="cursor: pointer;">
+                <div class="card-header bg-light" (click)="clubDetails(club.id)">
                   <div class="d-flex justify-content-center">
                     <img class="card-img" [src]="imageUrls[club.id]" alt="Logo do Clube" height="100" width="500">
                   </div>
                 </div>
-                <div class="card-body d-flex justify-content-center">
+                <div class="card-body d-flex justify-content-center" (click)="clubDetails(club.id)">
                   <h6>{{club.name}} ({{club.abv}})</h6>
+                </div>
+                <div class="card-footer" *ngIf="!playerHasClub && !playerAlreadyAskedForPermission(club.id)">
+                  <section class="w-full">
+                    <button class="w-full bg-blue-500 text-white py-1
+                           rounded-md hover:bg-blue-600 transition
+                           duration-300" (click)="askToJoin(club.id)">
+                      Pedir para Entrar
+                    </button>
+                  </section>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="text-center" style="color: black">
+          <div class="spinner-border" role="status" *ngIf="isLoading">
+            <span class="visually-hidden">Loading...</span>
           </div>
         </div>
       </div>

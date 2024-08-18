@@ -1,0 +1,37 @@
+<main class="flex flex-col min-h-screen">
+  <div class="flex-grow">
+    <app-navbar></app-navbar>
+    <section class="container mt-3 mb-3" style="color: black">
+      <div class="">
+        <div class="card card-body mb-3" *ngFor="let sent of sentInvitations">
+          {{sent.recipient.fullName}} {{sent.message}}.
+        </div>
+      </div>
+    </section>
+    <section class="container mt-3 mb-3" style="color: black">
+      <div class="" *ngIf="role ==='CAPTAIN'">
+        <div class="card card-body mb-3" *ngFor="let captain of captainInvitations">
+          {{captain.sender.fullName}} {{captain.message}} {{captain.club.name}}.
+          <div class="flex-column mt-3">
+            <button class="btn btn-success me-2" (click)="acceptPlayerPermission(captain.id)">Aceitar</button>
+            <button class="btn btn-danger" (click)="rejectPlayerPermission(captain.id)">Rejeitar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="" *ngIf="role ==='PLAYER' && !playerHasClub">
+        <div class="card card-body mb-3" *ngFor="let player of playerInvitations">
+          {{player.sender.fullName}} {{player.message}} {{player.club.name}}.
+          <div class="flex-column mt-3">
+            <button class="btn btn-success me-2" (click)="acceptInvitation(player.id)">Aceitar</button>
+            <button class="btn btn-danger" (click)="rejectInvitation(player.id)">Rejeitar</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+  <app-footer ></app-footer>
+</main>
+
+

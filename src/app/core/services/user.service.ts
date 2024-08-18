@@ -70,6 +70,10 @@ export class UserService {
     return this.http.put(`${this.backendUrl}/api/users`, user, {observe: "response", params});
   }
 
+  isPlayerAvailable(){
+    return this.http.get<any>(`${this.backendUrl}/api/users/available`, {observe: "response"})
+  }
+
   updatePlayer(player: any, id: number){
     const params = new HttpParams().set('id', id.toString())
     return this.http.put(`${this.backendUrl}/api/users/player`, player, {observe: "response", params});
