@@ -94,7 +94,9 @@
         <label>Histórico (títulos, clubes jogados, etc...):</label>
         <textarea class="form-control border-black mb-3" formControlName="biography"></textarea>
 
-        <input type="radio" value="Disponível" class="me-1 mb-3" formControlName="available"> <span>Aceito receber solicitações de clubes.</span>
+        <div *ngIf="registerForm.get('user.userRole')?.value === 'PLAYER'">
+          <input type="radio" value="Disponível" class="me-1 mb-3" formControlName="available"> <span>Aceito receber solicitações de clubes.</span>
+        </div>
 
         <div class="text-center" style="color: black">
           <div class="spinner-border" role="status" *ngIf="isLoading">
