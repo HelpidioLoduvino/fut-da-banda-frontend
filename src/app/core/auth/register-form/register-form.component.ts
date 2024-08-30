@@ -64,7 +64,7 @@ export class RegisterFormComponent implements OnInit{
         this.registerForm.get('player')?.enable({ emitEvent: false });
         this.registerForm.get('player.gender')?.setValidators(Validators.required);
         this.registerForm.get('player.position')?.setValidators(Validators.required);
-        this.registerForm.get('player.biography')?.setValidators(Validators.required);
+        this.registerForm.get('player.biography');
         this.registerForm.get('player.available');
 
       }

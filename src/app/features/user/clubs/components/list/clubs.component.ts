@@ -7,6 +7,8 @@ import {Page} from "../../../../../core/models/Page";
 import {Club} from "../../../../../core/models/Club";
 import {InvitationService} from "../../../../../core/services/invitation.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {UserService} from "../../../../../core/services/user.service";
+import {User} from "../../../../../core/models/User";
 
 @Component({
   selector: 'app-clubs',
@@ -30,10 +32,11 @@ export class ClubsComponent implements OnInit{
   isLoading = false
   playerHasClub = false
   playerPermissions: any[] = []
-
+  user: any = {}
 
   constructor(private router: Router,
               private clubService: ClubService,
+              private userService: UserService,
               private invitationService: InvitationService,
               private toast: MatSnackBar
               ) {
@@ -43,6 +46,15 @@ export class ClubsComponent implements OnInit{
     this.loadClubs()
     this.hasClub()
     this.getPlayerPermissions()
+    this.isLogged()
+  }
+
+  isLogged(){
+    this.userService.getAuthenticated().subscribe(response=>{
+      if(response.ok){
+        this.user = response.body
+      }
+    })
   }
 
   loadClubs(): void {
@@ -120,6 +132,7 @@ export class ClubsComponent implements OnInit{
   clubDetails(id: number){
     this.router.navigate(['/clube', id]).then();
   }
+
 
   displayCover(id: number): void {
     this.clubService.displayCover(id).subscribe({

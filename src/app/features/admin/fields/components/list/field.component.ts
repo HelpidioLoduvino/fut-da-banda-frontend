@@ -3,7 +3,6 @@ import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {FormBuilder} from "@angular/forms";
 import {FieldService} from "../../../../../core/services/field.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {NotificationComponent} from "../../../../../core/components/notifications/notification.component";
 import {SharedModule} from "../../../../../shared/shared.module";
 import {Page} from "../../../../../core/models/Page";
 import {Field} from "../../../../../core/models/Field";
@@ -19,7 +18,6 @@ import {SaveComponent} from "../save/save.component";
     imports: [
         MatTabGroup,
         MatTab,
-        NotificationComponent,
         SharedModule
     ],
   templateUrl: './field.component.html',

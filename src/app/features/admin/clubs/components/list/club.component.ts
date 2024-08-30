@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {ClubService} from "../../../../../core/services/club.service";
 import {BarChartComponent} from "../../../dashboard/charts/bar-chart/bar-chart.component";
-import {NotificationComponent} from "../../../../../core/components/notifications/notification.component";
 import {SharedModule} from "../../../../../shared/shared.module";
 import {NgOptimizedImage} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
@@ -23,7 +22,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     MatTabGroup,
     BarChartComponent,
     SharedModule,
-    NotificationComponent,
     NgOptimizedImage,
     ClubFormComponent,
   ],

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
-import {NotificationComponent} from "../../../../../core/components/notifications/notification.component";
 import {BarChartComponent} from "../../../dashboard/charts/bar-chart/bar-chart.component";
 import {ChampionshipService} from "../../../../../core/services/championship.service";
 import {SharedModule} from "../../../../../shared/shared.module";
@@ -11,6 +10,8 @@ import {ModalComponent} from "../../../../../shared/components/modal/modal.compo
 import {EditComponent} from "../edit/edit.component";
 import {SaveComponent} from "../save/save.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
+import {AdminInvitationComponent} from "../admin-invitation/admin-invitation.component";
 
 
 @Component({
@@ -19,7 +20,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   imports: [
     MatTab,
     MatTabGroup,
-    NotificationComponent,
     BarChartComponent,
     SharedModule
   ],
@@ -36,7 +36,8 @@ export class ChampionshipComponent implements OnInit{
 
   constructor(private championshipService: ChampionshipService,
               private modal: MatDialog,
-              private snackBar: MatSnackBar
+              private snackBar: MatSnackBar,
+              private router: Router
   ) {
   }
 
@@ -51,8 +52,12 @@ export class ChampionshipComponent implements OnInit{
         this.totalElements = page.totalElements;
         this.totalPages = page.totalPages;
       },
-      error: (err) => console.error('Erro ao buscar clubes:', err)
+      error: (err) => console.error('Erro ao buscar Campeonatos:', err)
     });
+  }
+
+  showChampionship(id: number){
+    this.router.navigate(['/admin-campeonato', id])
   }
 
   onPageChange(page: number): void {
@@ -108,6 +113,19 @@ export class ChampionshipComponent implements OnInit{
       data: {
         component: EditComponent,
         componentData: { id: id}
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  invitation(): void {
+    const dialogRef = this.modal.open(ModalComponent, {
+      width: '500px',
+      height: '500px',
+      data: {
+        component: AdminInvitationComponent,
       }
     });
 

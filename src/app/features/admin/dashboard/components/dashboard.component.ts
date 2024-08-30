@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {BarChartComponent} from "../charts/bar-chart/bar-chart.component";
-import {NotificationComponent} from "../../../../core/components/notifications/notification.component";
 import {SharedModule} from "../../../../shared/shared.module";
 import {User} from "../../../../core/models/User";
 import {UserService} from "../../../../core/services/user.service";
@@ -12,7 +11,6 @@ import {StatisticService} from "../../../../core/services/statistic.service";
   standalone: true,
   imports: [
     BarChartComponent,
-    NotificationComponent,
     SharedModule
   ],
   templateUrl: './dashboard.component.html',

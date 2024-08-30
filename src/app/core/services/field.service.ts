@@ -15,28 +15,34 @@ export class FieldService {
 
   constructor(private http: HttpClient) { }
 
-  register(field: any){
-    return this.http.post(`${this.backendUrl}/api/fields`, field, {observe: "response"})
+  register(field: Field, image: File){
+    const formData: FormData = new FormData();
+    formData.append('field', new Blob([JSON.stringify(field)], { type: 'application/json' }));
+    formData.append('photo', image);
+    return this.http.post<Field>(`${this.backendUrl}/fields`, formData, {observe: "response"})
   }
 
   all(page: number, size: number){
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
-    return this.http.get<Page<Field>>(`${this.backendUrl}/api/fields`, {params})
+    return this.http.get<Page<Field>>(`${this.backendUrl}/fields`, {params})
   }
 
   list(){
-    return this.http.get<any>(`${this.backendUrl}/api/fields/list`);
+    return this.http.get<Field[]>(`${this.backendUrl}/fields/list`);
   }
 
   findById(id: number): Observable<HttpResponse<Field>>{
-    return this.http.get<Field>(`${this.backendUrl}/api/fields/${id}`, {observe: "response"})
+    return this.http.get<Field>(`${this.backendUrl}/fields/${id}`, {observe: "response"})
   }
 
-  update(field: any, id: number){
+  update(field: Field, image: File, id: number){
+    const formData: FormData = new FormData();
+    formData.append('field', new Blob([JSON.stringify(field)], { type: 'application/json' }));
+    formData.append('photo', image);
     const params = new HttpParams().set('id', id.toString())
-    return this.http.put(`${this.backendUrl}/api/fields`, field, {observe: "response", params});
+    return this.http.put<Field>(`${this.backendUrl}/fields`, formData, {observe: "response", params});
   }
 
 }

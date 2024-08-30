@@ -6,9 +6,10 @@ export interface Club {
   emblem: string;
   status: string;
   description: string;
-  groupType: string;
+  competition: string;
   category: string;
-  isReadyToPlay: boolean;
+  gender: string;
+  admissionTest?: string;
   players: any[];
 
 }

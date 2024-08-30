@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit{
           if(response.status !== "Bloqueado"){
             if (response.userRole === "ADMIN") {
               this.router.navigate(['/dashboard']).then();
-            } else if (response.userRole === "CAPTAIN" || response.userRole === "PLAYER" || response.userRole === "COACH" || response.userRole === "USER") {
+            } else if (response.userRole === "PLAYER" || response.userRole === "USER") {
               this.router.navigate(['']).then();
             }
           } else {

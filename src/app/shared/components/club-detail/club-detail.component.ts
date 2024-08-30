@@ -68,7 +68,6 @@ export class ClubDetailComponent implements OnInit{
     this.clubService.findById(id).subscribe(response=>{
       if(response.ok){
         this.club = response.body as Club
-        console.log(this.club)
       }
     })
   }

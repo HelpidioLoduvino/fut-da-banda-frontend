@@ -21,7 +21,7 @@ import {
   Pencil,
   Ban,
   RefreshCwOff,
-  Search, Plus
+  Search, Plus, Inbox, Shirt
 } from 'lucide-angular';
 import {AdminSidebarComponent} from "./components/admin-sidebar/admin-sidebar.component";
 import {AdminNavbarComponent} from "./components/admin-navbar/admin-navbar.component";
@@ -45,7 +45,9 @@ const icons = {
   Ban,
   RefreshCwOff,
   Search,
-  Plus
+  Plus,
+  Inbox,
+  Shirt
 }
 
 

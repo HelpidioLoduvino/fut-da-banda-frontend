@@ -6,6 +6,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {SharedModule} from "../../shared.module";
 import {Club} from "../../../core/models/Club";
 import {ClubService} from "../../../core/services/club.service";
+import {UserService} from "../../../core/services/user.service";
 
 
 @Component({
@@ -24,9 +25,11 @@ export class EditClubComponent implements OnInit{
   public club!: Club
   private id!: number
   isLoading = false
+  role!: string | null
 
   constructor(private clubService: ClubService,
               private formBuilder: FormBuilder,
+              private userService: UserService,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private snackBar: MatSnackBar
   ) {
@@ -41,9 +44,11 @@ export class EditClubComponent implements OnInit{
       status: [''],
       description: [''],
       category: [''],
-      groupType: [''],
+      gender: [''],
+      competition: [''],
     });
     this.detail()
+    this.findRole()
   }
 
   detail(){
@@ -57,14 +62,25 @@ export class EditClubComponent implements OnInit{
           status: this.club.status,
           description: this.club.description,
           category: this.club.category,
-          groupType: this.club.groupType,
+          gender: this.club.gender,
+          competition: this.club.competition,
         });
       }
     })
   }
 
+  findRole(){
+    this.userService.findRole().subscribe(response=>{
+      if(response.ok){
+        this.role = response.body
+      }
+    })
+  }
+
+
   edit(){
     if(this.clubForm.valid){
+      console.log(this.clubForm.value);
       this.isLoading = true
       const club = this.clubForm.value
       this.clubService.update(club, this.id).subscribe(response=>{

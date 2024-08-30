@@ -1,0 +1,16 @@
+<section>
+  <div class="" *ngIf="invitations.length > 0 else emptyInvitation">
+    <div class="card card-body mb-3 border-0 border-bottom-1" *ngFor="let invitation of invitations">
+      <p><strong>{{invitation.club.name}}</strong> {{invitation.message}} <strong>{{invitation.championship.name}}.</strong></p>
+      <div class="flex">
+        <button class="btn btn-success me-2" (click)="acceptInvitation(invitation.id)">Aceitar</button>
+        <button class="btn btn-danger" (click)="rejectInvitation(invitation.id)">Rejeitar</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #emptyInvitation>
+    <h5 class="flex justify-center p-5">Nenhum Pedido Encontrado</h5>
+  </ng-template>
+
+</section>

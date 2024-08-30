@@ -35,8 +35,10 @@ export class ClubFormComponent implements OnInit{
       province: ['', Validators.required],
       status: ['', Validators.required],
       description: ['', Validators.required],
+      gender: ['', Validators.required],
       category: ['', Validators.required],
-      groupType: ['', Validators.required],
+      competition: ['', Validators.required],
+      admissionTest: ['']
     });
     this.findRole()
   }
@@ -44,7 +46,7 @@ export class ClubFormComponent implements OnInit{
   findRole(){
     this.userService.findRole().subscribe(response=>{
       this.role = response.body
-      if (this.role === 'CAPTAIN') {
+      if (this.role === 'PLAYER') {
         this.clubForm.patchValue({ status: 'Amador' });
       }
     })

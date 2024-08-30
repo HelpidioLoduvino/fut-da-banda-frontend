@@ -1,0 +1,28 @@
+<div class="p-2" *ngIf="clubStat">
+  <form class="space-y-3">
+    <label>Estatística</label>
+    <select class="form-control" (change)="onStatisticChange($event)">
+      <option value="" disabled selected>--Selecionar--</option>
+      <option value="goal">Golo</option>
+      <option value="foul">Falta</option>
+      <option value="yellow">Cartão Amarelo</option>
+      <option value="red">Cartão Vermelho</option>
+      <option value="blue">Cartão Azul</option>
+      <option value="corner">Canto</option>
+      <option value="assist">Assistência</option>
+    </select>
+    <label *ngIf="statistic !== 'corner'">Jogador</label>
+    <select class="form-control" (change)="onPlayerChange($event)" *ngIf="statistic !== 'corner'">
+      <option value="" disabled selected>--Selecionar--</option>
+      <option *ngFor="let player of clubStat.club.players" [value]="player.id">{{player.fullName}}</option>
+    </select>
+    <div class="text-center" style="color: black">
+      <div class="spinner-border" role="status" *ngIf="isLoading">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div class="flex justify-center">
+      <input value="Salvar" (click)="addStat()" class="btn btn-success">
+    </div>
+  </form>
+</div>

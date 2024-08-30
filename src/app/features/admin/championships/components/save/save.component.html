@@ -50,29 +50,78 @@
             </select>
           </div>
           <div class="col">
-            <label>Grupo</label>
-            <select class="form-control" formControlName="groupType">
+            <label>Classe</label>
+            <select class="form-control" formControlName="type">
               <option value="" disabled>-- Selecionar --</option>
-              <option value="A">Grupo A</option>
-              <option value="B">Grupo B</option>
-              <option value="C">Grupo C</option>
-              <option value="D">Grupo D</option>
+              <option value="Profissional">Profissinal</option>
+              <option value="Amador">Amador</option>
+              <option value="Academico">Academico</option>
             </select>
           </div>
         </div>
+
         <div class="row mb-3">
           <div class="col">
             <label>Preço de Inscrição:</label>
-            <input type="number" class="form-control" formControlName="price">
+            <select class="form-control" formControlName="pricePer" (change)="onOptionSelected($event)">
+              <option value="" disabled>-- Selecionar --</option>
+              <option value="Player">Por Jogador</option>
+              <option value="Club">Por Clube</option>
+            </select>
           </div>
           <div class="col">
             <label>Jornadas:</label>
             <input type="number" class="form-control" formControlName="matchDay">
           </div>
         </div>
+
+        <div class="mt-3 mb-3" *ngIf="selectedOption === 'Player'">
+          <label>Preço por Jogador:</label>
+          <input type="number" class="form-control" formControlName="price" placeholder="Preço por jogador">
+        </div>
+
+        <div class="mt-3 mb-3" *ngIf="selectedOption === 'Club'">
+          <label>Preço por Clube:</label>
+          <input type="number" class="form-control" formControlName="price" placeholder="Preço por clube">
+        </div>
+
+        <div class="mt-3 mb-3">
+          <label>Regra</label>
+          <select class="form-control" formControlName="rule" (change)="onRuleChange($event)">
+            <option value="" disabled>-- Selecionar --</option>
+            <option value="Futsal Base">Futsal Base</option>
+            <option value="Futsal Profissional">Futsal Profissional</option>
+            <option value="Manual">Manual</option>
+          </select>
+        </div>
+
+        <div *ngIf="selectedRule === 'Manual'" class="mt-3 mb-3">
+          <label>Descreva a Regra Manual:</label>
+          <textarea class="form-control" rows="4" formControlName="manualRule" placeholder="Descreva a regra manual"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label>Género:</label>
+          <select class="form-control" formControlName="gender">
+            <option value="" disabled>-- Selecionar --</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Data de Expiração:</label>
+          <input type="date" class="form-control" formControlName="expiryDate">
+        </div>
+
+        <div class="mb-3">
+          <label>Data de Começo:</label>
+          <input type="date" class="form-control" formControlName="startDate">
+        </div>
+
         <div class="form-group mb-3">
           <label>Descrição do campeonato:</label>
-          <textarea class="form-control" formControlName="description"></textarea>
+          <textarea class="form-control" rows="4" formControlName="description" placeholder="Descrição do campeonato"></textarea>
         </div>
 
         <div class="text-center" style="color: black">
@@ -82,8 +131,8 @@
         </div>
 
         <span class="d-flex justify-content-center">
-                        <input type="submit" class="btn btn-success" value="Criar">
-                      </span>
+          <input type="submit" class="btn btn-success" value="Criar">
+        </span>
       </div>
     </div>
   </form>

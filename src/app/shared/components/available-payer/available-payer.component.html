@@ -1,4 +1,4 @@
-<div class="row g-2">
+<div class="row g-2" *ngIf="players.length > 0 else emptyPlayer">
   <div class="col-md-3" *ngFor="let player of players">
     <div class="d-flex justify-content-center">
       <div class="card mb-2 flex flex-col h-full w-100 rounded-lg overflow-hidden">
@@ -39,7 +39,12 @@
     </div>
   </div>
 </div>
-<section class="w-full mt-3 mb-3 flex justify-center">
+
+<ng-template #emptyPlayer>
+  <h5 class="flex justify-center py-[80px]">Nenhum Jogador Encontrado</h5>
+</ng-template>
+
+<section class="w-full mt-3 mb-3 flex justify-center" *ngIf="players.length > 0">
   <div class="">
     <button class="btn me-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">
       <

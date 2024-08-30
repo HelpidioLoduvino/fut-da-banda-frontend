@@ -1,5 +1,5 @@
 .navbar{
-  background-color: #4C5454;
+  background-color: black;
   color: white;
 }
 
@@ -15,26 +15,13 @@
   margin-top: 40px;
 }
 
-.menu li{
-  padding-left: 20px;
-}
-
-.menu-link{
-  text-decoration: none;
-  color: #555555;
-}
-
-.menu-link:hover{
-  color: black;
-}
-
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   width: 250px;
   height: 100%;
-  background-color: #4C5454;
+  background-color: black;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transform: translateX(-100%);
   transition: transform 0.3s ease;
@@ -89,9 +76,10 @@
 }
 
 .menu-sidebar a:hover{
-  color: black;
+  color: #d1cfe2;
 }
 
-.active{
-  color: gold;
+.nav-item.active .nav-link {
+  color: #d1cfe2;
 }
+

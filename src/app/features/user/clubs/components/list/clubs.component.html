@@ -1,12 +1,13 @@
 <main class="flex flex-col min-h-screen">
   <div class="flex-grow">
     <app-navbar></app-navbar>
+
     <section class="w-full">
       <div class="container mt-3">
-        <div class="row g-3">
+        <div class="row g-3" *ngIf="clubs.length > 0 else emptyClub">
           <div class="col-md-3 mb-3" *ngFor="let club of clubs">
             <div class="d-flex justify-content-center">
-              <div class="card-color card" style="cursor: pointer;">
+              <div class="card rounded-none cursor-pointer bg-transparent hover:bg-gray-200 hover:shadow-lg">
                 <div class="card-header bg-light" (click)="clubDetails(club.id)">
                   <div class="d-flex justify-content-center">
                     <img class="card-img" [src]="imageUrls[club.id]" alt="Logo do Clube" height="100" width="500">
@@ -15,7 +16,7 @@
                 <div class="card-body d-flex justify-content-center" (click)="clubDetails(club.id)">
                   <h6>{{club.name}} ({{club.abv}})</h6>
                 </div>
-                <div class="card-footer" *ngIf="!playerHasClub && !playerAlreadyAskedForPermission(club.id)">
+                <div class="card-footer" *ngIf="!playerHasClub && !playerAlreadyAskedForPermission(club.id) && user">
                   <section class="w-full">
                     <button class="w-full bg-blue-500 text-white py-1
                            rounded-md hover:bg-blue-600 transition
@@ -33,15 +34,22 @@
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
+
+        <ng-template #emptyClub>
+          <h5 class="flex justify-center py-[90px]">Nenhum Clube Encontrado</h5>
+        </ng-template>
+
       </div>
     </section>
-    <section class="w-full mb-3 flex justify-center">
+
+
+    <section class="w-full mb-3 flex justify-center" *ngIf="clubs.length > 0">
       <div class="">
-        <button class="btn btn-outline-light me-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">
+        <button class="btn btn-outline-dark me-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">
           <
         </button>
         <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
-        <button class="btn btn-outline-light ms-2" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= totalPages - 1">
+        <button class="btn btn-outline-dark ms-2" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= totalPages - 1">
           >
         </button>
       </div>

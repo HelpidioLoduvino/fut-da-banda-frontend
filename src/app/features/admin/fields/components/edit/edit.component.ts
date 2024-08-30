@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Field} from "../../../../../core/models/Field";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -20,6 +20,7 @@ export class EditComponent implements OnInit{
   fieldForm!: FormGroup
   public field!: Field
   private id!: number
+  image!: File
   isLoading = false
 
   constructor(private fieldService: FieldService,
@@ -34,9 +35,18 @@ export class EditComponent implements OnInit{
     this.fieldForm = this.formBuilder.group({
       name: [''],
       location: [''],
+      type: [''],
+      geolocation: [''],
+      price: [''],
       status: ['']
     })
     this.details()
+  }
+
+  onImageFileChange(event: any) {
+    if(event.target.files.length > 0){
+      this.image = event.target.files[0];
+    }
   }
 
   details(){
@@ -46,6 +56,9 @@ export class EditComponent implements OnInit{
         this.fieldForm.patchValue({
           name: this.field.name,
           location: this.field.location,
+          geolocation: this.field.geolocation,
+          type: this.field.type,
+          price: this.field.price,
           status: this.field.status
         })
       }
@@ -55,8 +68,8 @@ export class EditComponent implements OnInit{
   update(){
     if(this.fieldForm.valid){
       this.isLoading = true
-      const field = this.fieldForm.value
-      this.fieldService.update(field, this.id).subscribe(response=>{
+      const field: Field = this.fieldForm.value
+      this.fieldService.update(field, this.image, this.id).subscribe(response=>{
         if(response.ok){
           this.isLoading = false
           this.snackBar.open("Campo atualizado com Sucesso", 'Fechar', {

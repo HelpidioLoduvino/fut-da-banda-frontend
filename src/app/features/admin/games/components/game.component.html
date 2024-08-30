@@ -7,81 +7,75 @@
       <app-admin-sidebar class="d-md-none"></app-admin-sidebar>
       <nav class="navbar navbar-light d-none d-md-block">
         <div class="container-fluid">
-          <a class="navbar-brand d-md-block d-none position-relative" style="top: 15px;">Partidas</a>
-        </div>
-        <div class="d-flex justify-content-end">
-          <app-admin-notification></app-admin-notification>
+          <a class="navbar-brand d-md-block d-none position-relative">Partidas</a>
         </div>
       </nav>
-      <section>
-        <div class="mt-3">
-          <mat-tab-group>
-            <mat-tab label="Resultados">
-
-            </mat-tab>
-            <mat-tab label="Próximas">
-
-            </mat-tab>
-            <mat-tab label="Nova">
-              <div class="card card-body navbar-light" style="border-radius: 0; color: black">
-                <form>
-                  <div class="d-flex justify-content-center">
-                    <div>
-                      <div class="row mb-3">
-                        <div class="col">
-                          <label>Campeonato</label>
-                          <select class="form-control">
-                            <option value="" disabled>-- Selecionar --</option>
-                            <option value="Amistoso">Amistoso</option>
-                            <option *ngFor="let championship of championships" value="{{championship.name}}">{{championship.name}}</option>
-                          </select>
-                        </div>
-                        <div class="col">
-                          <label>Campo</label>
-                          <select class="form-control">
-                            <option value="" disabled>-- Selecionar --</option>
-                            <option *ngFor="let field of fields">{{field.name}}</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <div class="col">
-                          <label>Time A</label>
-                          <select class="form-control">
-                            <option selected disabled>-- Selecionar --</option>
-                          </select>
-                        </div>
-                        <div class="col">
-                          <span style="position: relative; right: 18px; top: 30px;">X</span>
-                          <label style="position: relative; right: 10px;">Time B</label>
-                          <select class="form-control">
-                            <option selected disabled>-- Selecionar --</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <div class="col">
-                          <label>Data e Hora</label>
-                          <input type="datetime-local" class="form-control">
-                        </div>
-                        <div class="col">
-                          <label>Jornada</label>
-                          <input type="number" class="form-control">
-                        </div>
-                      </div>
-                      <span class="d-flex justify-content-center">
-                        <input type="submit" class="btn btn-success" value="Marcar">
-                      </span>
-                    </div>
+      <section class="w-full mt-3">
+        <div class="card card-body navbar-light" style="border-radius: 0; color: black">
+          <form [formGroup]="gameForm" (ngSubmit)="save()">
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+              {{ errorMessage }}
+            </div>
+            <div class="d-flex justify-content-center">
+              <div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label>Campeonato</label>
+                    <select class="form-control" (change)="onChampionshipChange($event)">
+                      <option value="" disabled selected>-- Selecionar --</option>
+                      <option *ngFor="let championship of championships" [value]="championship.id">{{championship.name}}</option>
+                    </select>
                   </div>
-                </form>
+                  <div class="col">
+                    <label>Campo</label>
+                    <select class="form-control" (change)="onFieldChange($event)">
+                      <option value="" disabled selected>-- Selecionar --</option>
+                      <option *ngFor="let field of fields" [value]="field.id">{{field.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label>Time A</label>
+                    <select class="form-control" (change)="onFirstClubChange($event)">
+                      <option value="" disabled selected>-- Selecionar --</option>
+                      <option *ngFor="let club of filteredClubs" [value]="club.id">{{club.name}}</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <span style="position: relative; right: 18px; top: 30px;">X</span>
+                    <label style="position: relative; right: 10px;">Time B</label>
+                    <select class="form-control" (change)="onSecondClubChange($event)">
+                      <option value="" disabled selected>-- Selecionar --</option>
+                      <option *ngFor="let club of filteredClubs" [value]="club.id">{{club.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label>Data e Hora</label>
+                    <input type="datetime-local" class="form-control" formControlName="dateTime">
+                  </div>
+                  <div class="col">
+                    <label>Jornada</label>
+                    <input type="number" class="form-control" formControlName="matchDay">
+                  </div>
+                </div>
+
+                <div class="text-center" style="color: black">
+                  <div class="spinner-border" role="status" *ngIf="isLoading">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+
+                <span class="d-flex justify-content-center">
+                  <input type="submit" class="btn btn-success" value="Marcar">
+                </span>
+
               </div>
-            </mat-tab>
-          </mat-tab-group>
+            </div>
+          </form>
         </div>
-      </section>
-      <section style="position: fixed; bottom: 12px; width: 72rem;">
-        <p class="d-flex justify-content-center" style="position: relative; top: 6px; color: black;">futdabanda.com</p>
       </section>
     </div>
   </div>

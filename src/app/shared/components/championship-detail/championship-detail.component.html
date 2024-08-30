@@ -6,10 +6,23 @@
           <h6 class="">{{championship.name}}</h6>
           <p class="mb-2">Província: {{ championship.province }}</p>
           <p class="mb-2">Categoria: {{ championship.category }}</p>
+          <p class="mb-2">Classe: {{championship.type}}</p>
+          <p class="mb-2">Género: {{championship.gender}}</p>
+          <button class="btn btn-warning" *ngIf="clubAvailable && clubPermission.length <= 0" (click)="askToJoin(championship.id)">Competir</button>
         </div>
 
         <div class="card card-body mt-3">
-          <h6 class="">Regulamentos</h6>
+          <h6 class="">Inscrição</h6>
+          <p *ngIf="championship.pricePer === 'Player'">Preço Por Jogador: {{championship.price}} Akz</p>
+          <p *ngIf="championship.pricePer === 'Club'">Preço Por Clube: {{championship.price}} Akz</p>
+          <p>Data Limite: {{championship.expiryDate}}</p>
+          <p>Início: {{championship.startDate}}</p>
+        </div>
+
+        <div class="card card-body mt-3">
+          <h6 class="">Regulamento</h6>
+          <p *ngIf="championship.rule !== 'Manual'">{{championship.rule}}</p>
+          <p *ngIf="championship.rule === 'Manual'">{{championship.manualRule}}</p>
         </div>
       </div>
       <div class="col">
@@ -20,70 +33,97 @@
               <thead class="table-dark">
               <tr>
                 <th class="pr-4">Clube</th>
+                <th class="pr-0">Pts</th>
                 <th class="pr-0">PD</th>
                 <th class="pr-0">V</th>
                 <th class="pr-0">E</th>
                 <th class="pr-0">D</th>
-                <th class="pr-0">Pts</th>
                 <th class="pr-0">GM</th>
                 <th class="pr-0">GS</th>
                 <th class="pr-0">DG</th>
               </tr>
               </thead>
               <tbody class="table-secondary">
-              <tr>
+              <tr *ngFor="let stat of stats">
                 <td>
                   <div class="flex">
-                    <img src="assets/img06.png" class="me-2" style="width: 40px"
-                         alt="Emblema do clube"/>
-                    <span class="mt-2">Petro de Luanda</span>
+                    <img [ngSrc]="imageUrl[stat.club.id]" class="object-fit-cover me-2"
+                         alt="Emblema do clube" width="40" height="40"/>
+                    <span class="mt-2">{{stat.club.abv}}</span>
                   </div>
                 </td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
+                <td>{{stat.points}}</td>
+                <td>{{stat.matches}}</td>
+                <td>{{stat.wins}}</td>
+                <td>{{stat.draws}}</td>
+                <td>{{stat.losses}}</td>
+                <td>{{stat.goalsScored}}</td>
+                <td>{{stat.goalsConceded}}</td>
+                <td>{{stat.goalsDifference}}</td>
               </tr>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="card card-body mt-3">
-          <h6 class="">Jogos</h6>
-          <p class="text-muted">Jornada 1 de 38</p>
-          <hr>
-          <div class="card card-body border-0">
-              <div class="row">
-                <div class="col-md-6 border-1">
+        <div *ngIf="scheduleGames.length > 0">
+          <div class="card rounded-0 card-body border-0 mt-3" style="color: black;">
+            <h6>Jogos</h6>
+            <div class="flex">
+              <button class="btn btn-light -mt-1 mb-3 me-2" (click)="previousMatchDay()"> < </button>
+              <p class="text-muted">Jornada {{ matchDay }}</p>
+              <button class="btn btn-light -mt-1 mb-3 ms-2" (click)="nextMatchDay()"> > </button>
+            </div>
+            <hr>
+            <div class="card card-body rounded-0 border-0">
+              <div class="row" *ngIf="userRole ==='ADMIN'">
+                <div class="col-md-6 border-1 cursor-pointer hover:bg-gray-200 hover:shadow-lg" *ngFor="let game of scheduleGames" (click)="adminGameDetail(game.id)">
                   <div class="flex">
-                    <img src="assets/img06.png" class="me-2" style="width: 60px" alt="Emblema do clube"/>
-                    <span class="mt-3">Petro de Luanda</span>
+                    <img [ngSrc]="imageUrl[game.firstClub.id]" class="object-fit-cover me-2" alt="Emblema do clube" width="60" height="60"/>
+                    <span class="mt-3">{{game.firstClub.name}}</span>
                   </div>
-                  <div class="flex justify-content-end">
-                    <span>01/08/2024, 20:00</span>
+                  <div class="flex justify-end">
+                    <span><strong>{{game.status}}</strong>, {{game.dateTime}}</span>
                   </div>
                   <div class="flex">
-                    <img src="assets/img06.png" class="me-2" style="width: 60px" alt="Emblema do clube"/>
-                    <span class="mt-3">1 De Agosto</span>
+                    <img [ngSrc]="imageUrl[game.secondClub.id]" class="object-fit-cover me-2" alt="Emblema do clube" width="60" height="60"/>
+                    <span class="mt-3">{{game.secondClub.name}}</span>
                   </div>
                 </div>
-                <div class="col-md-6 border-1">
+                <div class="mt-[50px] flex justify-center">
+                  <button class="btn btn-outline-dark me-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">
+                    <
+                  </button>
+                  <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+                  <button class="btn btn-outline-dark ms-2" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= totalPages - 1">
+                    >
+                  </button>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="userRole !=='ADMIN'">
+                <div class="col-md-6 border-1 cursor-pointer hover:bg-gray-200 hover:shadow-lg" *ngFor="let game of scheduleGames" (click)="gameDetail(game.id)">
                   <div class="flex">
-                    <img src="assets/img06.png" class="me-2" style="width: 60px" alt="Emblema do clube"/>
-                    <span class="mt-3">Petro de Luanda</span>
+                    <img [ngSrc]="imageUrl[game.firstClub.id]" class="object-fit-cover me-2" width="60" height="60" alt="Emblema do clube"/>
+                    <span class="mt-3">{{game.firstClub.name}}</span>
                   </div>
                   <div class="flex justify-content-end">
-                    <span>01/08/2024, 20:00</span>
+                    <span><strong>{{game.status}}</strong>, {{game.dateTime}}</span>
                   </div>
                   <div class="flex">
-                    <img src="assets/img06.png" class="me-2" style="width: 60px" alt="Emblema do clube"/>
-                    <span class="mt-3">1 De Agosto</span>
+                    <img [ngSrc]="imageUrl[game.secondClub.id]" class="object-fit-cover me-2" width="60" height="60" alt="Emblema do clube"/>
+                    <span class="mt-3">{{game.secondClub.name}}</span>
                   </div>
                 </div>
+                <div class="mt-[50px] flex justify-center">
+                  <button class="btn btn-outline-dark me-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">
+                    <
+                  </button>
+                  <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+                  <button class="btn btn-outline-dark ms-2" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= totalPages - 1">
+                    >
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {NgOptimizedImage} from "@angular/common";
-import {NotificationComponent} from "../../../../../core/components/notifications/notification.component";
 import {UserService} from "../../../../../core/services/user.service";
 import {MatDialog} from "@angular/material/dialog";
 import {Page} from "../../../../../core/models/Page";
@@ -18,7 +17,6 @@ import {SaveComponent} from "../save/save.component";
   selector: 'app-user',
   standalone: true,
   imports: [
-    NotificationComponent,
     MatTab,
     MatTabGroup,
     NgOptimizedImage,

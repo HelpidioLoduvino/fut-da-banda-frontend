@@ -1,15 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ChampionshipService} from "../../../../../core/services/championship.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MatDialog} from "@angular/material/dialog";
 import {SharedModule} from "../../../../../shared/shared.module";
 
 @Component({
   selector: 'app-save',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
     SharedModule
   ],
   templateUrl: './save.component.html',
@@ -19,6 +17,8 @@ export class SaveComponent implements OnInit{
 
   championshipForm!: FormGroup
   isLoading = false
+  selectedOption: string = '';
+  selectedRule: string = '';
 
   constructor(private championshipService: ChampionshipService,
               private formBuilder: FormBuilder,
@@ -32,10 +32,26 @@ export class SaveComponent implements OnInit{
       description: ['', Validators.required],
       category: ['', Validators.required],
       province: ['', Validators.required],
-      groupType: ['', Validators.required],
       price: ['', Validators.required],
+      pricePer: ['', Validators.required],
+      type: ['', Validators.required],
+      rule: ['', Validators.required],
+      manualRule: [''],
+      gender: ['', Validators.required],
+      expiryDate:  ['', Validators.required],
+      startDate:  ['', Validators.required],
       matchDay: ['', Validators.required]
     })
+  }
+
+  onOptionSelected(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.selectedOption = selectElement.value;
+  }
+
+  onRuleChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.selectedRule = selectElement.value;
   }
 
   submit(){

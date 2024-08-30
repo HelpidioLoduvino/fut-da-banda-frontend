@@ -1,14 +1,14 @@
 <main class="flex flex-col min-h-screen">
   <div class="flex-grow">
     <app-navbar></app-navbar>
-    <section class="container mt-3 mb-3" style="color: black">
+    <section class="container mt-3 mb-3">
       <div class="">
         <div class="card card-body mb-3" *ngFor="let sent of sentInvitations">
           {{sent.recipient.fullName}} {{sent.message}}.
         </div>
       </div>
     </section>
-    <section class="container mt-3 mb-3" style="color: black">
+    <section class="container mt-3 mb-3">
       <div class="" *ngIf="role ==='CAPTAIN'">
         <div class="card card-body mb-3" *ngFor="let captain of captainInvitations">
           {{captain.sender.fullName}} {{captain.message}} {{captain.club.name}}.
@@ -28,7 +28,6 @@
           </div>
         </div>
       </div>
-
     </section>
   </div>
   <app-footer ></app-footer>

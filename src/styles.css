@@ -7,8 +7,7 @@ html, body { height: 100%; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: #272727;
-  color: white;
+  background: #F1F1F1;
 }
 
 .icon-color{
@@ -21,18 +20,7 @@ body {
 }
 
 .icon-color:hover{
-  color: black;
-}
-
-.card-color{
-  background: #4C5454;
-  color: white;
-  width: 18rem;
-}
-
-.main-card{
-  background: #4C5454;
-  color: white;
+  color: #d1cfe2;
 }
 
 .no-margin {
@@ -41,15 +29,6 @@ body {
 
 .white-line{
   border: 1px solid white;
-}
-
-.navbar-light{
-  background-color: #F4F2F3;
-
-}
-
-.title-underline{
-  border: 1px solid #80FF72;
 }
 
 .error {

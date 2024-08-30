@@ -5,9 +5,6 @@ import {Club} from "../../../../../core/models/Club";
 import {FormsModule} from "@angular/forms";
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {NgOptimizedImage} from "@angular/common";
-import {NotificationComponent} from "../../../../../core/components/notifications/notification.component";
-import {ModalComponent} from "../../../../../shared/components/modal/modal.component";
-import {MatDialog} from "@angular/material/dialog";
 import {SharedModule} from "../../../../../shared/shared.module";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {ClubDetailComponent} from "../../../../../shared/components/club-detail/club-detail.component";
@@ -21,7 +18,6 @@ import {ClubDetailComponent} from "../../../../../shared/components/club-detail/
     MatTabGroup,
     NgOptimizedImage,
     SharedModule,
-    NotificationComponent,
     MatMenuTrigger,
     MatMenu,
     MatMenuItem,

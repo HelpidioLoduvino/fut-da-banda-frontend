@@ -1,35 +1,37 @@
 <main class="flex flex-col min-h-screen">
 <div class="flex-grow">
   <app-navbar></app-navbar>
-  <section class="container mt-3" style="color: black">
-    <div class="row g-3">
+  <section class="container mt-3">
+    <div class="row g-3" *ngIf="championships.length > 0 else emptyChampionship">
       <div class="col-md-4 mb-3" *ngFor="let championship of championships">
         <div class="flex justify-center h-full">
-          <div class="card card-body rounded-lg shadow-md p-6 h-full max-w-sm flex flex-col cursor-pointer">
-            <button [matMenuTriggerFor]="playerInfo" class="absolute top-2 right-2 bg-white rounded-full p-1 ">
+          <div class="card card-body rounded-0 bg-transparent hover:bg-gray-200 hover:shadow-lg p-6 h-full max-w-sm flex flex-col cursor-pointer">
+            <button [matMenuTriggerFor]="playerInfo" class="absolute top-2 right-2 rounded-full p-1 ">
               <lucide-icon name="info" class="text-gray-500 hover:text-black transition duration-300"></lucide-icon>
             </button>
             <mat-menu #playerInfo="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
-              <p class="p-2" style="color: black;">{{championship.description}}</p>
+              <p class="p-2">{{championship.description}}</p>
             </mat-menu>
             <div class="w-full" (click)="detail(championship.id)">
-              <h5 class="text-xl font-semibold mb-2">{{ championship.name }}</h5>
-              <p class="mb-2">Província: {{ championship.province }}</p>
-              <p class="mb-2">Categoria: {{ championship.category }}</p>
+              <h5 class="text-xl font-semibold mb-2 flex justify-center">{{ championship.name }}</h5>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <ng-template #emptyChampionship>
+      <h5 class="flex justify-center py-[90px]" style="color: white;">Nenhum Campeonato Encontrado</h5>
+    </ng-template>
+
   </section>
-  <section class="w-full mb-3 flex justify-center">
+  <section class="w-full mb-3 flex justify-center" *ngIf="championships.length > 0">
     <div class="">
-      <button class="btn btn-outline-light me-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">
+      <button class="btn btn-outline-dark me-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">
         <
       </button>
       <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
-      <button class="btn btn-outline-light ms-2" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= totalPages - 1">
+      <button class="btn btn-outline-dark ms-2" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= totalPages - 1">
         >
       </button>
     </div>

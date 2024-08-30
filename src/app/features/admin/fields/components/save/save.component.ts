@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FieldService} from "../../../../../core/services/field.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SharedModule} from "../../../../../shared/shared.module";
+import {Field} from "../../../../../core/models/Field";
 
 
 @Component({
@@ -18,6 +19,7 @@ export class SaveComponent implements OnInit{
 
   fieldForm!: FormGroup
   isLoading = false
+  image!: File
 
   constructor(private fieldService: FieldService,
               private formBuilder: FormBuilder,
@@ -29,15 +31,24 @@ export class SaveComponent implements OnInit{
     this.fieldForm = this.formBuilder.group({
       name: ['', Validators.required],
       location: ['', Validators.required],
+      type: ['', Validators.required],
+      geolocation: ['', Validators.required],
+      price: ['', Validators.required],
       status: ['', Validators.required]
     })
+  }
+
+  onImageFileChange(event: any) {
+    if(event.target.files.length > 0){
+      this.image = event.target.files[0];
+    }
   }
 
   submit(){
     if(this.fieldForm.valid){
       this.isLoading = true;
-      const field = this.fieldForm.value;
-      this.fieldService.register(field).subscribe(response=>{
+      const field: Field = this.fieldForm.value;
+      this.fieldService.register(field, this.image).subscribe(response=>{
         if(response.ok){
           this.isLoading = false
           this.snackBar.open("Campo Adicionado Com Sucesso", 'Fechar', {

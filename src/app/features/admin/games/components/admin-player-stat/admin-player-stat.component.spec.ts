@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotificationComponent } from './notification.component';
+import { AdminPlayerStatComponent } from './admin-player-stat.component';
 
-describe('AdminNotificationComponent', () => {
-  let component: NotificationComponent;
-  let fixture: ComponentFixture<NotificationComponent>;
+describe('AdminPlayerStatComponent', () => {
+  let component: AdminPlayerStatComponent;
+  let fixture: ComponentFixture<AdminPlayerStatComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NotificationComponent]
+      imports: [AdminPlayerStatComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NotificationComponent);
+    fixture = TestBed.createComponent(AdminPlayerStatComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

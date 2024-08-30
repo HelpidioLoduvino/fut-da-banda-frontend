@@ -1,158 +1,82 @@
-<app-navbar></app-navbar>
-<app-carousel></app-carousel>
-<div class="container mt-3">
+<main class="flex flex-col min-h-screen">
+  <div class="flex-grow">
+    <app-navbar></app-navbar>
 
-  <h6 class="d-flex justify-content-center">Campeonatos</h6>
-  <div class="d-flex justify-content-center">
-    <div class="title-underline mb-2" style="position: relative; top: -15px; width: 150px;"></div>
-  </div>
-
-  <div class="card main-card">
-    <div class="card-body">
-      <h6>Nome do Campeonato</h6>
-      <span class="d-flex justify-content-center">Resultados Finais</span>
-      <p style="position: relative; top: 5px;">Jornada: 2</p>
-      <div class="white-line mb-3"></div>
-      <div class="row g-3">
-        <div class="col-md-3 mb-3">
-          <div class="d-flex justify-content-center">
-            <div class="card-color card border-white">
-              <div class="card-body">
-                <span class="d-flex justify-content-center"><strong>Terminado</strong></span>
-                <span class="d-flex justify-content-center">02/07/2024</span>
-                <div class="d-flex justify-content-center">
-                  <div class="d-flex">
-                    <div>
-                      <lucide-icon name="circle-user-round" size="50" strokeWidth="1"></lucide-icon>
-                      <p class="d-flex justify-content-center">TIME A</p>
-                      <p class="d-flex justify-content-center" style="font-size: 20px;"><strong>2</strong></p>
-                    </div>
-                    <span class="me-4 ms-4" style="font-size: 28px; position: relative; top: 20px;">X</span>
-                    <div>
-                      <lucide-icon name="circle-user-round" size="50" strokeWidth="1"></lucide-icon>
-                      <p class="d-flex justify-content-center">TIME B</p>
-                      <p class="d-flex justify-content-center" style="font-size: 20px;"><strong>1</strong></p>
-                    </div>
+    <section class="w-full overflow-x-hidden" >
+      <h5 class="mt-3 flex justify-center">Campeonatos</h5>
+      <div *ngIf="championships.length > 0 else emptyChampionship">
+        <div *ngFor="let championship of championships">
+          <h6 class="ms-4">{{championship.name}}</h6>
+          <div class="card bg-transparent border-0 rounded-none card-body ms-4 mb-3 me-4">
+            <div class="row" *ngIf="games[championship.id].length > 0 else emptyGame">
+              <div class="col-md-6 border-1 cursor-pointer hover:bg-gray-200 hover:shadow-lg" *ngFor="let game of games[championship.id]">
+                <div (click)="gameDetails(game.id!)">
+                  <div class="flex">
+                    <img class="object-fit-cover" ngSrc="assets/img06.png" alt="" height="70" width="70">
+                    <span class="mt-4">{{game.firstClub.name}}</span>
+                    <span  *ngIf="game.status ==='Em Andamento' || game.status ==='Terminado'">
+                    <h6 class="ms-4 mt-3" *ngFor="let goal of firstClubGameStat[game.id!]">
+                      {{ goal.goals }}
+                    </h6>
+                  </span>
                   </div>
+                  <div class="flex justify-end">
+                    <span>{{game.status}}, {{game.dateTime}}</span>
+                  </div>
+                  <div class="flex">
+                    <img class="object-fit-cover" ngSrc="assets/img06.png" alt="" height="70" width="70">
+                    <span class="mt-4">{{game.secondClub.name}}</span>
+                    <span  *ngIf="game.status ==='Em Andamento' || game.status ==='Terminado'">
+                    <h6 class="ms-4 mt-3" *ngFor="let goal of secondClubGameStat[game.id!]">
+                      {{ goal.goals }}
+                    </h6>
+                  </span>
+                  </div>
+                </div>
+                </div>
+              <button class="btn hover:text-gray-500 mt-2" (click)="championshipDetails(championship.id)"><u>Ver Mais</u></button>
+            </div>
+
+            <ng-template #emptyGame>
+              <h6 class="flex justify-center text-muted">Nenhum Jogo Encontrado</h6>
+            </ng-template>
+
+          </div>
+        </div>
+      </div>
+
+      <ng-template #emptyChampionship>
+        <h6 class="flex justify-center text-muted py-[50px]">Nenhum Campeonato Encontrado</h6>
+      </ng-template>
+
+
+      <h5 class="mt-3 flex justify-center">Clubes</h5>
+
+      <div class="card bg-transparent border-0 rounded-none card-body ms-4 mb-3 me-4" *ngIf="clubs.length > 0 else emptyClub">
+        <div class="row g-3">
+          <div class="col-md-3 mb-3" *ngFor="let club of clubs">
+            <div class="d-flex justify-content-center">
+              <div class="card bg-transparent cursor-pointer hover:bg-gray-200 hover:shadow-lg">
+                <div class="card-header bg-light" (click)="clubDetails(club.id)">
+                  <div class="d-flex justify-content-center">
+                    <img class="card-img" [src]="imageUrls[club.id]" alt="Logo do Clube" height="80" width="80">
+                  </div>
+                </div>
+                <div class="card-body bg-transparent d-flex justify-content-center" (click)="clubDetails(club.id)">
+                  <h6>{{club.name}} ({{club.abv}})</h6>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <span class="d-flex justify-content-center mt-3">Próximas Partidas</span>
-      <p style="position: relative; top: 5px;">Jornada: 3</p>
-      <div class="white-line mb-3"></div>
-      <div class="row g-3">
-        <div class="col-md-3">
-          <div class="d-flex justify-content-center">
-            <div class="card-color card border-white">
-              <div class="card-body">
-                <span class="d-flex justify-content-center"><strong>29/06/2024</strong></span>
-                <span class="d-flex justify-content-center">15H:00</span>
-                <div class="d-flex justify-content-center">
-                  <div class="d-flex">
-                    <div>
-                      <lucide-icon name="circle-user-round" size="50" strokeWidth="1"></lucide-icon>
-                      <p>TIME A</p>
-                    </div>
-                    <span class="me-4 ms-4" style="font-size: 28px; position: relative; top: 20px;">X</span>
-                    <div>
-                      <lucide-icon name="circle-user-round" size="50" strokeWidth="1"></lucide-icon>
-                      <p>TIME B</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-      </div>
-    </div>
-    <div class="d-flex justify-content-center">
-      <a class="nav-link mb-3" routerLink="#"> <u>Ver Tabela de Classificação</u></a>
-    </div>
+      <ng-template #emptyClub>
+        <h6 class="flex justify-center text-muted py-[50px]">Nenhum Clube Encontrado</h6>
+      </ng-template>
+
+    </section>
   </div>
+  <app-footer></app-footer>
+</main>
 
-</div>
-
-<small class="d-flex justify-content-center mt-3">Cada partida é uma emoção</small>
-<div id="carouselExampleFade" class="carousel mt-3" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="assets/img/img03.webp" class="d-block w-100" alt="...">
-    </div>
-  </div>
-</div>
-
-<div class="container mt-3">
-  <h5 class="d-flex justify-content-center">Melhor</h5>
-  <div class="d-flex justify-content-center">
-    <div class="title-underline d-flex justify-content-center mb-3" style="position: relative; top: -15px; width: 100px;"></div>
-  </div>
-
-  <div class="row g-3">
-    <div class="col-md-3 mb-3">
-      <div class="d-flex justify-content-center">
-        <div class="card-color card">
-          <div class="card-body">
-            <div class="d-flex justify-content-center">
-              <div>
-                <lucide-icon name="circle-user-round" size="128" strokeWidth="1"></lucide-icon>
-                <p class="d-flex justify-content-center">Clube</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3 mb-3">
-      <div class="d-flex justify-content-center">
-        <div class="card-color card">
-          <div class="card-body">
-            <div class="d-flex justify-content-center">
-              <div>
-                <lucide-icon name="circle-user-round" size="128" strokeWidth="1"></lucide-icon>
-                <p class="d-flex justify-content-center">Jogador</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3 mb-3">
-      <div class="d-flex justify-content-center">
-        <div class="card-color card">
-          <div class="card-body">
-            <div class="d-flex justify-content-center">
-              <div>
-                <lucide-icon name="circle-user-round" size="128" strokeWidth="1"></lucide-icon>
-                <p class="d-flex justify-content-center">Marcador</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3 mb-3">
-      <div class="d-flex justify-content-center">
-        <div class="card-color card">
-          <div class="card-body">
-            <div class="d-flex justify-content-center">
-              <div>
-                <lucide-icon name="circle-user-round" size="128" strokeWidth="1"></lucide-icon>
-                <p class="d-flex justify-content-center">Defesa</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<app-footer class="no-margin"></app-footer>

@@ -1,5 +1,5 @@
-<div class="p-5">
-  <form class="space-y-5" [formGroup]="fieldForm" (ngSubmit)="submit()">
+<div class="p-2">
+  <form class="space-y-3" [formGroup]="fieldForm" (ngSubmit)="submit()">
     <div class="form-group">
       <label>Nome</label>
       <input type="text" class="form-control" formControlName="name">
@@ -9,12 +9,34 @@
       <input type="text" class="form-control" formControlName="location">
     </div>
     <div>
+      <label>Geolocalização</label>
+      <input type="text" class="form-control" formControlName="geolocation">
+    </div>
+    <div>
+      <label>Tipo</label>
+      <select class="form-control" formControlName="type">
+        <option value="" disabled>-- Selecionar --</option>
+        <option value="Futsal">Futsal</option>
+        <option value="Fut7">Fut7</option>
+        <option value="Fut11">Fut11</option>
+      </select>
+    </div>
+    <div>
+      <label>Preço</label>
+      <input type="number" class="form-control" formControlName="price">
+    </div>
+    <div>
       <label>Disponibilidade</label>
       <select class="form-control" formControlName="status">
         <option value="" disabled>-- Selecionar --</option>
         <option value="Disponível">Disponível</option>
         <option value="Indisponível">Indisponível</option>
       </select>
+    </div>
+
+    <div>
+      <label>Imagem</label>
+      <input type="file" class="form-control" (change)="onImageFileChange($event)">
     </div>
 
     <div class="text-center" style="color: black">

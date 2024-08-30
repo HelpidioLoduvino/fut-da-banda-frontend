@@ -7,18 +7,19 @@
       <app-admin-sidebar class="d-md-none"></app-admin-sidebar>
       <nav class="navbar navbar-light d-none d-md-block">
         <div class="container-fluid">
-          <a class="navbar-brand d-md-block d-none position-relative" style="top: 15px;">Campeonatos</a>
-        </div>
-        <div class="d-flex justify-content-end">
-          <app-admin-notification></app-admin-notification>
+          <a class="navbar-brand d-md-block d-none">Campeonatos</a>
         </div>
       </nav>
       <section class="w-full mt-3">
         <div class="flex justify-between items-center">
           <div>
-            <div>
-              <button class="btn btn-primary" (click)="save()">
+            <div class="flex">
+              <button class="btn btn-primary me-2" (click)="save()">
                 <lucide-icon name="plus"></lucide-icon>
+              </button>
+
+              <button class="btn btn-secondary" (click)="invitation()">
+                <lucide-icon name="inbox"></lucide-icon>
               </button>
             </div>
           </div>
@@ -37,22 +38,22 @@
 
       <section class="w-full mt-3" style="color: black;">
         <div class="table-responsive">
-          <table class="table">
+          <table class="table table-hover">
             <thead class="table-dark">
             <tr>
               <th>Nome</th>
               <th>Categoria</th>
-              <th>Grupo</th>
+              <th>Classe</th>
               <th>Provincia</th>
               <th>Ação</th>
             </tr>
             </thead>
             <tbody class="table-active">
             <tr *ngFor="let championship of championships">
-              <td>{{championship.name}}</td>
-              <td>{{championship.category}}</td>
-              <td>{{championship.groupType}}</td>
-              <td>{{championship.province}}</td>
+              <td class="cursor-pointer" (click)="showChampionship(championship.id)">{{championship.name}}</td>
+              <td class="cursor-pointer" (click)="showChampionship(championship.id)">{{championship.category}}</td>
+              <td class="cursor-pointer" (click)="showChampionship(championship.id)">{{championship.type}}</td>
+              <td class="cursor-pointer" (click)="showChampionship(championship.id)">{{championship.province}}</td>
               <td>
                 <div class="d-flex">
                   <button class="btn btn-primary me-2" (click)="edit(championship.id)">
@@ -71,7 +72,7 @@
           </table>
         </div>
       </section>
-      <section class="w-full" style="position: fixed; bottom: 12px; color: black">
+      <section class="w-full" style="position: fixed; bottom: 12px; color: black" *ngIf="championships.length > 0">
         <div class="">
           <button class="btn btn-outline-dark me-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">
             <

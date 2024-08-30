@@ -36,8 +36,14 @@ export class EditComponent implements OnInit{
       description: [''],
       category: [''],
       province: [''],
-      groupType: [''],
+      type: [''],
+      pricePer: [''],
       price: [''],
+      rule: [''],
+      gender: [''],
+      expiryDate: [''],
+      startDate: [''],
+      manualRule: [''],
       matchDay: ['']
     })
     this.details()
@@ -52,8 +58,14 @@ export class EditComponent implements OnInit{
           description: this.championship.description,
           category: this.championship.category,
           province: this.championship.province,
-          groupType: this.championship.groupType,
+          type: this.championship.type,
+          pricePer: this.championship.pricePer,
           price: this.championship.price,
+          rule: this.championship.rule,
+          gender: this.championship.gender,
+          expiryDate: this.championship.expiryDate,
+          startDate: this.championship.startDate,
+          manualRule: this.championship.manualRule,
           matchDay: this.championship.matchDay
         })
       }

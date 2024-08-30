@@ -12,23 +12,23 @@ export class StatisticService {
   constructor(private http: HttpClient) { }
 
   countUsers(){
-    return this.http.get<any>(`${this.backendUrl}/api/statistics/users`, {observe: "response"})
+    return this.http.get<any>(`${this.backendUrl}/statistics/users`, {observe: "response"})
   }
 
   countPlayers(){
-    return this.http.get<any>(`${this.backendUrl}/api/statistics/players`, {observe: "response"})
+    return this.http.get<any>(`${this.backendUrl}/statistics/players`, {observe: "response"})
   }
 
   countClubs(){
-    return this.http.get<any>(`${this.backendUrl}/api/statistics/clubs`, {observe: "response"})
+    return this.http.get<any>(`${this.backendUrl}/statistics/clubs`, {observe: "response"})
   }
 
   countChampionships(){
-    return this.http.get<any>(`${this.backendUrl}/api/statistics/championships`, {observe: "response"})
+    return this.http.get<any>(`${this.backendUrl}/statistics/championships`, {observe: "response"})
   }
 
   countFields(){
-    return this.http.get<any>(`${this.backendUrl}/api/statistics/fields`, {observe: "response"})
+    return this.http.get<any>(`${this.backendUrl}/statistics/fields`, {observe: "response"})
   }
 
 }
