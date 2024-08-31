@@ -65,7 +65,7 @@
             </table>
           </div>
         </div>
-        <div *ngIf="scheduleGames.length > 0">
+        <div *ngIf="games.length > 0">
           <div class="card rounded-0 card-body border-0 mt-3" style="color: black;">
             <h6>Jogos</h6>
             <div class="flex">
@@ -76,10 +76,15 @@
             <hr>
             <div class="card card-body rounded-0 border-0">
               <div class="row" *ngIf="userRole ==='ADMIN'">
-                <div class="col-md-6 border-1 cursor-pointer hover:bg-gray-200 hover:shadow-lg" *ngFor="let game of scheduleGames" (click)="adminGameDetail(game.id)">
+                <div class="col-md-6 border-1 cursor-pointer hover:bg-gray-200 hover:shadow-lg" *ngFor="let game of games" (click)="adminGameDetail(game.id!)">
                   <div class="flex">
                     <img [ngSrc]="imageUrl[game.firstClub.id]" class="object-fit-cover me-2" alt="Emblema do clube" width="60" height="60"/>
                     <span class="mt-3">{{game.firstClub.name}}</span>
+                    <span  *ngIf="game.status ==='Em Andamento' || game.status ==='Terminado'">
+                      <h6 class="ms-2 mt-2" *ngFor="let goal of firstClubGameStat[game.id!]">
+                        {{ goal.goals }}
+                      </h6>
+                    </span>
                   </div>
                   <div class="flex justify-end">
                     <span><strong>{{game.status}}</strong>, {{game.dateTime}}</span>
@@ -87,6 +92,11 @@
                   <div class="flex">
                     <img [ngSrc]="imageUrl[game.secondClub.id]" class="object-fit-cover me-2" alt="Emblema do clube" width="60" height="60"/>
                     <span class="mt-3">{{game.secondClub.name}}</span>
+                    <span  *ngIf="game.status ==='Em Andamento' || game.status ==='Terminado'">
+                      <h6 class="ms-2 mt-2" *ngFor="let goal of secondClubGameStat[game.id!]">
+                        {{ goal.goals }}
+                      </h6>
+                    </span>
                   </div>
                 </div>
                 <div class="mt-[50px] flex justify-center">
@@ -101,7 +111,7 @@
               </div>
 
               <div class="row" *ngIf="userRole !=='ADMIN'">
-                <div class="col-md-6 border-1 cursor-pointer hover:bg-gray-200 hover:shadow-lg" *ngFor="let game of scheduleGames" (click)="gameDetail(game.id)">
+                <div class="col-md-6 border-1 cursor-pointer hover:bg-gray-200 hover:shadow-lg" *ngFor="let game of games" (click)="gameDetail(game.id!)">
                   <div class="flex">
                     <img [ngSrc]="imageUrl[game.firstClub.id]" class="object-fit-cover me-2" width="60" height="60" alt="Emblema do clube"/>
                     <span class="mt-3">{{game.firstClub.name}}</span>

@@ -8,7 +8,6 @@ import {Field} from "../../../../core/models/Field";
 import {Club} from "../../../../core/models/Club";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Game} from "../../../../core/models/Game";
 import {GameService} from "../../../../core/services/game.service";
 
 @Component({

@@ -75,7 +75,6 @@ export class HomeComponent implements OnInit{
             this.firstClubGameStat[gameId] = []
           }
           this.firstClubGameStat[gameId].push(response.body as GameStat)
-          console.log(this.firstClubGameStat)
         }
       }
     })

@@ -15,10 +15,10 @@
                     <img class="object-fit-cover" ngSrc="assets/img06.png" alt="" height="70" width="70">
                     <span class="mt-4">{{game.firstClub.name}}</span>
                     <span  *ngIf="game.status ==='Em Andamento' || game.status ==='Terminado'">
-                    <h6 class="ms-4 mt-3" *ngFor="let goal of firstClubGameStat[game.id!]">
-                      {{ goal.goals }}
-                    </h6>
-                  </span>
+                      <h6 class="ms-4 mt-3" *ngFor="let goal of firstClubGameStat[game.id!]">
+                        {{ goal.goals }}
+                      </h6>
+                    </span>
                   </div>
                   <div class="flex justify-end">
                     <span>{{game.status}}, {{game.dateTime}}</span>
@@ -27,10 +27,10 @@
                     <img class="object-fit-cover" ngSrc="assets/img06.png" alt="" height="70" width="70">
                     <span class="mt-4">{{game.secondClub.name}}</span>
                     <span  *ngIf="game.status ==='Em Andamento' || game.status ==='Terminado'">
-                    <h6 class="ms-4 mt-3" *ngFor="let goal of secondClubGameStat[game.id!]">
-                      {{ goal.goals }}
-                    </h6>
-                  </span>
+                      <h6 class="ms-4 mt-3" *ngFor="let goal of secondClubGameStat[game.id!]">
+                        {{ goal.goals }}
+                      </h6>
+                    </span>
                   </div>
                 </div>
                 </div>

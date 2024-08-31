@@ -11,6 +11,7 @@ import {GameService} from "../../../core/services/game.service";
 import {Page} from "../../../core/models/Page";
 import {Game} from "../../../core/models/Game";
 import {UserService} from "../../../core/services/user.service";
+import {GameStat} from "../../../core/models/GameStat";
 
 @Component({
   selector: 'app-championship-detail',
@@ -32,7 +33,9 @@ export class ChampionshipDetailComponent implements OnInit{
   stats: any[] = []
   matchDay: number = 1
   imageUrl: { [key: number]: string } = {};
-  scheduleGames: any[] = []
+  games: Game[] = []
+  firstClubGameStat: { [key: number]: GameStat[] } = {};
+  secondClubGameStat: { [key: number]: GameStat[] } = {};
   totalElements: number = 0;
   totalPages: number = 0;
   userRole: string | null = ''
@@ -92,12 +95,42 @@ export class ChampionshipDetailComponent implements OnInit{
   loadGames(id: number){
     this.gameService.getAllByMatchDayAndChampionship(this.currentPage, this.pageSize, this.matchDay, id).subscribe({
       next: (page: Page<Game>) => {
-        this.scheduleGames = page.content;
+        this.games = page.content;
+        this.games.forEach(game=> {
+          this.getFirstClubStat(game.id!, game.firstClub.id)
+          this.getSecondClubStat(game.id!, game.secondClub.id)
+        })
         this.totalElements = page.totalElements;
         this.totalPages = page.totalPages;
         this.loadGamesImages()
       },
       error: (err) => console.error('Erro ao buscar Jogos Marcados:', err)
+    })
+  }
+
+  getFirstClubStat(gameId: number, clubId: number){
+    this.gameService.getClubStat(gameId, clubId).subscribe(response=>{
+      if(response.ok){
+        if (response.ok) {
+          if (!this.firstClubGameStat[gameId]) {
+            this.firstClubGameStat[gameId] = []
+          }
+          this.firstClubGameStat[gameId].push(response.body as GameStat)
+        }
+      }
+    })
+  }
+
+  getSecondClubStat(gameId: number, clubId: number){
+    this.gameService.getClubStat(gameId, clubId).subscribe(response=>{
+      if(response.ok){
+        if (response.ok) {
+          if (!this.secondClubGameStat[gameId]) {
+            this.secondClubGameStat[gameId] = [];
+          }
+          this.secondClubGameStat[gameId].push(response.body as GameStat);
+        }
+      }
     })
   }
 
@@ -129,7 +162,7 @@ export class ChampionshipDetailComponent implements OnInit{
   }
 
   loadGamesImages(): void {
-    const games = this.scheduleGames;
+    const games = this.games;
     games.forEach((game: any) => {
       const firstClubId = game.firstClub.id;
       const secondClubId = game.secondClub.id;
