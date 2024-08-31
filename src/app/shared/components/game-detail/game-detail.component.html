@@ -50,7 +50,7 @@
           <th class="px-[50px] bg-transparent">
             <span *ngIf="firstClub.goals > 0 && game.status ==='Em Andamento' && role==='ADMIN'">
               <button class="text-red-500 hover:text-red-200 me-2"
-              (click)="removeStat(firstClub.id, 'goal')">
+              (click)="removeFirstClubStat('goal')">
                 Anular
               </button>
             </span>
@@ -61,7 +61,7 @@
             {{secondClub.goals}}
             <span *ngIf="secondClub.goals > 0 && game.status ==='Em Andamento' && role==='ADMIN'">
               <button class="text-red-500 hover:text-red-200 ms-2"
-              (click)="removeStat(secondClub.id, 'goal')">
+              (click)="removeSecondClubStat( 'goal')">
                 Anular
               </button>
             </span>
@@ -71,7 +71,7 @@
           <th class="px-[50px] bg-transparent">
             <span *ngIf="firstClub.fouls > 0 && game.status ==='Em Andamento' && role==='ADMIN'">
               <button class="text-red-500 hover:text-red-200 me-2"
-                      (click)="removeStat(firstClub.id, 'foul')">
+                      (click)="removeFirstClubStat('foul')">
                 Anular
               </button>
             </span>
@@ -82,7 +82,7 @@
             {{secondClub.fouls}}
             <span *ngIf="secondClub.fouls > 0 && game.status ==='Em Andamento' && role==='ADMIN'">
               <button class="text-red-500 hover:text-red-200 ms-2"
-                      (click)="removeStat(secondClub.id, 'goal')">
+                      (click)="removeSecondClubStat('goal')">
                 Anular
               </button>
             </span>
@@ -92,7 +92,7 @@
           <th class="px-[50px] bg-transparent">
             <span *ngIf="firstClub.corners >0 && game.status ==='Em Andamento' && role==='ADMIN'">
               <button class="text-red-500 hover:text-red-200 me-2"
-                      (click)="removeStat(firstClub.id, 'corner')">
+                      (click)="removeFirstClubStat('corner')">
                 Anular
               </button>
             </span>
@@ -103,7 +103,7 @@
             {{secondClub.corners}}
             <span *ngIf="secondClub.corners > 0 && game.status ==='Em Andamento' && role==='ADMIN'">
               <button class="text-red-500 hover:text-red-200 ms-2"
-                      (click)="removeStat(secondClub.id, 'corner')">
+                      (click)="removeSecondClubStat('corner')">
                 Anular
               </button>
             </span>
@@ -113,7 +113,7 @@
           <th class="px-[50px] bg-transparent">
             <span *ngIf="firstClub.yellowCards > 0 && game.status ==='Em Andamento' && role==='ADMIN'">
               <button class="text-red-500 hover:text-red-200 me-2"
-                      (click)="removeStat(firstClub.id, 'yellow')">
+                      (click)="removeFirstClubStat('yellow')">
                 Anular
               </button>
             </span>
@@ -124,7 +124,7 @@
             {{secondClub.yellowCards}}
             <span *ngIf="secondClub.yellowCards > 0 && game.status ==='Em Andamento' && role==='ADMIN'">
               <button class="text-red-500 hover:text-red-200 ms-2"
-                      (click)="removeStat(secondClub.id, 'yellow')">
+                      (click)="removeSecondClubStat('yellow')">
                 Anular
               </button>
             </span>
@@ -134,7 +134,7 @@
           <th class="px-[50px] bg-transparent">
             <span *ngIf="firstClub.redCards > 0 && game.status ==='Em Andamento' && role==='ADMIN'">
               <button class="text-red-500 hover:text-red-200 me-2"
-                      (click)="removeStat(firstClub.id, 'red')">
+                      (click)="removeFirstClubStat( 'red')">
                 Anular
               </button>
             </span>
@@ -145,7 +145,7 @@
             {{secondClub.redCards}}
             <span *ngIf="secondClub.redCards > 0 && game.status ==='Em Andamento' && role==='ADMIN'">
               <button class="text-red-500 hover:text-red-200 ms-2"
-                      (click)="removeStat(secondClub.id, 'red')">
+                      (click)="removeSecondClubStat('red')">
                 Anular
               </button>
             </span>
@@ -155,7 +155,7 @@
           <th class="px-[50px] bg-transparent">
             <span *ngIf="firstClub.blueCards > 0 && game.status ==='Em Andamento' && role==='ADMIN'">
               <button class="text-red-500 hover:text-red-200 me-2"
-                      (click)="removeStat(firstClub.id, 'blue')">
+                      (click)="removeFirstClubStat('blue')">
                 Anular
               </button>
             </span>
@@ -166,7 +166,7 @@
             {{secondClub.blueCards}}
             <span *ngIf="secondClub.blueCards > 0 && game.status ==='Em Andamento' && role==='ADMIN'">
               <button class="text-red-500 hover:text-red-200 ms-2"
-                      (click)="removeStat(secondClub.id, 'blue')">
+                      (click)="removeSecondClubStat('blue')">
                 Anular
               </button>
             </span>

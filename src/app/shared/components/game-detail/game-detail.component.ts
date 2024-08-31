@@ -80,7 +80,6 @@ export class GameDetailComponent implements OnInit{
     this.gameService.findById(gameId).subscribe(response => {
       if (response.ok) {
         this.game = response.body as Game
-        console.log(this.game)
         this.firstClubId = this.game.firstClub.id
         this.secondClubId = this.game.secondClub.id
         this.getFirstClubStat(this.gameId, this.firstClubId)
@@ -204,9 +203,36 @@ export class GameDetailComponent implements OnInit{
     });
   }
 
-  removeStat(entityId: number, statistic: string) {
+  removeFirstClubStat(statistic: string) {
     this.isLoading = true;
-    this.gameService.removeClubStat(this.gameId, entityId, statistic)
+    this.gameService.removeClubStat(this.gameId, this.firstClubId, statistic)
+      .subscribe({
+        next: (response) => {
+          if (response.ok) {
+            this.toast.open("Estatística removida", 'Fechar', {
+              duration: 1000
+            });
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
+          } else {
+            this.toast.open("Erro ao remover estatística", 'Fechar', {
+              duration: 1000
+            });
+          }
+        },
+        error: () => {
+          this.isLoading = false;
+          this.toast.open("Erro ao remover estatística", 'Fechar', {
+            duration: 1000
+          });
+        }
+      });
+  }
+
+  removeSecondClubStat(statistic: string) {
+    this.isLoading = true;
+    this.gameService.removeClubStat(this.gameId, this.secondClubId, statistic)
       .subscribe({
         next: (response) => {
           if (response.ok) {
