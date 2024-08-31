@@ -81,8 +81,8 @@
                     <img [ngSrc]="imageUrl[game.firstClub.id]" class="object-fit-cover me-2" alt="Emblema do clube" width="60" height="60"/>
                     <span class="mt-3">{{game.firstClub.name}}</span>
                     <span  *ngIf="game.status ==='Em Andamento' || game.status ==='Terminado'">
-                      <h6 class="ms-2 mt-2" *ngFor="let goal of firstClubGameStat[game.id!]">
-                        {{ goal.goals }}
+                      <h6 class="ms-2 mt-2" *ngIf="firstClubGameStat">
+                        {{ firstClubGameStat.goals }}
                       </h6>
                     </span>
                   </div>
@@ -93,8 +93,8 @@
                     <img [ngSrc]="imageUrl[game.secondClub.id]" class="object-fit-cover me-2" alt="Emblema do clube" width="60" height="60"/>
                     <span class="mt-3">{{game.secondClub.name}}</span>
                     <span  *ngIf="game.status ==='Em Andamento' || game.status ==='Terminado'">
-                      <h6 class="ms-2 mt-2" *ngFor="let goal of secondClubGameStat[game.id!]">
-                        {{ goal.goals }}
+                      <h6 class="ms-2 mt-2" *ngIf="secondClubGameStat">
+                        {{ secondClubGameStat.goals }}
                       </h6>
                     </span>
                   </div>

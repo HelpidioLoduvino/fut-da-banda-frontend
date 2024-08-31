@@ -34,8 +34,8 @@ export class ChampionshipDetailComponent implements OnInit{
   matchDay: number = 1
   imageUrl: { [key: number]: string } = {};
   games: Game[] = []
-  firstClubGameStat: { [key: number]: GameStat[] } = {};
-  secondClubGameStat: { [key: number]: GameStat[] } = {};
+  firstClubGameStat!: GameStat;
+  secondClubGameStat!: GameStat;
   totalElements: number = 0;
   totalPages: number = 0;
   userRole: string | null = ''
@@ -112,10 +112,7 @@ export class ChampionshipDetailComponent implements OnInit{
     this.gameService.getClubStat(gameId, clubId).subscribe(response=>{
       if(response.ok){
         if (response.ok) {
-          if (!this.firstClubGameStat[gameId]) {
-            this.firstClubGameStat[gameId] = []
-          }
-          this.firstClubGameStat[gameId].push(response.body as GameStat)
+          this.firstClubGameStat = response.body as GameStat
         }
       }
     })
@@ -125,10 +122,7 @@ export class ChampionshipDetailComponent implements OnInit{
     this.gameService.getClubStat(gameId, clubId).subscribe(response=>{
       if(response.ok){
         if (response.ok) {
-          if (!this.secondClubGameStat[gameId]) {
-            this.secondClubGameStat[gameId] = [];
-          }
-          this.secondClubGameStat[gameId].push(response.body as GameStat);
+          this.secondClubGameStat = response.body as GameStat
         }
       }
     })
