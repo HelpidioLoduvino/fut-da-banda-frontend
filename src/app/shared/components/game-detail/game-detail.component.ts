@@ -80,10 +80,13 @@ export class GameDetailComponent implements OnInit{
     this.gameService.findById(gameId).subscribe(response => {
       if (response.ok) {
         this.game = response.body as Game
+        console.log(this.game)
         this.firstClubId = this.game.firstClub.id
         this.secondClubId = this.game.secondClub.id
         this.getFirstClubStat(this.gameId, this.firstClubId)
         this.getSecondClubStat(this.gameId, this.secondClubId)
+        this.displayCover(this.firstClubId)
+        this.displayCover(this.secondClubId)
       }
     })
   }
@@ -100,7 +103,6 @@ export class GameDetailComponent implements OnInit{
     this.gameService.getPlayerStat(gameId).subscribe(response=>{
       if(response.ok){
         this.playerStat = response.body as PlayerStat[]
-        console.log(this.playerStat)
       }
     })
   }
@@ -109,7 +111,6 @@ export class GameDetailComponent implements OnInit{
     this.gameService.getClubStat(gameId, clubId).subscribe(response=>{
       if(response.ok){
         this.firstClub = response.body as GameStat
-        this.displayCover(this.firstClub.club.id)
       }
     })
   }
@@ -118,7 +119,6 @@ export class GameDetailComponent implements OnInit{
     this.gameService.getClubStat(gameId, clubId).subscribe(response=>{
       if(response.ok){
         this.secondClub = response.body as GameStat
-        this.displayCover(this.secondClub.club.id)
       }
     })
   }
