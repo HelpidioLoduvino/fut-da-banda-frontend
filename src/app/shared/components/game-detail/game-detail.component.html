@@ -204,7 +204,7 @@
                 <td class="bg-transparent">{{player.yellowCards}}</td>
                 <td class="bg-transparent">{{player.redCards}}</td>
                 <td class="bg-transparent">{{player.blueCards}}</td>
-                <td *ngIf="role === 'ADMIN' && game.status === 'Em Andamento'">
+                <td *ngIf="role === 'ADMIN' && game.status === 'Em Andamento'" class="bg-transparent">
                   <button class="text-red-500 hover:text-red-200" (click)="removePlayerStat(game.id, player.player.id)">Anular</button>
                 </td>
               </tr>
