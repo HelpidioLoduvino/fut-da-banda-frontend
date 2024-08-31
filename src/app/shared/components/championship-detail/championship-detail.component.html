@@ -26,7 +26,10 @@
         </div>
       </div>
       <div class="col">
-        <div class="card card-body">
+        <button class="btn btn-primary mb-3" (click)="toggleTable()" *ngIf="userRole ==='ADMIN'">
+          {{ showTable ? 'Ocultar' : 'Mostrar' }} Tabela
+        </button>
+        <div class="card card-body" *ngIf="showTable">
           <h6 class="">Tabela de Classificação</h6>
           <div class="table-responsive">
             <table class="table table-striped">
@@ -115,6 +118,11 @@
                   <div class="flex">
                     <img [ngSrc]="imageUrl[game.firstClub.id]" class="object-fit-cover me-2" width="60" height="60" alt="Emblema do clube"/>
                     <span class="mt-3">{{game.firstClub.name}}</span>
+                    <span  *ngIf="game.status ==='Em Andamento' || game.status ==='Terminado'">
+                      <h6 class="ms-2 mt-2" *ngIf="firstClubGameStat">
+                        {{ firstClubGameStat.goals }}
+                      </h6>
+                    </span>
                   </div>
                   <div class="flex justify-content-end">
                     <span><strong>{{game.status}}</strong>, {{game.dateTime}}</span>
@@ -122,6 +130,11 @@
                   <div class="flex">
                     <img [ngSrc]="imageUrl[game.secondClub.id]" class="object-fit-cover me-2" width="60" height="60" alt="Emblema do clube"/>
                     <span class="mt-3">{{game.secondClub.name}}</span>
+                    <span  *ngIf="game.status ==='Em Andamento' || game.status ==='Terminado'">
+                      <h6 class="ms-2 mt-2" *ngIf="secondClubGameStat">
+                        {{ secondClubGameStat.goals }}
+                      </h6>
+                    </span>
                   </div>
                 </div>
                 <div class="mt-[50px] flex justify-center">

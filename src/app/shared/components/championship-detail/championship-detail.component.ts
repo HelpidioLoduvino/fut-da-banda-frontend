@@ -41,6 +41,7 @@ export class ChampionshipDetailComponent implements OnInit{
   userRole: string | null = ''
   currentPage: number = 0;
   pageSize: number = 10;
+  showTable: boolean = true;
 
   constructor(private championshipService: ChampionshipService,
               private route: ActivatedRoute,
@@ -65,6 +66,10 @@ export class ChampionshipDetailComponent implements OnInit{
       this.clubAlreadyAsked()
       this.getUserRole()
     })
+  }
+
+  toggleTable() {
+    this.showTable = !this.showTable;
   }
 
   detail(id: number){
