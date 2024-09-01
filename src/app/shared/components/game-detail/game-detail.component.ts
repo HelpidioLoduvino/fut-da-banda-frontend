@@ -80,6 +80,7 @@ export class GameDetailComponent implements OnInit{
     this.gameService.findById(gameId).subscribe(response => {
       if (response.ok) {
         this.game = response.body as Game
+        console.log(this.game)
         this.firstClubId = this.game.firstClub.id
         this.secondClubId = this.game.secondClub.id
         this.getFirstClubStat(this.gameId, this.firstClubId)
@@ -110,6 +111,7 @@ export class GameDetailComponent implements OnInit{
     this.gameService.getClubStat(gameId, clubId).subscribe(response=>{
       if(response.ok){
         this.firstClub = response.body as GameStat
+        console.log(this.firstClub)
       }
     })
   }

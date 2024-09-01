@@ -47,9 +47,10 @@
               </tr>
               </thead>
               <tbody class="table-secondary">
-              <tr *ngFor="let stat of stats">
+              <tr *ngFor="let stat of stats let i = index">
                 <td>
                   <div class="flex">
+                    <span class="mt-2">{{ i + 1 }}.</span>
                     <img [ngSrc]="imageUrl[stat.club.id]" class="object-fit-cover me-2"
                          alt="Emblema do clube" width="40" height="40"/>
                     <span class="mt-2">{{stat.club.abv}}</span>
@@ -62,7 +63,7 @@
                 <td>{{stat.losses}}</td>
                 <td>{{stat.goalsScored}}</td>
                 <td>{{stat.goalsConceded}}</td>
-                <td>{{stat.goalsDifference}}</td>
+                <td>{{stat.goalsScored - stat.goalsConceded}}</td>
               </tr>
               </tbody>
             </table>
