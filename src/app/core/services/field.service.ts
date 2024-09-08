@@ -11,7 +11,7 @@ import {Observable} from "rxjs";
 })
 export class FieldService {
 
-  private backendUrl = environment.backendUrl;
+  private backendUrl = `${environment.backendUrl}/fields`;
 
   constructor(private http: HttpClient) { }
 
@@ -19,22 +19,26 @@ export class FieldService {
     const formData: FormData = new FormData();
     formData.append('field', new Blob([JSON.stringify(field)], { type: 'application/json' }));
     formData.append('photo', image);
-    return this.http.post<Field>(`${this.backendUrl}/fields`, formData, {observe: "response"})
+    return this.http.post<Field>(this.backendUrl, formData)
   }
 
   all(page: number, size: number){
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
-    return this.http.get<Page<Field>>(`${this.backendUrl}/fields`, {params})
+    return this.http.get<Page<Field>>(this.backendUrl, {params})
   }
 
   list(){
-    return this.http.get<Field[]>(`${this.backendUrl}/fields/list`);
+    return this.http.get<Field[]>(`${this.backendUrl}/list`);
   }
 
-  findById(id: number): Observable<HttpResponse<Field>>{
-    return this.http.get<Field>(`${this.backendUrl}/fields/${id}`, {observe: "response"})
+  findById(id: number): Observable<Field>{
+    return this.http.get<Field>(`${this.backendUrl}/${id}`)
+  }
+
+  displayCover(id: number): Observable<Blob> {
+    return this.http.get(`${this.backendUrl}/display/${id}`, { responseType: 'blob' });
   }
 
   update(field: Field, image: File, id: number){
@@ -42,7 +46,7 @@ export class FieldService {
     formData.append('field', new Blob([JSON.stringify(field)], { type: 'application/json' }));
     formData.append('photo', image);
     const params = new HttpParams().set('id', id.toString())
-    return this.http.put<Field>(`${this.backendUrl}/fields`, formData, {observe: "response", params});
+    return this.http.put<Field>(this.backendUrl, formData, {params});
   }
 
 }

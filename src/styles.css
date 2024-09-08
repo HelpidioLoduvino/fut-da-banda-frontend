@@ -35,3 +35,25 @@ body {
   color: red;
   display: block;
 }
+
+.scrollProgress{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 10px;
+  width: 100%;
+  background-color: rgba(255, 208, 0, 0.87);
+  animation: scroll-progress linear;
+  animation-timeline: scroll();
+  z-index: 999;
+}
+
+@keyframes scroll-progress {
+  from{
+    width: 0;
+  }
+  to{
+    width: 100%;
+  }
+}
+

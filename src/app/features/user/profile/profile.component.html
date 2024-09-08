@@ -1,0 +1,52 @@
+<main class="flex flex-col min-h-screen bg-gray-100">
+  <div class="flex-grow">
+    <app-navbar></app-navbar>
+    <section class="w-full py-6 px-4">
+      <div class="max-w-5xl mx-auto bg-white  shadow-lg rounded-lg overflow-hidden">
+        <div class="flex flex-col md:flex-row p-6">
+          <!-- Foto do Usuário -->
+          <div class="flex-shrink-0 mb-6 md:mb-0 md:w-1/4 md:pr-6">
+            <img *ngIf="player" [src]="imageUrl[player.id!]" alt="Foto do Usuário" class="w-32 h-32 rounded-full border-2 object-fit-cover border-yellow-400 mx-auto">
+            <lucide-icon *ngIf="!player" name="user-round" strokeWidth="1" class="w-32 h-32 rounded-full border-2 border-yellow-400 mx-auto text-gray-400 flex items-center justify-center"></lucide-icon>
+          </div>
+          <!-- Informações do Usuário -->
+          <div class="flex-grow">
+            <h2 class="text-3xl font-extrabold text-gray-800">{{user.fullName}}</h2>
+            <p class="text-lg text-gray-600">{{user.email}}</p>
+
+            <div *ngIf="player">
+
+              <div class="mt-4">
+                <p class="text-md font-semibold text-gray-700">Sobre o Jogador:</p>
+                <p class="text-gray-600">{{player.biography}}</p>
+              </div>
+
+              <div class="mt-4">
+                <p class="text-md font-semibold text-gray-700">Gênero:</p>
+                <p class="text-gray-600">{{player.gender}}</p>
+              </div>
+
+              <div class="mt-4">
+                <p class="text-md font-semibold text-gray-700">Posição em Campo:</p>
+                <p class="text-gray-600">{{player.position}}</p>
+              </div>
+
+              <div class="mt-4" *ngIf="club">
+                <p class="text-md font-semibold text-gray-700">Clube:</p>
+                <p class="text-gray-600">{{club.name}}</p>
+              </div>
+            </div>
+
+            <!-- Botão de Editar -->
+            <div class="mt-6 flex justify-end">
+              <button (click)="edit(user.id!)" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
+                Editar Dados
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <app-footer></app-footer>
+</main>

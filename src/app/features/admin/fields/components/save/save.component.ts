@@ -44,12 +44,12 @@ export class SaveComponent implements OnInit{
     }
   }
 
-  submit(){
-    if(this.fieldForm.valid){
+  submit() {
+    if (this.fieldForm.valid) {
       this.isLoading = true;
       const field: Field = this.fieldForm.value;
-      this.fieldService.register(field, this.image).subscribe(response=>{
-        if(response.ok){
+      this.fieldService.register(field, this.image).subscribe({
+        next: (response=>{
           this.isLoading = false
           this.snackBar.open("Campo Adicionado Com Sucesso", 'Fechar', {
             duration: 1000
@@ -57,12 +57,7 @@ export class SaveComponent implements OnInit{
           setTimeout(() => {
             window.location.reload();
           }, 1000);
-        }
-      })
-    } else {
-      this.isLoading = false
-      this.snackBar.open("Erro de Formulário", 'Fechar', {
-        duration: 1000
+        })
       })
     }
   }

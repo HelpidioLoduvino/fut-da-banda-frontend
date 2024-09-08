@@ -13,95 +13,99 @@ import {Page} from "../models/Page";
 })
 export class UserService {
 
-  private backendUrl = environment.backendUrl;
+  private backendUrl = `${environment.backendUrl}/users`;
   private token = localStorage.getItem('token');
   private refreshToken: string | null = localStorage.getItem('refreshToken');
 
   constructor(private http: HttpClient, private router: Router) { }
 
   registerUser(user: User){
-    return this.http.post<User>(`${this.backendUrl}/users`, user, {observe: "response"});
+    return this.http.post<User>(this.backendUrl, user, {observe: "response"});
   }
 
   registerPlayer(player: Player, photo: File) {
     const formData: FormData = new FormData();
     formData.append('player', new Blob([JSON.stringify(player)], { type: 'application/json' }));
     formData.append('photo', photo);
-    return this.http.post<any>(`${this.backendUrl}/users/player`, formData, {observe: "response"});
+    return this.http.post<any>(`${this.backendUrl}/player`, formData, {observe: "response"});
   }
 
   login(credentials: any) {
-    return this.http.post<any>(`${this.backendUrl}/users/login`, credentials);
+    return this.http.post<any>(`${this.backendUrl}/login`, credentials);
   }
 
   showPhoto(id: number): Observable<Blob> {
-    return this.http.get(`${this.backendUrl}/users/display/${id}`, { responseType: 'blob' });
+    return this.http.get(`${this.backendUrl}/display/${id}`, { responseType: 'blob' });
   }
 
   getAll(page: number, size: number){
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
-    return this.http.get<Page<User>>(`${this.backendUrl}/users`, {params});
+    return this.http.get<Page<User>>(this.backendUrl, {params});
   }
 
   getAllPlayers(page: number, size: number){
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
-    return this.http.get<Page<Player>>(`${this.backendUrl}/users/players`, {params});
+    return this.http.get<Page<Player>>(`${this.backendUrl}/players`, {params});
   }
 
   findById(id: number): Observable<HttpResponse<User>>{
-    return this.http.get<User>(`${this.backendUrl}/users/${id}`, {observe: "response"})
+    return this.http.get<User>(`${this.backendUrl}/${id}`, {observe: "response"})
   }
 
   findRole(): Observable<HttpResponse<string>>{
-    return this.http.get(`${this.backendUrl}/users/role`, { observe: "response", responseType: 'text' });
+    return this.http.get(`${this.backendUrl}/role`, { observe: "response", responseType: 'text' });
   }
 
   findUserByRole(role: string){
     const params = new HttpParams().set('role', role)
-    return this.http.get<User>(`${this.backendUrl}/users/user`, {observe: "response", params})
+    return this.http.get<User>(`${this.backendUrl}/user`, {observe: "response", params})
   }
 
   getAuthenticated(){
-    return this.http.get<User>(`${this.backendUrl}/users/authenticated`, {observe: "response"})
+    return this.http.get<User>(`${this.backendUrl}/authenticated`, {observe: "response"})
+  }
+
+  getPlayer(){
+    return this.http.get<Player>(`${this.backendUrl}/player`)
   }
 
   update(user: any, id: number){
     const params = new HttpParams().set('id', id.toString())
-    return this.http.put(`${this.backendUrl}/users`, user, {observe: "response", params});
+    return this.http.put(this.backendUrl, user, {observe: "response", params});
   }
 
   isPlayerAvailable(){
-    return this.http.get<any>(`${this.backendUrl}/users/available`, {observe: "response"})
+    return this.http.get<any>(`${this.backendUrl}/available`, {observe: "response"})
   }
 
   updatePlayer(player: any, id: number){
     const params = new HttpParams().set('id', id.toString())
-    return this.http.put(`${this.backendUrl}/users/player`, player, {observe: "response", params});
+    return this.http.put(`${this.backendUrl}/player`, player, {observe: "response", params});
   }
 
   updatePhoto(photo: File, id: number){
     const formData: FormData = new FormData();
     formData.append('photo', photo);
     const params = new HttpParams().set('id', id.toString())
-    return this.http.put(`${this.backendUrl}/users/photo`, formData, {observe: "response", params});
+    return this.http.put(`${this.backendUrl}/photo`, formData, {observe: "response", params});
   }
 
   ban(id: number){
     const params = new HttpParams().set('id', id.toString())
-    return this.http.put(`${this.backendUrl}/users/ban`, null,{params, observe: "response"})
+    return this.http.put(`${this.backendUrl}/ban`, null,{params, observe: "response"})
   }
 
   unban(id: number){
     const params = new HttpParams().set('id', id.toString())
-    return this.http.put(`${this.backendUrl}/users/unban`, null,{params, observe: "response"})
+    return this.http.put(`${this.backendUrl}/unban`, null,{params, observe: "response"})
   }
 
   refreshTokenRequest(): Observable<any> {
-    return this.http.post<any>(`${this.backendUrl}/users/token`, { refreshToken: this.refreshToken }).pipe(
+    return this.http.post<any>(`${this.backendUrl}/token`, { refreshToken: this.refreshToken }).pipe(
       tap(tokens => {
         this.token = tokens.token;
         this.refreshToken = tokens.refreshToken;

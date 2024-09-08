@@ -33,14 +33,18 @@ import {
 import {
   UserGameDetailComponent
 } from "./features/user/games/components/detail/user-game-detail/user-game-detail.component";
+import {ProfileComponent} from "./features/user/profile/profile.component";
+import {UserFieldsComponent} from "./features/user/fields/user-fields.component";
 
 export const routes: Routes = [
 
   // User routes
   {path: '', component: HomeComponent},
+  {path: 'perfil', component: ProfileComponent},
   {path: 'partidas', component: GameComponent},
   {path: 'jogadores', component: ListPlayersComponent},
   {path: 'clubes', component: ClubsComponent},
+  {path: 'campos', component: UserFieldsComponent},
   {path: 'clube/:id', component: UserClubDetailComponent},
   {path: 'entrar', component: LoginComponent},
   {path: 'registar', component: RegisterComponent},

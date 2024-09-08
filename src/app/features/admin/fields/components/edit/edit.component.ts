@@ -50,9 +50,9 @@ export class EditComponent implements OnInit{
   }
 
   details(){
-    this.fieldService.findById(this.id).subscribe(response=>{
-      if(response.ok){
-        this.field = response.body as Field
+    this.fieldService.findById(this.id).subscribe({
+      next: (response=>{
+        this.field = response as Field
         this.fieldForm.patchValue({
           name: this.field.name,
           location: this.field.location,
@@ -61,16 +61,17 @@ export class EditComponent implements OnInit{
           price: this.field.price,
           status: this.field.status
         })
-      }
+      })
     })
+
   }
 
   update(){
     if(this.fieldForm.valid){
       this.isLoading = true
       const field: Field = this.fieldForm.value
-      this.fieldService.update(field, this.image, this.id).subscribe(response=>{
-        if(response.ok){
+      this.fieldService.update(field, this.image, this.id).subscribe({
+        next: (response=>{
           this.isLoading = false
           this.snackBar.open("Campo atualizado com Sucesso", 'Fechar', {
             duration: 1000
@@ -78,12 +79,7 @@ export class EditComponent implements OnInit{
           setTimeout(() => {
             window.location.reload();
           }, 1000);
-        } else{
-          this.isLoading = false
-          this.snackBar.open("Erro ao atualizar campo", 'Fechar', {
-            duration: 1000
-          })
-        }
+        })
       })
     }
   }

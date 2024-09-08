@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <u class="custom-nav-items">
       <li>
-        <button class="btn bg-transparent border-0 m-0" (click)="toggleSidebar()">
+        <button class="btn bg-transparent d-md-none d-block border-0 m-0" (click)="toggleSidebar()">
           <lucide-icon class="icon-color" name="menu"></lucide-icon>
         </button>
       </li>
@@ -19,6 +19,9 @@
         </li>
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link icon-color" routerLink="/clubes">Clubes</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link icon-color" routerLink="/campos">Campos</a>
         </li>
       </ul>
     </div>
@@ -37,16 +40,23 @@
       </li>
 
       <li class="nav-item" *ngIf="isLogged() && role == 'PLAYER' && club || isLogged() && role == 'PLAYER' && playerHasClub">
-        <button class="icon-color btn bg-transparent border-0" [matMenuTriggerFor]="clubMenu">
-          <lucide-icon name="shirt"></lucide-icon>
+        <button class="icon-color btn bg-transparent mt-1 border-0" [matMenuTriggerFor]="clubMenu">
+          <span class="material-symbols-outlined text-3xl font-light">
+            sports_soccer
+          </span>
         </button>
         <mat-menu #clubMenu="matMenu">
-
+          <a mat-menu-item class="flex items-center space-x-4" (click)="clubDetail(club.id!)">
+            <div class="flex">
+              <img [src]="imageUrl[club.id!]" alt="club logo" class="w-10 h-10 rounded-full object-cover">
+              <span class="mt-2">{{club.abv}}</span>
+            </div>
+          </a>
         </mat-menu>
       </li>
 
 
-      <li class="nav-item mt-2 me-2" *ngIf="isLogged() && role == 'PLAYER'">
+      <li class="nav-item mt-3" *ngIf="isLogged() && role == 'PLAYER'">
         <a routerLink="/notificações" class="position-relative icon-color" *ngIf="unseenInvitations">
           <lucide-icon name="bell"></lucide-icon>
           <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
@@ -64,10 +74,13 @@
 
       <li class="nav-item" *ngIf="isLogged() && user">
         <button class="icon-color btn bg-transparent border-0" [matMenuTriggerFor]="userMenu">
-          <lucide-icon name="user-round"></lucide-icon>
+          <lucide-icon name="user-round" *ngIf="!player"></lucide-icon>
+          <div *ngIf="player" class="w-12 h-12 rounded-full overflow-hidden border bg-white ml-3 cursor-pointer transform transition duration-300 ease-in-out hover:scale-110">
+            <img [src]="imageUrl[player.id!]" alt="Foto do jogador" class="w-full h-full object-fit-cover">
+          </div>
         </button>
         <mat-menu #userMenu="matMenu">
-          <a routerLink="#" mat-menu-item>Perfil</a>
+          <a routerLink="/perfil" mat-menu-item>Perfil</a>
           <a *ngIf="club" (click)="clubDetail(club.id)" mat-menu-item>Clube</a>
           <a *ngIf="role === 'CAPTAIN' && !club" routerLink="/registar-clube" mat-menu-item>Clube</a>
           <a mat-menu-item (click)="logout()">Sair</a>
@@ -100,6 +113,12 @@
     <li class="sidebar-item p-4">
       <a routerLink="/clubes">
         Clubes
+      </a>
+    </li>
+    <hr>
+    <li class="sidebar-item p-4">
+      <a routerLink="/campos">
+        Campos
       </a>
     </li>
     <br>

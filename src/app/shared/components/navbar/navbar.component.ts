@@ -8,6 +8,9 @@ import {UserService} from "../../../core/services/user.service";
 import {ClubService} from "../../../core/services/club.service";
 import {Club} from "../../../core/models/Club";
 import {InvitationService} from "../../../core/services/invitation.service";
+import {User} from "../../../core/models/User";
+import {Player} from "../../../core/models/Player";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'app-navbar',
@@ -23,6 +26,7 @@ import {InvitationService} from "../../../core/services/invitation.service";
     RouterLinkActive,
     NgIf,
     NgOptimizedImage,
+    FaIconComponent,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
@@ -30,9 +34,10 @@ import {InvitationService} from "../../../core/services/invitation.service";
 export class NavbarComponent implements OnInit{
 
   isSidebarOpened: boolean = false;
-  public club!: Club
+  club!: Club
   role!: string | null
-  user: any = {}
+  user!: User
+  player!: Player
   unseenInvitations!: number
   imageUrl: { [key: number]: string } = {};
   playerHasClub: boolean = false
@@ -50,6 +55,7 @@ export class NavbarComponent implements OnInit{
     this.countUnseenInvitation()
     this.findAuthenticatedUser()
     this.getPlayerClub()
+    this.getPlayer()
   }
 
 
@@ -64,8 +70,17 @@ export class NavbarComponent implements OnInit{
   findAuthenticatedUser(){
     this.userService.getAuthenticated().subscribe(response=>{
       if(response.ok){
-        this.user = response.body
+        this.user = response.body as User
       }
+    })
+  }
+
+  getPlayer(){
+    this.userService.getPlayer().subscribe({
+      next: (response=>{
+        this.player = response as Player
+        this.userPhoto(this.player.id!)
+      })
     })
   }
 
@@ -86,10 +101,20 @@ export class NavbarComponent implements OnInit{
     })
   }
 
+  userPhoto(id: number){
+    this.userService.showPhoto(id).subscribe({
+      next: (response =>{
+        this.imageUrl[id] = window.URL.createObjectURL(response);
+      }), error: (error) => {
+        console.error('Error loading image', error);
+      }
+    })
+  }
+
   displayImage(id: number){
     this.clubService.displayCover(id).subscribe({
       next: (response =>{
-        this.imageUrl = window.URL.createObjectURL(response);
+        this.imageUrl[id] = window.URL.createObjectURL(response);
       }), error: (error) => {
         console.error('Error loading image', error);
       }
